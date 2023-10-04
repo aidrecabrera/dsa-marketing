@@ -1,8 +1,30 @@
-﻿<h3>TransactionList</h3>
-
-<!-- DocumentItem.razor -->
+﻿<!-- DocumentItem.razor -->
 
 <div class="document-item">
+    <!-- Display the table of inputted items -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Unit</th>
+                <th>Particulars</th>
+                <th>Quantity</th>
+                <th>Unit Cost</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in documentItems)
+            {
+                <tr>
+                    <td>@item.Unit</td>
+                    <td>@item.Particulars</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.UnitCost</td>
+                    <td>@item.Amount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
     <!-- Unit -->
     <div class="form-group">
         <label for="unit">Unit:</label>
@@ -27,19 +49,19 @@
         <input type="number" id="unitCost" @bind="documentItem.UnitCost" class="form-control" />
     </div>
 
-    <!-- Amount -->
-    <div class="form-group">
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" @bind="documentItem.Amount" class="form-control" />
-    </div>
+    <!-- Add button to add the item to the table -->
+    <button class="btn btn-primary" @onclick="AddItem">Add Item</button>
 </div>
 
 @code {
     // Define a model for the document item
     private DocumentItemModel documentItem = new DocumentItemModel();
 
+    // Define a list to store inputted items
+    private List<DocumentItemModel> documentItems = new List<DocumentItemModel>();
+
     [Parameter]
-    public EventCallback<DocumentItemModel> OnItemChanged { get; set; }
+    public EventCallback<List<DocumentItemModel>> OnItemsChanged { get; set; }
 
     // Define a class for the document item
     public class DocumentItemModel
@@ -51,9 +73,19 @@
         public decimal Amount { get; set; }
     }
 
-    // Invoke the callback when the document item changes
-    private async Task UpdateItem()
+    // Add the item to the list and invoke the callback if fields are not blank
+    private void AddItem()
     {
-        await OnItemChanged.InvokeAsync(documentItem);
+        if (!string.IsNullOrWhiteSpace(documentItem.Unit)
+            && !string.IsNullOrWhiteSpace(documentItem.Particulars)
+            && documentItem.Quantity > 0
+            && documentItem.UnitCost > 0)
+        {
+            // Calculate Amount
+            documentItem.Amount = documentItem.Quantity * documentItem.UnitCost;
+            documentItems.Add(documentItem);
+            documentItem = new DocumentItemModel(); // Clear the form fields
+            OnItemsChanged.InvokeAsync(documentItems);
+        }
     }
 }

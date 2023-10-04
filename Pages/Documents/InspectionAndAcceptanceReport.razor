@@ -1,0 +1,36 @@
+﻿<!-- InspectionAndAcceptanceReport.razor -->
+
+<div class="inspection-acceptance-report">
+    <h2>Inspection and Acceptance Report Form</h2>
+
+    <!-- Form fields -->
+    <div class="form-group">
+        <label for="barangay">Barangay:</label>
+        <input type="text" id="barangay" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="municipality">Municipality:</label>
+        <input type="text" id="municipality" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="telNo">Tel No.:</label>
+        <input type="tel" id="telNo" class="form-control" />
+    </div>
+
+    <!-- Add more form fields for other information as needed -->
+    <!-- Generate Inspection Report button -->
+    <button class="btn btn-primary" @onclick="GenerateInspectionReport">Generate Inspection Report</button>
+</div>
+
+@code {
+    // Method to generate the inspection report
+    private void GenerateInspectionReport()
+    {
+        // Implement the logic to generate the inspection report here
+        // You can use a library or create a PDF/Document based on the form inputs
+        // For example, you can use IronPDF or another library to generate PDF documents
+        // You'll need to handle the PDF generation logic accordingly.
+    }
+}
