@@ -1,0 +1,178 @@
+﻿@page "/transaction/commonparameters"
+
+@using MudBlazor
+
+<MudContainer>
+    <MudCard>
+        <MudCardContent>
+            <MudSelect T="string" Label="Select Municipality" @bind-Value="selectedMunicipality">
+                @foreach (var municipality in municipalities)
+                {
+                    <MudSelectItem T="string" Value="@municipality">@municipality</MudSelectItem>
+                }
+            </MudSelect>
+
+            <MudSelect T="string" Label="US States" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options">
+                @foreach (var state in states)
+                {
+                    <MudSelectItem T="string" Value="@state">@state</MudSelectItem>
+                }
+            </MudSelect>
+
+            <MudSelect Label="Select Barangay" @bind-Value="selectedBarangay">
+                @foreach (var barangay in GetBarangays(selectedMunicipality))
+                {
+                    <MudSelectItem Value="@barangay">@barangay</MudSelectItem>
+                }
+            </MudSelect>
+
+            <!-- Display the selected municipality and barangay (for demonstration purposes) -->
+            <p>You selected Municipality: @selectedMunicipality</p>
+            <p>You selected Barangay: @selectedBarangay</p>
+
+            <div class="form-group">
+                <MudTextField T="string" Label="PunongBarangay" HelperText="Punong Barangay for Transaction" HelperTextOnFocus="true" Variant="Variant.Text" @bind-Value="punongBarangay"/>
+            </div>
+
+            <div class="inspection-acceptance-report">
+                <!-- Form fields -->
+                <div class="form-group">
+                    <MudTextField T="string" Label="PunongBarangay" HelperText="Punong Barangay for Transaction" HelperTextOnFocus="true" Variant="Variant.Text" @bind-Value="treasurerBarangay" />
+                </div>
+            </div>
+            
+        </MudCardContent>
+    </MudCard>
+</MudContainer>
+
+@code {
+    private string value { get; set; } = "Nothing selected";
+    private IEnumerable<string> options { get; set; } = new HashSet<string>() { "Alaska" };
+
+    private string[] states =
+    {
+        "Alabama", "Alaska", "American Samoa", "Arizona",
+        "Arkansas", "California", "Colorado", "Connecticut",
+        "Delaware", "District of Columbia", "Federated States of Micronesia",
+        "Florida", "Georgia", "Guam", "Hawaii", "Idaho",
+        "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+        "Louisiana", "Maine", "Marshall Islands", "Maryland",
+        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+        "Missouri", "Montana", "Nebraska", "Nevada",
+        "New Hampshire", "New Jersey", "New Mexico", "New York",
+        "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
+        "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
+        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
+        "Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
+        "Washington", "West Virginia", "Wisconsin", "Wyoming",
+    };
+
+    private string selectedMunicipality = "Matanao"; // Initialize with a default value
+    private string selectedBarangay = "Asbang";                 // Property to capture the selected barangay
+    private string punongBarangay = "";
+    private string treasurerBarangay = "";
+    // List of municipalities
+    private List<string> municipalities = new List<string>
+    {
+        "Matanao",
+        "Magsaysay",
+        "Sarangani"
+        // Add more municipalities as needed
+    };
+
+    // Dictionary to store barangays for each municipality
+    private Dictionary<string, List<string>> barangays = new Dictionary<string, List<string>>
+    {
+        { "Matanao", new List<string>
+            {
+                "Asbang",
+                "Asinan",
+                "Bagumbayan",
+                "Bangkal",
+                "Buas",
+                "Buri",
+                "Camanchiles",
+                "Ceboza",
+                "Colonsabak",
+                "Dongan-Pekong",
+                "Kabasagan",
+                "Kapok",
+                "Kauswagan",
+                "Kibao",
+                "La Suerte",
+                "Langa-an",
+                "Lower Marber",
+                "Cabligan (Managa)",
+                "Manga",
+                "New Katipunan",
+                "New Murcia",
+                "New Visayas",
+                "Poblacion",
+                "Saboy",
+                "San Jose",
+                "San Miguel",
+                "San Vicente",
+                "Saub",
+                "Sinaragan",
+                "Sinawilan",
+                "Tamlangon",
+                "Towak",
+                "Tibongbong"
+                // Add more barangays for Matanao as needed
+            }
+        },
+        { "Magsaysay", new List<string>
+            {
+                "Poblacion",
+                "Bacungan",
+                "Balnate",
+                "Barayong",
+                "Blocon",
+                "Dalawinon",
+                "Dalumay",
+                "Glamang",
+                "Kanapolo",
+                "Kasuga",
+                "Mabini",
+                "Malawanit",
+                "New Ilocos",
+                "New Opon",
+                "San Isidro",
+                "San Miguel",
+                "Tacul",
+                "Tagaytay",
+                "Upper Bala"
+                // Add more barangays for Magsaysay as needed
+            }
+        },
+        { "Sarangani", new List<string>
+            {
+                "Balut Island",
+                "Batuganding",
+                "Konel",
+                "Lipol",
+                "Mabila (Poblacion)",
+                "Tinina",
+                "Gomtago",
+                "Tagen",
+                "Tucal",
+                "Patuco (Sarangani Norte)",
+                "Laker (Sarangani Sur)",
+                "Camahual",
+                "Camalig"
+                // Add more barangays for Sarangani as needed
+            }
+        }
+        // Add more municipalities and their barangays as needed
+    };
+
+    // Method to get the list of barangays based on the selected municipality
+    private List<string> GetBarangays(string municipality)
+    {
+        if (barangays.ContainsKey(municipality))
+        {
+            return barangays[municipality];
+        }
+        return new List<string>();
+    }
+}

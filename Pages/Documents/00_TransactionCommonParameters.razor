@@ -26,10 +26,23 @@
 <p>You selected Municipality: @selectedMunicipality</p>
 <p>You selected Barangay: @selectedBarangay</p>
 
+<div>
+    <label for="barangay">Punong Barangay:</label>
+    <input type="text" id="barangay" @bind="@punongBarangay" class="form-control" />
+</div>
+
+<div class="inspection-acceptance-report">
+    <!-- Form fields -->
+    <div class="form-group">
+        <label for="barangayTreasurer">Barangay Treasurer:</label>
+        <input type="text" id="barangayTreasurer" class="form-control" />
+    </div>
+</div>
+
 @code {
     private string selectedMunicipality = "Matanao"; // Initialize with a default value
-    private string selectedBarangay;                 // Property to capture the selected barangay
-
+    private string selectedBarangay = "Asbang";                 // Property to capture the selected barangay
+    private string punongBarangay;
     // List of municipalities
     private List<string> municipalities = new List<string>
     {

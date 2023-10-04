@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMudServices();
 // Add services to the container.
