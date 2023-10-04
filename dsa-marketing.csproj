@@ -18,4 +18,8 @@
     <PackageReference Include="MudBlazor.ThemeManager" Version="1.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Documents\NewFolder\" />
+  </ItemGroup>
+
 </Project>
