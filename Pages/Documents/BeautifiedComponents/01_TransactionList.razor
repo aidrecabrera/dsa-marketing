@@ -1,0 +1,71 @@
+﻿@using MudBlazor
+
+<MudTable Items="@elements" EditTrigger="TableEditTrigger.RowClick" CanCancelEdit="true" CommitEditTooltip="Commit Edit" Hover="true" Bordered="true" Striped="true" Breakpoint="Breakpoint.Sm">
+    <HeaderContent>
+        <MudTh>Nr</MudTh>
+        <MudTh>Sign</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Position</MudTh>
+        <MudTh>Molar mass</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Nr">@context.Number</MudTd>
+        <MudTd DataLabel="Sign">@context.Sign</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Position">@context.Position</MudTd>
+        <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
+    </RowTemplate>
+    <RowEditingTemplate>
+        <MudTd DataLabel="Nr">@context.Number</MudTd>
+        <MudTd DataLabel="Sign">
+            <MudTextField @bind-Value="@context.Sign" Required />
+         </MudTd>
+         <MudTd DataLabel="Name">
+             <MudTextField @bind-Value="@context.Name" Required />
+         </MudTd>
+         <MudTd DataLabel="Position">
+             <MudTextField @bind-Value="@context.Position" Required Min="1" />
+         </MudTd>
+         <MudTd DataLabel="Molar mass">
+             <MudTextField @bind-Value="@context.Molar" Required />
+         </MudTd>
+     </RowEditingTemplate>
+</MudTable>
+
+<MudForm Model="@newElement">
+    <MudTextField Label="Number" @bind-Value="newElement.Number" Required="true"></MudTextField>
+    <MudTextField Label="Sign" @bind-Value="newElement.Sign" Required="true"></MudTextField>
+    <MudTextField Label="Name" @bind-Value="newElement.Name" Required="true"></MudTextField>
+    <MudTextField Label="Position" @bind-Value="newElement.Position"></MudTextField>
+    <MudTextField Label="Molar mass" @bind-Value="newElement.Molar"></MudTextField>
+    <MudButton Type="ButtonType.Submit" OnClick="AddElement">Add Element</MudButton>
+</MudForm>
+
+@code {
+    public class Element
+    {
+        public int Number { get; set; }
+        public string Sign { get; set; }
+        public string Name { get; set; }
+        public string Position { get; set; }
+        public double Molar { get; set; }
+    }
+
+    List<Element> elements = new List<Element>();
+    Element newElement = new Element();
+
+    void AddElement()
+    {
+        elements.Add(new Element
+            {
+                Number = newElement.Number,
+                Sign = newElement.Sign,
+                Name = newElement.Name,
+                Position = newElement.Position,
+                Molar = newElement.Molar
+            });
+
+        // Clear the form
+        newElement = new Element();
+    }
+}
