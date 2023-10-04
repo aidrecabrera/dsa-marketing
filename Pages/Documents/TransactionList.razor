@@ -1,0 +1,59 @@
+﻿<h3>TransactionList</h3>
+
+<!-- DocumentItem.razor -->
+
+<div class="document-item">
+    <!-- Unit -->
+    <div class="form-group">
+        <label for="unit">Unit:</label>
+        <input type="text" id="unit" @bind="documentItem.Unit" class="form-control" />
+    </div>
+
+    <!-- Particulars -->
+    <div class="form-group">
+        <label for="particulars">Particulars:</label>
+        <input type="text" id="particulars" @bind="documentItem.Particulars" class="form-control" />
+    </div>
+
+    <!-- Quantity -->
+    <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" @bind="documentItem.Quantity" class="form-control" />
+    </div>
+
+    <!-- Unit Cost -->
+    <div class="form-group">
+        <label for="unitCost">Unit Cost:</label>
+        <input type="number" id="unitCost" @bind="documentItem.UnitCost" class="form-control" />
+    </div>
+
+    <!-- Amount -->
+    <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" @bind="documentItem.Amount" class="form-control" />
+    </div>
+</div>
+
+@code {
+    // Define a model for the document item
+    private DocumentItemModel documentItem = new DocumentItemModel();
+
+    [Parameter]
+    public EventCallback<DocumentItemModel> OnItemChanged { get; set; }
+
+    // Define a class for the document item
+    public class DocumentItemModel
+    {
+        public string Unit { get; set; }
+        public string Particulars { get; set; }
+        public int Quantity { get; set; }
+        public decimal UnitCost { get; set; }
+        public decimal Amount { get; set; }
+    }
+
+    // Invoke the callback when the document item changes
+    private async Task UpdateItem()
+    {
+        await OnItemChanged.InvokeAsync(documentItem);
+    }
+}
