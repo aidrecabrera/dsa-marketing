@@ -1,17 +1,40 @@
 ﻿@page "/inventory"
 @using MudBlazor
+@using System.Net.Http.Json
 
-<MudGrid Class="d-flex align-content-center justify-space-between flex-grow-1 gap-4">
+<MudGrid Class="d-flex align-content-center justify-space-between flex-grow-1">
     <MudItem Class="d-flex flex-grow-1">
         <MudText Typo="Typo.h6">Transaction</MudText>
     </MudItem>
-    <MudItem>
-        <MudAutocomplete T="string" Label="US States" @bind-Value="value1" SearchFunc="@Search1" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" />
+    <MudItem Class="w-25">
+        <MudTextField @bind-Value="searchTransactionInfo" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </MudItem>
     <MudItem Class="d-flex align-center">
         <MudButton StartIcon="@Icons.Material.Filled.AddCircleOutline" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary">Create</MudButton>
     </MudItem>
 </MudGrid>
+
+
+<MudTable Items="@transactionList" Hover="true" @bind-SelectedItem="selectedItem1" Filter="new Func<Element,bool>(FilterFunc1)">
+    <HeaderContent>
+        <MudTh>TID</MudTh>
+        <MudTh>City/Municipality</MudTh>
+        <MudTh>Barangay</MudTh>
+        <MudTh>Price</MudTh>
+        <MudTh>Quantity</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="TID">@context.TID</MudTd>
+        <MudTd DataLabel="City/Municipality">@context.CityMunicipality</MudTd>
+        <MudTd DataLabel="Barangay">@context.Barangay</MudTd>
+        <MudTd DataLabel="Price">@context.Price</MudTd>
+        <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+<MudButton Variant="Variant.Filled" OnClick="@AddElement">Default</MudButton>
 
 @code {
     private string value1;
@@ -28,5 +51,51 @@
         if (string.IsNullOrEmpty(value))
             return states;
         return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+    // Table
+    private string searchTransactionInfo = "";
+    private Element selectedItem1 = null;
+    public class Element
+    {
+        public int TID { get; set; }
+        public string CityMunicipality { get; set; }
+        public string Barangay { get; set; }
+        public int Price { get; set; }
+        public double Quantity { get; set; }
+
+    }
+    List<Element> transactionList = new List<Element>();
+    Element newElement = new Element();
+
+    void AddElement()
+    {
+        Random rnd = new Random();
+        for(int i = 0; i < 100; i++)
+        {
+            transactionList.Add(new Element
+                {
+                    TID = 12,
+                    CityMunicipality = "Matanao",
+                    Barangay = "Laswerte",
+                    Price = 12500,
+                    Quantity = rnd.Next()
+                });
+        }
+    }
+    
+
+    private bool FilterFunc1(Element element) => FilterFunc(element, searchTransactionInfo);
+
+    private bool FilterFunc(Element element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.Barangay.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.CityMunicipality.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if ($"{element.TID} {element.Price} {element.Quantity}".Contains(searchString))
+            return true;
+        return false;
     }
 }
