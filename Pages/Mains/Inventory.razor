@@ -1,4 +1,4 @@
-﻿@page "/inventory"
+@page "/inventory"
 @using MudBlazor
 @using System.Net.Http.Json
 
@@ -31,7 +31,7 @@
         <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
     </RowTemplate>
     <PagerContent>
-        <MudTablePager />
+        <MudTablePager Style="height: 113px" />
     </PagerContent>
 </MudTable>
 <MudButton Variant="Variant.Filled" OnClick="@AddElement">Default</MudButton>
