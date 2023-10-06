@@ -7,37 +7,197 @@
 
 <h3>Test</h3>
 
-@if (transactions == null)
+<!-- Display data from TransactionDocument table -->
+<h4>Transaction Documents</h4>
+@if (transactionDocuments == null)
 {
-    <h1>Loading</h1>
+    <h5>Loading</h5>
 }
 else
 {
-    @foreach (var p in transactions)
-    {
-        <p>
-            @p.TID
-        </p>
-        <p>
-            @p.CityOrMunicipality
-        </p>
-        <p>
-            @p.Barangay
-        </p>
-        <p>
-            @p.Price
-        </p>
-        <p>
-            @p.Quantity
-        </p>
-    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Document ID</th>
+                <th>Municipality</th>
+                <th>Barangay</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transactionDocument in transactionDocuments)
+            {
+                <tr>
+                    <td>@transactionDocument.document_id</td>
+                    <td>@transactionDocument.municipality_name</td>
+                    <td>@transactionDocument.barangay_name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
+<!-- Display data from PurchaseOrder table -->
+<h4>Purchase Orders</h4>
+@if (purchaseOrders == null)
+{
+    <h5>Loading</h5>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Document ID</th>
+                <th>Mode of Procurement</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var purchaseOrder in purchaseOrders)
+            {
+                <tr>
+                    <td>@purchaseOrder.order_id</td>
+                    <td>@purchaseOrder.document_id</td>
+                    <td>@purchaseOrder.mode_of_procurement</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<!-- Display data from AbstractQuotation table -->
+<h4>Abstract Quotations</h4>
+@if (abstractQuotations == null)
+{
+    <h5>Loading</h5>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Document ID</th>
+                <th>Open Date</th>
+                <th>Office Location</th>
+                <th>Office of the</th>
+                <th>Awarded to the</th>
+                <th>Office of</th>
+                <th>Opening Quotations Office</th>
+                <th>Chairman Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var abstractQuotation in abstractQuotations)
+            {
+                <tr>
+                    <td>@abstractQuotation.document_id</td>
+                    <td>@abstractQuotation.open_date</td>
+                    <td>@abstractQuotation.office_location</td>
+                    <td>@abstractQuotation.office_of_the</td>
+                    <td>@abstractQuotation.awarded_to_the</td>
+                    <td>@abstractQuotation.office_of</td>
+                    <td>@abstractQuotation.opening_quotations_office</td>
+                    <td>@abstractQuotation.chairman_name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<!-- Display data from PurchaseRequest table -->
+<h4>Purchase Requests</h4>
+@if (purchaseRequests == null)
+{
+    <h5>Loading</h5>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Document ID</th>
+                <th>Request Number</th>
+                <th>Request Date</th>
+                <th>Requisition</th>
+                <th>Delivery Location</th>
+                <th>Delivery Terms</th>
+                <th>Delivery Date</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var purchaseRequest in purchaseRequests)
+            {
+                <tr>
+                    <td>@purchaseRequest.document_id</td>
+                    <td>@purchaseRequest.request_number</td>
+                    <td>@purchaseRequest.request_date</td>
+                    <td>@purchaseRequest.requisition</td>
+                    <td>@purchaseRequest.delivery_location</td>
+                    <td>@purchaseRequest.delivery_terms</td>
+                    <td>@purchaseRequest.delivery_date</td>
+                    <td>@purchaseRequest.purpose</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<!-- Display data from Transaction table -->
+<h4>Transactions</h4>
+@if (transactions == null)
+{
+    <h5>Loading</h5>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Document ID</th>
+                <th>Municipality Name</th>
+                <th>Barangay Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in transactions)
+            {
+                <tr>
+                    <td>@transaction.document_id</td>
+                    <td>@transaction.municipality_name</td>
+                    <td>@transaction.barangay_name</td>
+                    <td>@transaction.price</td>
+                    <td>@transaction.quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 @code {
-    List<TransactionsModel> transactions;
+    List<TransactionDocument> transactionDocuments;
+    List<PurchaseOrder> purchaseOrders;
+    List<AbstractQuotation> abstractQuotations;
+    List<PurchaseRequest> purchaseRequests;
+    List<Transaction> transactions;
+
     protected override async Task OnInitializedAsync()
     {
-        string sql = "select * from transactions";
-        transactions = await _data.LoadData<TransactionsModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
+        // Fetch data for each table
+        string transactionDocumentsSql = "SELECT * FROM transactiondocuments";
+        transactionDocuments = await _data.LoadData<TransactionDocument, dynamic>(transactionDocumentsSql, new { }, _config.GetConnectionString("default"));
+
+        string purchaseOrdersSql = "SELECT * FROM purchaseorder";
+        purchaseOrders = await _data.LoadData<PurchaseOrder, dynamic>(purchaseOrdersSql, new { }, _config.GetConnectionString("default"));
+
+        string abstractQuotationsSql = "SELECT * FROM abstractquotation";
+        abstractQuotations = await _data.LoadData<AbstractQuotation, dynamic>(abstractQuotationsSql, new { }, _config.GetConnectionString("default"));
+
+        string purchaseRequestsSql = "SELECT * FROM purchaserequest";
+        purchaseRequests = await _data.LoadData<PurchaseRequest, dynamic>(purchaseRequestsSql, new { }, _config.GetConnectionString("default"));
+
+        string transactionsSql = "SELECT * FROM transactions";
+        transactions = await _data.LoadData<Transaction, dynamic>(transactionsSql, new { }, _config.GetConnectionString("default"));
     }
 }
