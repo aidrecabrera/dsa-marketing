@@ -1,0 +1,43 @@
+﻿@page "/testss"
+
+@using dsa_marketing_data
+@using dsa_marketing.Model
+@inject IDataAccess _data
+@inject IConfiguration _config
+
+<h3>Test</h3>
+
+@if (transactions == null)
+{
+    <h1>Loading</h1>
+}
+else
+{
+    @foreach (var p in transactions)
+    {
+        <p>
+            @p.TID
+        </p>
+        <p>
+            @p.CityOrMunicipality
+        </p>
+        <p>
+            @p.Barangay
+        </p>
+        <p>
+            @p.Price
+        </p>
+        <p>
+            @p.Quantity
+        </p>
+    }
+}
+
+@code {
+    List<TransactionsModel> transactions;
+    protected override async Task OnInitializedAsync()
+    {
+        string sql = "select * from transactions";
+        transactions = await _data.LoadData<TransactionsModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
+    }
+}
