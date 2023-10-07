@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dsa-marketing", "dsa-market
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dsa-marketing-data", "..\dsa-marketing-data\dsa-marketing-data.csproj", "{7376673C-DE2C-41D0-A002-FF2C26416BE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSA Feature Playground", "..\DSA Feature Playground\DSA Feature Playground.csproj", "{D8AF144D-81B5-4570-9799-B75019D7571D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSA Feature Playground", "..\DSA Feature Playground\DSA Feature Playground.csproj", "{D8AF144D-81B5-4570-9799-B75019D7571D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{60590D3B-474A-49B4-9E64-AEC2C9483877}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

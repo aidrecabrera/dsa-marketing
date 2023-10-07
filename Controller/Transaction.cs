@@ -6,15 +6,16 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 namespace dsa_marketing.Controller
 {
-    public class Transaction : TransactionsModel
+    public class Transaction
     {
-        private readonly IConfiguration _configuration;
-        private readonly MySqlConnection connection;
-        public Transaction(IConfiguration configuration)
+        string connectionString = "Server=127.0.0.1;Port=3306;Database=dsa_cluster;Uid=aidrecabrera;Pwd=aidrecabrera";
+        public List<TransactionViewModel> ReadTransaction()
         {
-            _configuration = configuration;
-            connection = new MySqlConnection(_configuration.GetConnectionString("default"));
+            List<TransactionViewModel> transactionList = new List<TransactionViewModel>();
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            string selectQuery = "SELECT * FROM transactionview";
+            transactionList = connection.Query<TransactionViewModel>(selectQuery).ToList();
+            return transactionList;
         }
-        
     }
 }

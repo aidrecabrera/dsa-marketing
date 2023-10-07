@@ -1,19 +1,44 @@
 @page "/"
+@using Dapper;
+@using MySql.Data.MySqlClient;
+@using dsa_marketing.Models
+@using dsa_marketing.Controller
 
 <PageTitle>New Document</PageTitle>
 
 <h1>Document</h1>
 <p>Let us make a new document for a barangay.</p>
 
-<div>
-    <dsa_marketing.Pages.Documents.MunicipalityBarangay/>
-</div>
-<div>
-    <dsa_marketing.Pages.Documents.BeautifiedComponents._00_TransactionCommonParameters/>
-    <dsa_marketing.Pages.Documents.BeautifiedComponents._01_TransactionList/>
-    <dsa_marketing.Pages.Documents._02_TransactionPurchaseOrder/>
-    <dsa_marketing.Pages.Documents._03_TransactionAbstractQuotation/>
-    <dsa_marketing.Pages.Documents._04_TransactionPurchaseRequest/>
-    <dsa_marketing.Pages.Documents._05_TransactionInspectionAndAcceptanceReport/>
-</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Transaction Id</th>
+            <th>Municipality Name</th>
+            <th>Barangay Name</th>
+            <!-- Add other column headers here -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in transactions)
+        {
+            <tr>
+                <td>@transaction.TransactionId</td>
+                <td>@transaction.MunicipalityName</td>
+                <td>@transaction.BarangayName</td>
+                <!-- Add other column values here -->
+            </tr>
+        }
+    </tbody>
+</table>
 
+@code {
+    private List<TransactionViewModel> transactions = new List<TransactionViewModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        string connectionString = "Server=127.0.0.1;Port=3306;Database=dsa_cluster;Uid=aidrecabrera;Pwd=aidrecabrera";
+        MySqlConnection connection = new MySqlConnection(connectionString);
+        string selectQuery = "SELECT * FROM transactions";
+        transactions = (await connection.QueryAsync<TransactionViewModel>(selectQuery)).ToList();
+    }
+}
