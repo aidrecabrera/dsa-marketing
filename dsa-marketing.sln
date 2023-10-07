@@ -5,7 +5,9 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dsa-marketing", "dsa-marketing.csproj", "{991930EB-398C-484D-A2A1-ACB452942C91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dsa-marketing-data", "..\dsa-marketing-data\dsa-marketing-data.csproj", "{7376673C-DE2C-41D0-A002-FF2C26416BE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dsa-marketing-data", "..\dsa-marketing-data\dsa-marketing-data.csproj", "{7376673C-DE2C-41D0-A002-FF2C26416BE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSA Feature Playground", "..\DSA Feature Playground\DSA Feature Playground.csproj", "{D8AF144D-81B5-4570-9799-B75019D7571D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7376673C-DE2C-41D0-A002-FF2C26416BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7376673C-DE2C-41D0-A002-FF2C26416BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7376673C-DE2C-41D0-A002-FF2C26416BE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8AF144D-81B5-4570-9799-B75019D7571D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8AF144D-81B5-4570-9799-B75019D7571D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8AF144D-81B5-4570-9799-B75019D7571D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8AF144D-81B5-4570-9799-B75019D7571D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
