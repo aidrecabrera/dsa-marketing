@@ -1,7 +1,10 @@
-﻿namespace dsa_marketing.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace dsa_marketing.Models
 {
     public class AbstractQuotationModel
     {
+        [Key]
         public int AbstractId { get; set; }
         public int DocumentId { get; set; }
         public DateTime OpenDate { get; set; }

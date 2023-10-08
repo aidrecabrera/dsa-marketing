@@ -1,7 +1,10 @@
-﻿namespace dsa_marketing.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace dsa_marketing.Models
 {
     public class PurchaseRequestModel
     {
+        [Key]
         public int RequestId { get; set; }
         public int DocumentId { get; set; }
         public string RequestNumber { get; set; }

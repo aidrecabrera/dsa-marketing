@@ -1,7 +1,10 @@
-﻿namespace dsa_marketing.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace dsa_marketing.Models
 {
     public class TransactionItemsModel
     {
+        [Key]
         public int ItemId { get; set; }
         public int DocumentId { get; set; }
         public string UnitName { get; set; }

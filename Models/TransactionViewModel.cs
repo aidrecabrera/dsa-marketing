@@ -1,4 +1,7 @@
-﻿namespace dsa_marketing.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace dsa_marketing.Models
 {
     public class TransactionViewModel
     {

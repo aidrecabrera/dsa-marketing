@@ -2,7 +2,7 @@
 {
     public interface IAbstractQuotationBuilder
     {
-        AbstractModel Build();
+        AbstractQuotationModel Build();
         AbstractQuotationBuilder WithAbstractId(int abstractId);
         AbstractQuotationBuilder WithAwardedToThe(string awardedToThe);
         AbstractQuotationBuilder WithDocumentId(int documentId);

@@ -46,7 +46,7 @@
             return this;
         }
 
-        public AbstractModel Build()
+        public AbstractQuotationModel Build()
         {
             return _abstract;
         }

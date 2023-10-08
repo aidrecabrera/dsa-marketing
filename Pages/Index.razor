@@ -1,44 +1,50 @@
 @page "/"
 @using Dapper;
 @using MySql.Data.MySqlClient;
-@using dsa_marketing.Models
-@using dsa_marketing.Controller
+@using System.Collections.Generic;
+@using Models
 
-<PageTitle>New Document</PageTitle>
+<PageTitle>Combined Data</PageTitle>
 
-<h1>Document</h1>
-<p>Let us make a new document for a barangay.</p>
+<h1>Combined Data</h1>
+<p>Displaying data from multiple tables in Blazor using Dapper.</p>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Transaction Id</th>
+            <th>Transaction ID</th>
             <th>Municipality Name</th>
             <th>Barangay Name</th>
-            <!-- Add other column headers here -->
         </tr>
     </thead>
     <tbody>
-        @foreach (var transaction in transactions)
+        @foreach (var data in combinedData)
         {
             <tr>
-                <td>@transaction.TransactionId</td>
-                <td>@transaction.MunicipalityName</td>
-                <td>@transaction.BarangayName</td>
-                <!-- Add other column values here -->
+                <td>@data.TransactionId</td>
+                <td>@data.MunicipalityName</td>
+                <td>@data.BarangayName</td>
             </tr>
         }
     </tbody>
 </table>
 
 @code {
-    private List<TransactionViewModel> transactions = new List<TransactionViewModel>();
+    private List<TransactionsModel> combinedData = new List<TransactionsModel>();
 
     protected override async Task OnInitializedAsync()
     {
         string connectionString = "Server=127.0.0.1;Port=3306;Database=dsa_cluster;Uid=aidrecabrera;Pwd=aidrecabrera";
         MySqlConnection connection = new MySqlConnection(connectionString);
-        string selectQuery = "SELECT * FROM transactions";
-        transactions = (await connection.QueryAsync<TransactionViewModel>(selectQuery)).ToList();
+
+        var query = @"
+            SELECT
+                *
+            FROM
+                Transactions
+        ";
+
+        var outputList = connection.Query<TransactionsModel>(query);
+        combinedData = outputList.ToList();
     }
 }
