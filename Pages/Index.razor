@@ -1,22 +1,6 @@
 @page "/"
 
-<PageTitle>New Document</PageTitle>
-
-
-<h1>Document</h1>
-<p>Let us make a new document for a barangay.</p>
-
-<div>
-    <dsa_marketing.Pages.Documents.MunicipalityBarangay/>
-</div>
-<div>
-    <dsa_marketing.Pages.Documents.BeautifiedComponents._00_TransactionCommonParameters/>
-    <dsa_marketing.Pages.Documents.BeautifiedComponents._01_TransactionList/>
-    <dsa_marketing.Pages.Documents._02_TransactionPurchaseOrder/>
-    <dsa_marketing.Pages.Documents._03_TransactionAbstractQuotation/>
-    <dsa_marketing.Pages.Documents._04_TransactionPurchaseRequest/>
-    <dsa_marketing.Pages.Documents._05_TransactionInspectionAndAcceptanceReport/>
-</div>
+<PageTitle>Transactions</PageTitle>
 
 @using dsa_marketing.Models
 
@@ -30,7 +14,6 @@
                 <th>Transaction ID</th>
                 <th>Municipality Name</th>
                 <th>Barangay Name</th>
-                <!-- Add other column headers here -->
             </tr>
         </thead>
         <tbody>
@@ -40,7 +23,6 @@
                     <td>@transaction.TransactionId</td>
                     <td>@transaction.MunicipalityName</td>
                     <td>@transaction.BarangayName</td>
-                    <!-- Add other columns here -->
                 </tr>
             }
         </tbody>
@@ -64,3 +46,30 @@ else
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
+<div>
+    <dsa_marketing.Pages.Documents.MunicipalityBarangay/>
+</div>
+<div>
+    <dsa_marketing.Pages.Documents.BeautifiedComponents._00_TransactionCommonParameters/>
+    <dsa_marketing.Pages.Documents.BeautifiedComponents._01_TransactionList/>
+    <dsa_marketing.Pages.Documents._02_TransactionPurchaseOrder/>
+    <dsa_marketing.Pages.Documents._03_TransactionAbstractQuotation/>
+    <dsa_marketing.Pages.Documents._04_TransactionPurchaseRequest/>
+    <dsa_marketing.Pages.Documents._05_TransactionInspectionAndAcceptanceReport/>
+</div>
+*@
