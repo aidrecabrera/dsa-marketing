@@ -29,5 +29,5 @@ public partial class PurchaseRequest
 
     public string? RequestorName { get; set; }
 
-    public virtual TransactionDocument? Document { get; set; }
+    public virtual TransactionDocuments? Document { get; set; }
 }

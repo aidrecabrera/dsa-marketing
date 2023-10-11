@@ -2,48 +2,7 @@
 
 <PageTitle>Transactions</PageTitle>
 
-@using dsa_marketing.Models
-
-<h1>Transactions</h1>
-
-@if (transactions != null && transactions.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Transaction ID</th>
-                <th>Municipality Name</th>
-                <th>Barangay Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var transaction in transactions)
-            {
-                <tr>
-                    <td>@transaction.TransactionId</td>
-                    <td>@transaction.MunicipalityName</td>
-                    <td>@transaction.BarangayName</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>No transactions found.</p>
-}
-
-@code {
-    private List<Transaction> transactions;
-
-    [Inject]
-    private DsaClusterContext _context { get; set; }
-
-    protected override void OnInitialized()
-    {
-        transactions = _context.Transactions.ToList();
-    }
-}
+<dsa_marketing.Pages.Views.DsaTransactions/>
 
 
 
@@ -58,18 +17,3 @@ else
 
 
 
-
-
-@*
-<div>
-    <dsa_marketing.Pages.Documents.MunicipalityBarangay/>
-</div>
-<div>
-    <dsa_marketing.Pages.Documents.BeautifiedComponents._00_TransactionCommonParameters/>
-    <dsa_marketing.Pages.Documents.BeautifiedComponents._01_TransactionList/>
-    <dsa_marketing.Pages.Documents._02_TransactionPurchaseOrder/>
-    <dsa_marketing.Pages.Documents._03_TransactionAbstractQuotation/>
-    <dsa_marketing.Pages.Documents._04_TransactionPurchaseRequest/>
-    <dsa_marketing.Pages.Documents._05_TransactionInspectionAndAcceptanceReport/>
-</div>
-*@

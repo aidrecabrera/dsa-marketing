@@ -11,5 +11,5 @@ public partial class Transaction
 
     public string? BarangayName { get; set; }
 
-    public virtual ICollection<TransactionDocument> TransactionDocuments { get; set; } = new List<TransactionDocument>();
+    public virtual ICollection<TransactionDocuments> TransactionDocuments { get; set; } = new List<TransactionDocuments>();
 }

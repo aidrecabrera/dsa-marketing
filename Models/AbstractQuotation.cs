@@ -19,5 +19,5 @@ public partial class AbstractQuotation
 
     public string? OpeningQuotationsOffice { get; set; }
 
-    public virtual TransactionDocument? Document { get; set; }
+    public virtual TransactionDocuments? Document { get; set; }
 }

@@ -1,0 +1,54 @@
+﻿@page "/transactions_list"
+@using dsa_marketing.Models
+@inject NavigationManager Navigation
+
+<h1>Transactions</h1>
+
+@if (transactions != null && transactions.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Municipality Name</th>
+                <th>Barangay Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in transactions)
+            {
+                <tr>
+                    <td>@transaction.TransactionId</td>
+                    <td>@transaction.MunicipalityName</td>
+                    <td>@transaction.BarangayName</td>
+                    <td>
+                        <button @onclick="() => NavigateToTransactionInfo(transaction.TransactionId)">
+                            View Details
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No transactions found.</p>
+}
+
+@code {
+    private List<Transaction> transactions;
+
+    [Inject]
+    private DsaClusterContext _context { get; set; }
+
+    protected override void OnInitialized()
+    {
+        transactions = _context.Transactions.ToList();
+    }
+
+    private void NavigateToTransactionInfo(int transactionId)
+    {
+        Navigation.NavigateTo($"/transaction_info/{transactionId}");
+    }
+}

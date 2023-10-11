@@ -23,7 +23,7 @@ public partial class DsaClusterContext : DbContext
 
     public virtual DbSet<Transaction> Transactions { get; set; }
 
-    public virtual DbSet<TransactionDocument> TransactionDocuments { get; set; }
+    public virtual DbSet<TransactionDocuments> TransactionDocuments { get; set; }
 
     public virtual DbSet<TransactionItem> TransactionItems { get; set; }
 
@@ -91,7 +91,7 @@ public partial class DsaClusterContext : DbContext
             entity.Property(e => e.MunicipalityName).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<TransactionDocument>(entity =>
+        modelBuilder.Entity<TransactionDocuments>(entity =>
         {
             entity.HasKey(e => e.DocumentId).HasName("PK__Transact__1ABEEF0F895E8B39");
 

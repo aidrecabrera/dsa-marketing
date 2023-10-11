@@ -11,5 +11,5 @@ public partial class PurchaseOrder
 
     public string? ModeOfProcurement { get; set; }
 
-    public virtual TransactionDocument? Document { get; set; }
+    public virtual TransactionDocuments? Document { get; set; }
 }

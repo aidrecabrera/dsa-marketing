@@ -1,0 +1,95 @@
+﻿@page "/documents"
+@using dsa_marketing.Models
+
+<h3>Transaction Documents</h3>
+
+@if (transactionDocuments != null && transactionDocuments.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Punong Barangay</th>
+                <th>Barangay Treasurer</th>
+                <th>Document ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in transactionDocuments)
+            {
+                <tr>
+                    <td>@transaction.DocumentId</td>
+                    <td>@transaction.TransactionId</td>
+                    <td>@transaction.PunongBarangayName</td>
+                    <td>@transaction.BarangayTreasurerName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No transactions found.</p>
+}
+
+@*
+    CREATE TABLE TransactionItems (
+    ItemId INT PRIMARY KEY IDENTITY(1,1),
+    DocumentId INT,
+    UnitName NVARCHAR(255),
+    Particulars NVARCHAR(255),
+    Quantity INT,
+    Cost DECIMAL(10, 2),
+    Amount DECIMAL(10, 2),
+    Price DECIMAL(10, 2),
+    FOREIGN KEY (DocumentId) REFERENCES TransactionDocuments(DocumentId)
+);
+*@
+
+@if (transactionItems != null && transactionItems.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item ID</th>
+                <th>Unit</th>
+                <th>Particulars</th>
+                <th>Quantity</th>
+                <th>Cost</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var items in transactionItems)
+            {
+                <tr>
+                    <td>@items.ItemId</td>
+                    <td>@items.UnitName</td>
+                    <td>@items.Particulars</td>
+                    <td>@items.Quantity</td>
+                    <td>@items.Cost</td>
+                    <td>@items.Amount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No transactions found.</p>
+}
+
+
+@code {
+    private List<TransactionDocuments> transactionDocuments;
+    private List<TransactionItem> transactionItems;
+
+    [Inject]
+    private DsaClusterContext _context { get; set; }
+
+    protected override void OnInitialized()
+    {
+        transactionDocuments = _context.TransactionDocuments.ToList();
+        transactionItems = _context.TransactionItems.ToList();
+    }
+}

@@ -21,5 +21,5 @@ public partial class TransactionItem
 
     public decimal? Price { get; set; }
 
-    public virtual TransactionDocument? Document { get; set; }
+    public virtual TransactionDocuments? Document { get; set; }
 }

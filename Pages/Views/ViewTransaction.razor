@@ -1,0 +1,73 @@
+﻿@page "/transaction_info/{TransactionId:int}"
+@using dsa_marketing.Models
+
+<h3>Transaction Information</h3>
+
+@if (transactionInformation != null)
+{
+    <h1>@transactionInformation.MunicipalityName</h1>
+    <h1>@transactionInformation.BarangayName</h1>
+    <h1>@documentInformation.PunongBarangayName</h1>
+    <h1>@documentInformation.BarangayTreasurerName</h1>
+
+    @if (transactionItems != null && transactionItems.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Unit</th>
+                    <th>Particulars</th>
+                    <th>Quantity</th>
+                    <th>Cost</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in transactionItems)
+                {
+                    <tr>
+                        <td>@item.UnitName</td>
+                        <td>@item.Particulars</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Cost</td>
+                        <td>@item.Amount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No transactions found.</p>
+    }
+}
+else
+{
+    <p>No data found for the selected transaction.</p>
+}
+
+@code {
+    [Parameter]
+    public int TransactionId { get; set; }
+
+    private Transaction transactionInformation;
+    private TransactionDocuments documentInformation;
+    private List<TransactionItem> transactionItems;
+
+    [Inject]
+    private DsaClusterContext _context { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (TransactionId > 0)
+        {
+            transactionInformation = _context.Transactions.FirstOrDefault(t => t.TransactionId == TransactionId);
+
+            if (transactionInformation != null)
+            {
+                documentInformation = _context.TransactionDocuments.FirstOrDefault(d => d.DocumentId == transactionInformation.TransactionId);
+                transactionItems = _context.TransactionItems.Where(ti => ti.DocumentId == transactionInformation.TransactionId).ToList();
+            }
+        }
+    }
+}

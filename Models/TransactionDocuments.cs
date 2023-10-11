@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace dsa_marketing.Models;
 
-public partial class TransactionDocument
+public partial class TransactionDocuments
 {
     public int DocumentId { get; set; }
 
