@@ -10,20 +10,29 @@
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="34.0.2" />
+    <PackageReference Include="Dapper" Version="2.1.4" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.11">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.12">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="MudBlazor" Version="6.10.0" />
+    <PackageReference Include="MySql.Data" Version="8.1.0" />
     <PackageReference Include="Radzen.Blazor" Version="4.16.4" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="Pages\Test\" />
   </ItemGroup>
 
 </Project>
