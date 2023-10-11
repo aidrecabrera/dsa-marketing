@@ -1,62 +1,88 @@
-﻿@using MudBlazor
+﻿@page "/create_transaction"
+@using dsa_marketing.Models
+@using Microsoft.EntityFrameworkCore
+@using dsa_marketing.Pages.Documents.BeautifiedComponents
 
-<MudContainer>
-    <MudCard>
-        <MudCardContent>
-            <MudSelect T="string" Label="Municipality" @bind-Value="selectedMunicipality">
-                @foreach (var municipality in municipalities)
-                {
-                    <MudSelectItem T="string" Value="@municipality">@municipality</MudSelectItem>
-                }
-            </MudSelect>
+<h3>Create Transaction</h3>
 
-            <MudSelect Label="Barangay" @bind-Value="selectedBarangay">
-                @foreach (var barangay in GetBarangays(selectedMunicipality))
-                {
-                    <MudSelectItem Value="@barangay">@barangay</MudSelectItem>
-                }
-            </MudSelect>
+@if (isSaved)
+{
+    <p>Transaction has been saved successfully!</p>
+}
+else
+{
+    <MudContainer>
+        <MudCard>
+            <MudCardContent>
+                <MudSelect T="string" Label="Municipality" @bind-Value="selectedMunicipality">
+                    @foreach (var municipality in municipalities)
+                    {
+                        <MudSelectItem T="string" Value="@municipality">@municipality</MudSelectItem>
+                    }
+                </MudSelect>
 
-            <div class="form-group">
-                <MudTextField T="string" Label="Punong Barangay" HelperText="Punong Barangay for Transaction" HelperTextOnFocus="true" Variant="Variant.Text" @bind-Value="punongBarangay" />
-            </div>
+                <MudSelect Label="Barangay" @bind-Value="selectedBarangay">
+                    @foreach (var barangay in GetBarangays(selectedMunicipality))
+                    {
+                        <MudSelectItem Value="@barangay">@barangay</MudSelectItem>
+                    }
+                </MudSelect>
 
-            <div class="inspection-acceptance-report">
-                <!-- Form fields -->
                 <div class="form-group">
-                    <MudTextField T="string" Label="Barangay Treasurer" HelperText="Barangay Treasurer for Transaction" HelperTextOnFocus="true" Variant="Variant.Text" @bind-Value="treasurerBarangay" />
+                    <MudTextField T="string" Label="Punong Barangay" HelperText="Punong Barangay for Transaction" HelperTextOnFocus="true" Variant="Variant.Text" @bind-Value="newPunongBarangay" />
                 </div>
-            </div>
 
-        </MudCardContent>
-    </MudCard>
-</MudContainer>
+                <div class="inspection-acceptance-report">
+                    <!-- Form fields -->
+                    <div class="form-group">
+                        <MudTextField T="string" Label="Barangay Treasurer" HelperText="Barangay Treasurer for Transaction" HelperTextOnFocus="true" Variant="Variant.Text" @bind-Value="newBarangayTreasurer" />
+                    </div>
+                </div>
+
+            </MudCardContent>
+        </MudCard>
+    </MudContainer>
+}
+
+<h1>Selected Municipality: @selectedMunicipality</h1>
+<h1>Selected Barangay: @selectedBarangay</h1>
+
+<button type="submit" class="btn btn-primary" @onclick="SaveTransaction">Save Transaction</button>
 
 @code {
-    [Parameter]
+    private Transaction transaction;
+    private TransactionDocuments document;
+    private bool isSaved = false;
+
+    [Inject]
+    private DsaClusterContext _context { get; set; }
+
     public string selectedMunicipality { get; set; }
-
-    [Parameter]
-    public EventCallback<string> selectedMunicipalityChanged { get; set; }
-
-    [Parameter]
     public string selectedBarangay { get; set; }
+    public string newPunongBarangay { get; set; }
+    public string newBarangayTreasurer { get; set; }
 
-    [Parameter]
-    public EventCallback<string> selectedBarangayChanged { get; set; }
-
-    private async Task OnSelectedMunicipalityChanged()
+    private void SaveTransaction()
     {
-        await selectedMunicipalityChanged.InvokeAsync(selectedMunicipality);
+        // Save the transaction to the database
+        transaction = new Transaction
+        {
+            MunicipalityName = selectedMunicipality,
+            BarangayName = selectedBarangay,
+        };
+        document = new TransactionDocuments
+        {
+            PunongBarangayName = newPunongBarangay,
+            BarangayTreasurerName = newBarangayTreasurer
+        };
+        _context.Transactions.Add(transaction);
+        document.Transaction = transaction;
+        _context.TransactionDocuments.Add(document);
+        _context.SaveChanges();
+        isSaved = true;
     }
 
-    private async Task OnSelectedBarangayChanged()
-    {
-        await selectedBarangayChanged.InvokeAsync(selectedBarangay);
-    }
 
-    private string punongBarangay = "";
-    private string treasurerBarangay = "";
     // List of municipalities
     private List<string> municipalities = new List<string>
     {
@@ -155,10 +181,12 @@
     // Method to get the list of barangays based on the selected municipality
     private List<string> GetBarangays(string municipality)
     {
-        if (barangays.ContainsKey(municipality))
+        if (!string.IsNullOrEmpty(municipality) && barangays.ContainsKey(municipality))
         {
             return barangays[municipality];
         }
         return new List<string>();
     }
 }
+
+

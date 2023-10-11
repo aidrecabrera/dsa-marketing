@@ -7,8 +7,14 @@
 {
     <h1>@transactionInformation.MunicipalityName</h1>
     <h1>@transactionInformation.BarangayName</h1>
-    <h1>@documentInformation.PunongBarangayName</h1>
-    <h1>@documentInformation.BarangayTreasurerName</h1>
+    @if (documentInformation != null) {
+        <h1>@documentInformation.PunongBarangayName</h1>
+        <h1>@documentInformation.BarangayTreasurerName</h1>
+    } else
+    {
+        <h1>No Punong Barangay</h1>
+        <h1>No Barangay Treasurer</h1>
+    }
 
     @if (transactionItems != null && transactionItems.Any())
     {
@@ -38,7 +44,7 @@
     }
     else
     {
-        <p>No transactions found.</p>
+        <p>No transaction items found.</p>
     }
 }
 else
