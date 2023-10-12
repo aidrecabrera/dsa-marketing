@@ -7,10 +7,12 @@
 {
     <h1>@transactionInformation.MunicipalityName</h1>
     <h1>@transactionInformation.BarangayName</h1>
-    @if (documentInformation != null) {
+    @if (documentInformation != null)
+    {
         <h1>@documentInformation.PunongBarangayName</h1>
         <h1>@documentInformation.BarangayTreasurerName</h1>
-    } else
+    }
+    else
     {
         <h1>No Punong Barangay</h1>
         <h1>No Barangay Treasurer</h1>
@@ -26,6 +28,7 @@
                     <th>Quantity</th>
                     <th>Cost</th>
                     <th>Amount</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,7 +40,38 @@
                         <td>@item.Quantity</td>
                         <td>@item.Cost</td>
                         <td>@item.Amount</td>
+                        <td>
+                            @if (itemInEditMode == item)
+                            {
+                                <button @onclick="SaveEdit">Save</button>
+                                <button @onclick="CancelEdit">Cancel</button>
+                            }
+                            else
+                            {
+                                <button @onclick="() => EditItem(item)">Edit</button>
+                            }
+                        </td>
                     </tr>
+                    @if (itemInEditMode == item)
+                    {
+                        <tr>
+                            <td>
+                                <input @bind="item.UnitName" />
+                            </td>
+                            <td>
+                                <input @bind="item.Particulars" />
+                            </td>
+                            <td>
+                                <input @bind="item.Quantity" />
+                            </td>
+                            <td>
+                                <input @bind="item.Cost" />
+                            </td>
+                            <td>
+                                <input @bind="item.Amount" />
+                            </td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
@@ -60,6 +94,8 @@ else
     private TransactionDocuments documentInformation;
     private List<TransactionItem> transactionItems;
 
+    private TransactionItem itemInEditMode;
+
     [Inject]
     private DsaClusterContext _context { get; set; }
 
@@ -75,5 +111,25 @@ else
                 transactionItems = _context.TransactionItems.Where(ti => ti.DocumentId == transactionInformation.TransactionId).ToList();
             }
         }
+    }
+
+    void EditItem(TransactionItem item)
+    {
+        itemInEditMode = item;
+    }
+
+    void SaveEdit()
+    {
+        if (itemInEditMode != null)
+        {
+            _context.Update(itemInEditMode);
+            _context.SaveChanges();
+            itemInEditMode = null;
+        }
+    }
+
+    void CancelEdit()
+    {
+        itemInEditMode = null;
     }
 }
