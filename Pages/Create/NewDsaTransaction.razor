@@ -43,51 +43,7 @@ else
     </MudContainer>
 }
 
-<button type="submit" class="btn btn-primary" @onclick="SaveTransaction">Save Transaction</button>
-
 @code {
-    private Transaction transaction;
-    private TransactionDocuments document;
-    private bool isSaved = false;
-
-    [Inject]
-    private DsaClusterContext _context { get; set; }
-
-    public string selectedMunicipality { get; set; }
-    public string selectedBarangay { get; set; }
-    public string newPunongBarangay { get; set; }
-    public string newBarangayTreasurer { get; set; }
-
-    [Inject]
-    private NavigationManager NavigationManager { get; set; }
-
-    private void NavigateBackToOriginalPage()
-    {
-        NavigationManager.NavigateTo("/transactions_list");
-    }
-
-    private void SaveTransaction()
-    {
-        // Save the transaction to the database
-        transaction = new Transaction
-        {
-            MunicipalityName = selectedMunicipality,
-            BarangayName = selectedBarangay,
-        };
-        document = new TransactionDocuments
-        {
-            PunongBarangayName = newPunongBarangay,
-            BarangayTreasurerName = newBarangayTreasurer
-        };
-        _context.Transactions.Add(transaction);
-        document.Transaction = transaction;
-        _context.TransactionDocuments.Add(document);
-        _context.SaveChanges();
-        isSaved = true;
-        NavigateBackToOriginalPage();
-    }
-
-
     // List of municipalities
     private List<string> municipalities = new List<string>
     {
@@ -194,10 +150,7 @@ else
     }
 }
 
-
-@using MudBlazor
-
-<MudTable Items="@itemList" EditTrigger="TableEditTrigger.RowClick" CanCancelEdit="true" CommitEditTooltip="Commit Edit" Hover="true" Bordered="true" Striped="true" Breakpoint="Breakpoint.Sm">
+<MudTable Items="@itemList" FixedHeader="true" FixedFooter="true" EditTrigger="TableEditTrigger.RowClick" CanCancelEdit="true" CommitEditTooltip="Commit Edit" Hover="true" Breakpoint="Breakpoint.Sm" @ref="_table">
     <HeaderContent>
         <MudTh>Unit Name</MudTh>
         <MudTh>Particulars</MudTh>
@@ -213,19 +166,22 @@ else
         <MudTd DataLabel="Amount">@context.Amount</MudTd>
     </RowTemplate>
     <RowEditingTemplate>
-        <MudTd DataLabel="Nr">@context.UnitName</MudTd>
-        <MudTd DataLabel="Sign">
+        <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
+        <MudTd DataLabel="Particulars">
             <MudTextField @bind-Value="@context.Particulars" Required />
          </MudTd>
-         <MudTd DataLabel="Name">
+         <MudTd DataLabel="Quantity">
              <MudTextField @bind-Value="@context.Quantity" Required />
          </MudTd>
-         <MudTd DataLabel="Position">
+         <MudTd DataLabel="Cost">
              <MudTextField @bind-Value="@context.Cost" Required Min="1" />
          </MudTd>
-         <MudTd DataLabel="Molar mass">
+         <MudTd DataLabel="Amount">
              <MudTextField @bind-Value="@context.Amount" Required />
          </MudTd>
+         <MudTd>
+             <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" OnClick="() => DeleteRow(context)"></MudIconButton>
+        </MudTd>
      </RowEditingTemplate>
  </MudTable>
 
@@ -234,31 +190,13 @@ else
      <MudTextField Label="Particulars" @bind-Value="newItem.Particulars" Required="true"></MudTextField>
      <MudTextField Label="Quantity" @bind-Value="newItem.Quantity" Required="true"></MudTextField>
      <MudTextField Label="Cost" @bind-Value="newItem.Cost"></MudTextField>
-     <MudTextField Label="Amount" @bind-Value="newItem.Amount"></MudTextField>
      <MudButton Type="ButtonType.Submit" OnClick="AddElement">Add Element</MudButton>
  </MudForm>
 
- @code {
-     @*
-     [ItemId]
-      ,[DocumentId]
-      ,[UnitName]
-      ,[Particulars]
-      ,[Quantity]
-      ,[Cost]
-      ,[Amount]
-      ,[Price]
-     *@
-    private List<TransactionItem> itemList = new List<TransactionItem>();
-    public class TransactionItem
-    {
-        public string UnitName { get; set; }
-        public string Particulars { get; set; }
-        public int Quantity { get; set; }
-        public double Cost { get; set; }
-        public double Amount { get; set; }
-    }
+ <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" OnClick="SaveTransaction">Disable elevation</MudButton>
 
+ @code {
+    private List<TransactionItem> itemList = new List<TransactionItem>();
     TransactionItem newItem = new TransactionItem();
 
     void AddElement()
@@ -274,5 +212,72 @@ else
 
         // Clear the form
         newItem = new TransactionItem();
+    }
+
+    private MudTable<TransactionItem> _table;
+    void DeleteRow(TransactionItem item)
+    {
+        itemList.Remove(item);
+        _table.SetEditingItem(null);
+        StateHasChanged();
+    }
+
+    private Transaction transaction;
+    private TransactionDocuments document;
+    private TransactionItem items;
+    private bool isSaved = false;
+
+    [Inject]
+    private DsaClusterContext _context { get; set; }
+
+    public string selectedMunicipality { get; set; }
+    public string selectedBarangay { get; set; }
+    public string newPunongBarangay { get; set; }
+    public string newBarangayTreasurer { get; set; }
+
+    private void SaveTransaction()
+    {
+        // Create and save the transaction first
+        transaction = new Transaction
+            {
+                MunicipalityName = selectedMunicipality,
+                BarangayName = selectedBarangay,
+            };
+
+        _context.Transactions.Add(transaction);
+        _context.SaveChanges(); // Save the transaction to generate a TransactionId
+
+        // Create the associated TransactionDocuments
+        document = new TransactionDocuments
+            {
+                TransactionId = transaction.TransactionId, // Set the TransactionId
+                PunongBarangayName = newPunongBarangay,
+                BarangayTreasurerName = newBarangayTreasurer
+            };
+
+        _context.TransactionDocuments.Add(document);
+        _context.SaveChanges(); // Save the TransactionDocuments to generate a DocumentId
+
+        // Create and add the TransactionItem objects
+        foreach (var item in itemList)
+        {
+            item.DocumentId = document.DocumentId; // Set the DocumentId
+            _context.TransactionItems.Add(item);
+        }
+
+        _context.SaveChanges();
+        isSaved = true;
+
+        NavigateBackToOriginalPage();
+    }
+}
+
+@code {
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
+    private void NavigateBackToOriginalPage()
+    {
+        NavigationManager.NavigateTo("/transactions_list");
     }
 }
