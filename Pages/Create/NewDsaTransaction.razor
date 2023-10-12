@@ -33,7 +33,6 @@ else
                 </div>
 
                 <div class="inspection-acceptance-report">
-                    <!-- Form fields -->
                     <div class="form-group">
                         <MudTextField T="string" Label="Barangay Treasurer" HelperText="Barangay Treasurer for Transaction" HelperTextOnFocus="true" Variant="Variant.Text" @bind-Value="newBarangayTreasurer" />
                     </div>
@@ -43,9 +42,6 @@ else
         </MudCard>
     </MudContainer>
 }
-
-<h1>Selected Municipality: @selectedMunicipality</h1>
-<h1>Selected Barangay: @selectedBarangay</h1>
 
 <button type="submit" class="btn btn-primary" @onclick="SaveTransaction">Save Transaction</button>
 
@@ -61,6 +57,14 @@ else
     public string selectedBarangay { get; set; }
     public string newPunongBarangay { get; set; }
     public string newBarangayTreasurer { get; set; }
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
+    private void NavigateBackToOriginalPage()
+    {
+        NavigationManager.NavigateTo("/transactions_list");
+    }
 
     private void SaveTransaction()
     {
@@ -80,6 +84,7 @@ else
         _context.TransactionDocuments.Add(document);
         _context.SaveChanges();
         isSaved = true;
+        NavigateBackToOriginalPage();
     }
 
 
@@ -190,3 +195,84 @@ else
 }
 
 
+@using MudBlazor
+
+<MudTable Items="@itemList" EditTrigger="TableEditTrigger.RowClick" CanCancelEdit="true" CommitEditTooltip="Commit Edit" Hover="true" Bordered="true" Striped="true" Breakpoint="Breakpoint.Sm">
+    <HeaderContent>
+        <MudTh>Unit Name</MudTh>
+        <MudTh>Particulars</MudTh>
+        <MudTh>Quantity</MudTh>
+        <MudTh>Unit Cost</MudTh>
+        <MudTh>Amount</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
+        <MudTd DataLabel="Particulars">@context.Particulars</MudTd>
+        <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
+        <MudTd DataLabel="Cost">@context.Cost</MudTd>
+        <MudTd DataLabel="Amount">@context.Amount</MudTd>
+    </RowTemplate>
+    <RowEditingTemplate>
+        <MudTd DataLabel="Nr">@context.UnitName</MudTd>
+        <MudTd DataLabel="Sign">
+            <MudTextField @bind-Value="@context.Particulars" Required />
+         </MudTd>
+         <MudTd DataLabel="Name">
+             <MudTextField @bind-Value="@context.Quantity" Required />
+         </MudTd>
+         <MudTd DataLabel="Position">
+             <MudTextField @bind-Value="@context.Cost" Required Min="1" />
+         </MudTd>
+         <MudTd DataLabel="Molar mass">
+             <MudTextField @bind-Value="@context.Amount" Required />
+         </MudTd>
+     </RowEditingTemplate>
+ </MudTable>
+
+ <MudForm Model="@newItem">
+     <MudTextField Label="Unit" @bind-Value="newItem.UnitName" Required="true"></MudTextField>
+     <MudTextField Label="Particulars" @bind-Value="newItem.Particulars" Required="true"></MudTextField>
+     <MudTextField Label="Quantity" @bind-Value="newItem.Quantity" Required="true"></MudTextField>
+     <MudTextField Label="Cost" @bind-Value="newItem.Cost"></MudTextField>
+     <MudTextField Label="Amount" @bind-Value="newItem.Amount"></MudTextField>
+     <MudButton Type="ButtonType.Submit" OnClick="AddElement">Add Element</MudButton>
+ </MudForm>
+
+ @code {
+     @*
+     [ItemId]
+      ,[DocumentId]
+      ,[UnitName]
+      ,[Particulars]
+      ,[Quantity]
+      ,[Cost]
+      ,[Amount]
+      ,[Price]
+     *@
+    private List<TransactionItem> itemList = new List<TransactionItem>();
+    public class TransactionItem
+    {
+        public string UnitName { get; set; }
+        public string Particulars { get; set; }
+        public int Quantity { get; set; }
+        public double Cost { get; set; }
+        public double Amount { get; set; }
+    }
+
+    TransactionItem newItem = new TransactionItem();
+
+    void AddElement()
+    {
+        itemList.Add(new TransactionItem
+            {
+                UnitName = newItem.UnitName,
+                Particulars = newItem.Particulars,
+                Quantity = newItem.Quantity,
+                Cost = newItem.Cost,
+                Amount = newItem.Quantity * newItem.Cost,
+            });
+
+        // Clear the form
+        newItem = new TransactionItem();
+    }
+}
