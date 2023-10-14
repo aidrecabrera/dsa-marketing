@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace dsa_marketing.Models;
 
@@ -15,17 +13,17 @@ public partial class DsaClusterContext : DbContext
     {
     }
 
-    public virtual DbSet<AbstractQuotation> AbstractQuotations { get; set; }
+    public virtual DbSet<AbstractQuotation>? AbstractQuotations { get; set; }
 
-    public virtual DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+    public virtual DbSet<PurchaseOrder>? PurchaseOrders { get; set; }
 
-    public virtual DbSet<PurchaseRequest> PurchaseRequests { get; set; }
+    public virtual DbSet<PurchaseRequest>? PurchaseRequests { get; set; }
 
-    public virtual DbSet<Transaction> Transactions { get; set; }
+    public virtual DbSet<Transaction>? Transactions { get; set; }
 
-    public virtual DbSet<TransactionDocuments> TransactionDocuments { get; set; }
+    public virtual DbSet<TransactionDocuments>? TransactionDocuments { get; set; }
 
-    public virtual DbSet<TransactionItem> TransactionItems { get; set; }
+    public virtual DbSet<TransactionItem>? TransactionItems { get; set; }
 
     // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer("Server=WindowsPC\\SQLEXPRESS;Database=dsa_cluster;Trusted_Connection=True;TrustServerCertificate=True;");
 

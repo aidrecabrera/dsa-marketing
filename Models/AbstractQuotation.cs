@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace dsa_marketing.Models;
 
-namespace dsa_marketing.Models;
-
-public partial class AbstractQuotation
+public sealed class AbstractQuotation
 {
     public int AbstractId { get; set; }
 
@@ -19,5 +16,5 @@ public partial class AbstractQuotation
 
     public string? OpeningQuotationsOffice { get; set; }
 
-    public virtual TransactionDocuments? Document { get; set; }
+    public TransactionDocuments? Document { get; set; }
 }

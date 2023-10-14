@@ -2,7 +2,10 @@
 @using dsa_marketing.Models;
 
 <div>
-    <MudTable Items="@transactions" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+    <MudTable Elevation="0" Items="@transactions" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info" class="border-2 border-black ">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Recent Transactions</MudText>
+        </ToolBarContent>
         <HeaderContent>
             <MudTh>Transaction ID</MudTh>
             <MudTh>Barangay Name</MudTh>

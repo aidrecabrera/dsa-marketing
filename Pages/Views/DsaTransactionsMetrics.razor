@@ -1,22 +1,22 @@
 ﻿@using System.Globalization;
 @using dsa_marketing.Models;
 
-<div class="flex flex-col flex-grow gap-2">
-    <MudPaper class="bg-dark p-4 text-white" Width="100%" Height="20%">
+<div class="flex flex-row flex-grow gap-2">
+    <MudPaper Elevation="0" class="border-2 border-black p-4 text-black" Width="100%" Height="20%">
         <div>
             <MudText Typo="Typo.h6">Transactions</MudText>
             <MudText Typo="Typo.h3">@totalTransactions</MudText>
             <MudText Typo="Typo.caption">All running & completed projects</MudText>
         </div>
     </MudPaper>
-    <MudPaper class="bg-dark p-4 text-white" Width="100%" Height="20%">
+    <MudPaper Elevation="0" class="border-2 border-black p-4 text-black" Width="100%" Height="20%">
         <div>
             <MudText Typo="Typo.h6">Expenses</MudText>
             <MudText Typo="Typo.h3">@totalExpenses</MudText>
             <MudText Typo="Typo.caption">The total expenses from all projects</MudText>
         </div>
     </MudPaper>
-    <MudPaper class="bg-dark p-4 text-white" Width="100%" Height="20%">
+    <MudPaper Elevation="0" class="border-2 border-black p-4 text-black" Width="100%" Height="20%">
         <div>
             <MudText Typo="Typo.h6">Revenue</MudText>
             <MudText Typo="Typo.h3">@totalRevenue</MudText>
