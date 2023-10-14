@@ -1,7 +1,3 @@
-@page "/municipality-barangay"
-
-<!-- MunicipalityBarangayForm.razor -->
-
 <div class="form-group">
     <label for="municipality">Select Municipality:</label>
     <select id="municipality" @bind="selectedMunicipality" class="form-control">
@@ -28,7 +24,7 @@
 
 <div>
     <label for="barangay">Punong Barangay:</label>
-    <input type="text" id="barangay" @bind="@punongBarangay" class="form-control" />
+    <input type="text" id="barangay" @bind="punongBarangay" class="form-control" />
 </div>
 
 <div class="inspection-acceptance-report">
@@ -40,9 +36,14 @@
 </div>
 
 @code {
-    private string selectedMunicipality = "Matanao"; // Initialize with a default value
-    private string selectedBarangay = "Asbang";                 // Property to capture the selected barangay
+    [Parameter]
+    public string selectedMunicipality { get; set; } = "Matanao";
+
+    [Parameter]
+    public string selectedBarangay { get; set; } = "Asbang";
+
     private string punongBarangay;
+
     // List of municipalities
     private List<string> municipalities = new List<string>
     {
@@ -97,7 +98,7 @@
             {
                 "Poblacion",
                 "Bacungan",
-                "Balnate",
+                "Balnay",
                 "Barayong",
                 "Blocon",
                 "Dalawinon",

@@ -1,0 +1,283 @@
+﻿@page "/create_transaction"
+@using dsa_marketing.Models
+@using Microsoft.EntityFrameworkCore
+@using dsa_marketing.Pages.Documents.BeautifiedComponents
+
+<h3>Create Transaction</h3>
+
+@if (isSaved)
+{
+    <p>Transaction has been saved successfully!</p>
+}
+else
+{
+    <MudContainer>
+        <MudCard>
+            <MudCardContent>
+                <MudSelect T="string" Label="Municipality" @bind-Value="selectedMunicipality">
+                    @foreach (var municipality in municipalities)
+                    {
+                        <MudSelectItem T="string" Value="@municipality">@municipality</MudSelectItem>
+                    }
+                </MudSelect>
+
+                <MudSelect Label="Barangay" @bind-Value="selectedBarangay">
+                    @foreach (var barangay in GetBarangays(selectedMunicipality))
+                    {
+                        <MudSelectItem Value="@barangay">@barangay</MudSelectItem>
+                    }
+                </MudSelect>
+
+                <div class="form-group">
+                    <MudTextField T="string" Label="Punong Barangay" HelperText="Punong Barangay for Transaction" HelperTextOnFocus="true" Variant="Variant.Text" @bind-Value="newPunongBarangay" />
+                </div>
+
+                <div class="inspection-acceptance-report">
+                    <div class="form-group">
+                        <MudTextField T="string" Label="Barangay Treasurer" HelperText="Barangay Treasurer for Transaction" HelperTextOnFocus="true" Variant="Variant.Text" @bind-Value="newBarangayTreasurer" />
+                    </div>
+                </div>
+
+            </MudCardContent>
+        </MudCard>
+    </MudContainer>
+}
+
+@code {
+    // List of municipalities
+    private List<string> municipalities = new List<string>
+    {
+        "Matanao",
+        "Magsaysay",
+        "Sarangani"
+        // Add more municipalities as needed
+    };
+
+    // Dictionary to store barangays for each municipality
+    private Dictionary<string, List<string>> barangays = new Dictionary<string, List<string>>
+    {
+        { "Matanao", new List<string>
+            {
+                "Asbang",
+                "Asinan",
+                "Bagumbayan",
+                "Bangkal",
+                "Buas",
+                "Buri",
+                "Camanchiles",
+                "Ceboza",
+                "Colonsabak",
+                "Dongan-Pekong",
+                "Kabasagan",
+                "Kapok",
+                "Kauswagan",
+                "Kibao",
+                "La Suerte",
+                "Langa-an",
+                "Lower Marber",
+                "Cabligan (Managa)",
+                "Manga",
+                "New Katipunan",
+                "New Murcia",
+                "New Visayas",
+                "Poblacion",
+                "Saboy",
+                "San Jose",
+                "San Miguel",
+                "San Vicente",
+                "Saub",
+                "Sinaragan",
+                "Sinawilan",
+                "Tamlangon",
+                "Towak",
+                "Tibongbong"
+                // Add more barangays for Matanao as needed
+            }
+        },
+        { "Magsaysay", new List<string>
+            {
+                "Poblacion",
+                "Bacungan",
+                "Balnate",
+                "Barayong",
+                "Blocon",
+                "Dalawinon",
+                "Dalumay",
+                "Glamang",
+                "Kanapolo",
+                "Kasuga",
+                "Mabini",
+                "Malawanit",
+                "New Ilocos",
+                "New Opon",
+                "San Isidro",
+                "San Miguel",
+                "Tacul",
+                "Tagaytay",
+                "Upper Bala"
+                // Add more barangays for Magsaysay as needed
+            }
+        },
+        { "Sarangani", new List<string>
+            {
+                "Balut Island",
+                "Batuganding",
+                "Konel",
+                "Lipol",
+                "Mabila (Poblacion)",
+                "Tinina",
+                "Gomtago",
+                "Tagen",
+                "Tucal",
+                "Patuco (Sarangani Norte)",
+                "Laker (Sarangani Sur)",
+                "Camahual",
+                "Camalig"
+                // Add more barangays for Sarangani as needed
+            }
+        }
+        // Add more municipalities and their barangays as needed
+    };
+
+    // Method to get the list of barangays based on the selected municipality
+    private List<string> GetBarangays(string municipality)
+    {
+        if (!string.IsNullOrEmpty(municipality) && barangays.ContainsKey(municipality))
+        {
+            return barangays[municipality];
+        }
+        return new List<string>();
+    }
+}
+
+<MudTable Items="@itemList" FixedHeader="true" FixedFooter="true" EditTrigger="TableEditTrigger.RowClick" CanCancelEdit="true" CommitEditTooltip="Commit Edit" Hover="true" Breakpoint="Breakpoint.Sm" @ref="_table">
+    <HeaderContent>
+        <MudTh>Unit Name</MudTh>
+        <MudTh>Particulars</MudTh>
+        <MudTh>Quantity</MudTh>
+        <MudTh>Unit Cost</MudTh>
+        <MudTh>Amount</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
+        <MudTd DataLabel="Particulars">@context.Particulars</MudTd>
+        <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
+        <MudTd DataLabel="Cost">@context.Cost</MudTd>
+        <MudTd DataLabel="Amount">@context.Amount</MudTd>
+    </RowTemplate>
+    <RowEditingTemplate>
+        <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
+        <MudTd DataLabel="Particulars">
+            <MudTextField @bind-Value="@context.Particulars" Required />
+         </MudTd>
+         <MudTd DataLabel="Quantity">
+             <MudTextField @bind-Value="@context.Quantity" Required />
+         </MudTd>
+         <MudTd DataLabel="Cost">
+             <MudTextField @bind-Value="@context.Cost" Required Min="1" />
+         </MudTd>
+         <MudTd DataLabel="Amount">
+             <MudTextField @bind-Value="@context.Amount" Required />
+         </MudTd>
+         <MudTd>
+             <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" OnClick="() => DeleteRow(context)"></MudIconButton>
+        </MudTd>
+     </RowEditingTemplate>
+ </MudTable>
+
+ <MudForm Model="@newItem">
+     <MudTextField Label="Unit" @bind-Value="newItem.UnitName" Required="true"></MudTextField>
+     <MudTextField Label="Particulars" @bind-Value="newItem.Particulars" Required="true"></MudTextField>
+     <MudTextField Label="Quantity" @bind-Value="newItem.Quantity" Required="true"></MudTextField>
+     <MudTextField Label="Cost" @bind-Value="newItem.Cost"></MudTextField>
+     <MudButton Type="ButtonType.Submit" OnClick="AddElement">Add Element</MudButton>
+ </MudForm>
+
+ <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" OnClick="SaveTransaction">Disable elevation</MudButton>
+
+ @code {
+    private List<TransactionItem> itemList = new List<TransactionItem>();
+    TransactionItem newItem = new TransactionItem();
+
+    void AddElement()
+    {
+        itemList.Add(new TransactionItem
+            {
+                UnitName = newItem.UnitName,
+                Particulars = newItem.Particulars,
+                Quantity = newItem.Quantity,
+                Cost = newItem.Cost,
+                Amount = newItem.Quantity * newItem.Cost,
+            });
+
+        // Clear the form
+        newItem = new TransactionItem();
+    }
+
+    private MudTable<TransactionItem> _table;
+    void DeleteRow(TransactionItem item)
+    {
+        itemList.Remove(item);
+        _table.SetEditingItem(null);
+        StateHasChanged();
+    }
+
+    private Transaction transaction;
+    private TransactionDocuments document;
+    private TransactionItem items;
+    private bool isSaved = false;
+
+    [Inject]
+    private DsaClusterContext _context { get; set; }
+
+    public string selectedMunicipality { get; set; }
+    public string selectedBarangay { get; set; }
+    public string newPunongBarangay { get; set; }
+    public string newBarangayTreasurer { get; set; }
+
+    private void SaveTransaction()
+    {
+        // Create and save the transaction first
+        transaction = new Transaction
+            {
+                MunicipalityName = selectedMunicipality,
+                BarangayName = selectedBarangay,
+            };
+
+        _context.Transactions.Add(transaction);
+        _context.SaveChanges(); // Save the transaction to generate a TransactionId
+
+        // Create the associated TransactionDocuments
+        document = new TransactionDocuments
+            {
+                TransactionId = transaction.TransactionId, // Set the TransactionId
+                PunongBarangayName = newPunongBarangay,
+                BarangayTreasurerName = newBarangayTreasurer
+            };
+
+        _context.TransactionDocuments.Add(document);
+        _context.SaveChanges(); // Save the TransactionDocuments to generate a DocumentId
+
+        // Create and add the TransactionItem objects
+        foreach (var item in itemList)
+        {
+            item.DocumentId = document.DocumentId; // Set the DocumentId
+            _context.TransactionItems.Add(item);
+        }
+
+        _context.SaveChanges();
+        isSaved = true;
+
+        NavigateBackToOriginalPage();
+    }
+}
+
+@code {
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
+    private void NavigateBackToOriginalPage()
+    {
+        NavigationManager.NavigateTo("/transactions_list");
+    }
+}

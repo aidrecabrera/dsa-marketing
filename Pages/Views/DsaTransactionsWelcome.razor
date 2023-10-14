@@ -1,0 +1,20 @@
+﻿@using MudBlazor
+
+@code {
+    static DateTime today = DateTime.Today;
+    private string dateDddd = today.ToString("dddd");
+    private string dateDd = today.ToString("dd");
+    private string dateTime = today.ToString("h:mm tt");
+}
+
+<div class="flex flex-row">
+    <div>
+        <MudPaper Elevation="0" class="py-10 px-10">
+            <div>
+                <h2 class="font-light">@dateDddd</h2>
+                <h1 class="text-8xl">@dateDd</h1>
+                <p class="text-3xl">@dateTime</p>
+            </div>
+        </MudPaper>
+    </div>
+</div>

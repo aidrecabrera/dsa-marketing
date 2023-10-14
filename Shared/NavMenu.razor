@@ -1,27 +1,13 @@
-<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Project Aneta</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
-
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
+<div>
+    <nav class="flex flex-row justify-center items-center">
+        <div class="w-1/6 nav-item">
+            <NavLink class="nav-link justify-center items-center" href="" Match="NavLinkMatch.All">
+                <span class="material-symbols-outlined" aria-hidden="true">description</span> Transactions
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="inventory">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+        <div class="w-1/6 nav-item">
+            <NavLink class="nav-link justify-center items-center" href="documents">
+                <span class="material-symbols-outlined" aria-hidden="true">contract</span> Documents
             </NavLink>
         </div>
     </nav>

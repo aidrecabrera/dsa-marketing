@@ -1,6 +1,4 @@
-﻿@page "/transaction/commonparameters"
-
-@using MudBlazor
+﻿@using MudBlazor
 
 <MudContainer>
     <MudCard>
@@ -20,7 +18,7 @@
             </MudSelect>
 
             <div class="form-group">
-                <MudTextField T="string" Label="Punong Barangay" HelperText="Punong Barangay for Transaction" HelperTextOnFocus="true" Variant="Variant.Text" @bind-Value="punongBarangay"/>
+                <MudTextField T="string" Label="Punong Barangay" HelperText="Punong Barangay for Transaction" HelperTextOnFocus="true" Variant="Variant.Text" @bind-Value="punongBarangay" />
             </div>
 
             <div class="inspection-acceptance-report">
@@ -29,14 +27,34 @@
                     <MudTextField T="string" Label="Barangay Treasurer" HelperText="Barangay Treasurer for Transaction" HelperTextOnFocus="true" Variant="Variant.Text" @bind-Value="treasurerBarangay" />
                 </div>
             </div>
-            
+
         </MudCardContent>
     </MudCard>
 </MudContainer>
 
 @code {
-    private string selectedMunicipality = "Matanao"; // Initialize with a default value
-    private string selectedBarangay = "Asbang";                 // Property to capture the selected barangay
+    [Parameter]
+    public string selectedMunicipality { get; set; }
+
+    [Parameter]
+    public EventCallback<string> selectedMunicipalityChanged { get; set; }
+
+    [Parameter]
+    public string selectedBarangay { get; set; }
+
+    [Parameter]
+    public EventCallback<string> selectedBarangayChanged { get; set; }
+
+    private async Task OnSelectedMunicipalityChanged()
+    {
+        await selectedMunicipalityChanged.InvokeAsync(selectedMunicipality);
+    }
+
+    private async Task OnSelectedBarangayChanged()
+    {
+        await selectedBarangayChanged.InvokeAsync(selectedBarangay);
+    }
+
     private string punongBarangay = "";
     private string treasurerBarangay = "";
     // List of municipalities
