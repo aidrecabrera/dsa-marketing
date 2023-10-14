@@ -1,4 +1,3 @@
-using dsa_marketing.Areas.Identity;
 using dsa_marketing.Models;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -10,7 +9,6 @@ builder.Services.AddMudServices();
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 // Adding connection
 var connection = @"Server=WindowsPC\SQLEXPRESS;Database=dsa_cluster;Trusted_Connection=True;TrustServerCertificate=True;";
 builder.Services.AddDbContext<DsaClusterContext>(options => options.UseSqlServer(connection), ServiceLifetime.Scoped);
