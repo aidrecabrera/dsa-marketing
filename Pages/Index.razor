@@ -1,9 +1,18 @@
 @page "/"
 
-<PageTitle>Transactions</PageTitle>
+<PageTitle>DSA Transactions</PageTitle>
 
-<dsa_marketing.Pages.Views.DsaTransactions/>
-
+<div class="flex flex-row gap-2.5">
+    <div>
+        <dsa_marketing.Pages.Views.DsaTransactionsWelcome />
+    </div>
+    <div class="flex flex-col flex-grow-1 gap-2">
+        <dsa_marketing.Pages.Views.DsaTransactionsRecent />
+    </div>
+    <div class="flex-grow-0 content-end">
+        <dsa_marketing.Pages.Views.DsaTransactionsMetrics />
+    </div>
+</div>
 
 
 

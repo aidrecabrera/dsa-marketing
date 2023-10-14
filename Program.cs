@@ -13,7 +13,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 // Adding connection
 var connection = @"Server=WindowsPC\SQLEXPRESS;Database=dsa_cluster;Trusted_Connection=True;TrustServerCertificate=True;";
-builder.Services.AddDbContext<DsaClusterContext>(options => options.UseSqlServer(connection));
+builder.Services.AddDbContext<DsaClusterContext>(options => options.UseSqlServer(connection), ServiceLifetime.Scoped);
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
