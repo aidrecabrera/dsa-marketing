@@ -23,13 +23,13 @@
 
 
 <MudGrid Class="d-flex align-content-center justify-space-between flex-grow-1 pb-3">
-    <MudItem Class="d-flex flex-grow-1">
-        <MudText Typo="Typo.h2" Class="fw-bold">DSA Transactions</MudText>
+    <MudItem Class="d-flex flex-grow-1 align-end">
+        <MudText Typo="Typo.h3" Class="fw-bold font-grotesk" Style="@($"color:{Colors.Shades.Black};")">Dashboard</MudText>
     </MudItem>
-    <MudItem Class="w-25">
+    <MudItem Class="w-25 align-end">
         <MudTextField @bind-Value="searchTransactionInfo" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </MudItem>
-    <MudItem Class="d-flex align-center">
+    <MudItem Class="d-flex align-end">
         <MudButton StartIcon="@Icons.Material.Filled.AddCircleOutline" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" @onclick="CreateNewTransaction">Create</MudButton>
     </MudItem>
 </MudGrid>
@@ -55,7 +55,7 @@
         </MudTd>
     </RowTemplate>
     <PagerContent>
-        <MudTablePager Style="height: 113px" />
+        <MudTablePager Style="height: 50px" />
     </PagerContent>
 </MudTable>
 
