@@ -1,0 +1,88 @@
+﻿@page "/repo2"
+@using dsa_marketing.Data
+@using dsa_marketing.Models
+<h3>Test</h3>
+
+<!-- Button to trigger data operations -->
+<button @onclick="PerformDataOperations">Perform Data Operations</button>
+
+<!-- Display the result of the data operation -->
+@if (isOperationCompleted)
+{
+    <p>Data operations completed successfully!</p>
+}
+
+@code {
+    [Inject]
+    private DsaClusterContext _context { get; set; }
+    private UnitOfWork unitOfWork;
+    private bool isOperationCompleted = false;
+
+    protected override void OnInitialized()
+    {
+        unitOfWork = new UnitOfWork(_context);
+    }
+
+    private void PerformDataOperations()
+    {
+        var newTransaction = CreateNewTransaction();
+        var newDocument = CreateNewDocument();
+        
+        // Add the transaction and document
+        unitOfWork.Transaction.Add(newTransaction);
+        unitOfWork.TransactionDocuments.Add(newDocument);
+
+        // Create a list of TransactionItems and associate them with the Document
+        var newItems = CreateNewTransactionItems();
+        foreach (var newItem in newItems)
+        {
+            newItem.Document = newDocument; // Set the relationship
+            unitOfWork.TransactionItems.Add(newItem);
+        }
+
+        unitOfWork.Complete();
+
+        isOperationCompleted = true;
+    }
+
+    private Transaction CreateNewTransaction()
+    {
+        return new Transaction
+        {
+            MunicipalityName = "Davao",
+            BarangayName = "Empress"
+        };
+    }
+    
+    private TransactionDocuments CreateNewDocument()
+    {
+        return new TransactionDocuments
+        {
+            PunongBarangayName = "Trisha",
+            BarangayTreasurerName = "Talagtag"
+        };
+    }
+
+    private List<TransactionItem> CreateNewTransactionItems()
+    {
+        var items = new List<TransactionItem>
+        {
+            new TransactionItem
+            {
+                UnitName = "KG",
+                Particulars = "Jasmine Rice",
+                Quantity = 7,
+                Cost = 58
+            },
+            new TransactionItem
+            {
+                UnitName = "Each",
+                Particulars = "Sugar",
+                Quantity = 10,
+                Cost = 12
+            }
+        };
+
+        return items;
+    }
+}
