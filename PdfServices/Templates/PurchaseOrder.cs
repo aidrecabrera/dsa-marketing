@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
+using Humanizer;
 
 namespace dsa_marketing.PdfServices.Templates;
 
@@ -19,7 +20,6 @@ public class PurchaseOrder
         LineHeight = 1f,
         Border = 0.1f
     };
-
     public Document DsaTemplate(TransactionInfo transactionInfo, List<TransactionItem> transactionItems)
     {
         return Document.Create(container =>
@@ -27,8 +27,8 @@ public class PurchaseOrder
             var borderThickness = _documentParameters.Border;
             var philippinesCulture = _documentParameters.PhilippinesCulture;
 
-            var totalCost = 0.00f;
-
+            float totalCost = 0.00f;
+            
             container.Page(page =>
             {
                 page.Size(PageSizes.Letter);
@@ -185,19 +185,13 @@ public class PurchaseOrder
                                 .Bold();
                             header.Cell().ColumnSpan(1).Element(ItemCategoryHeader).Text("Amount").FontSize(10).Bold();
                         });
-
-                        for (uint i = 0; i < 16; i++)
-                        {
-                            Item(i, itemList, false);
-                        }
-                        
                         uint row = 1;
                         foreach (var i in transactionItems)
                         {
                             totalCost += Item(row, itemList, i.UnitName, i.Particulars, (int)i.Quantity!, (float)i.Cost!);
                             row++;
                         }
-                        
+                        Item(itemList, false);
                     });
                     c.Item().Border(0.1f).Padding(5).Table(transactionInformation =>
                     {
@@ -215,7 +209,8 @@ public class PurchaseOrder
 
                         transactionInformation.Cell().ColumnSpan(2).Text("(Total Amount in Words)").FontSize(10)
                             .Italic();
-                        transactionInformation.Cell().ColumnSpan(5).Text(totalCost.ToString("C", philippinesCulture))
+                        int humanizedCost = (int)totalCost;
+                        transactionInformation.Cell().ColumnSpan(5).Text(humanizedCost.ToWords().Transform(To.UpperCase))
                             .FontSize(9);
                         transactionInformation.Cell().ColumnSpan(1).PaddingRight(5).AlignRight()
                             .Text(totalCost.ToString("C", philippinesCulture)).FontSize(10);
@@ -238,7 +233,7 @@ public class PurchaseOrder
                             .Text(
                                 "Very Truly yours," +
                                 "\n" +
-                                "\nPUNONG BARANGAY NAME" +
+                                transactionInfo.PunongBarangay +
                                 "\nSK CHAIRMAN" +
                                 "\nDate: ___________" +
                                 "\n"
@@ -303,32 +298,32 @@ public class PurchaseOrder
             .ShowOnce()
             .AlignMiddle();
     }
-    public void Item(uint i, TableDescriptor itemList, bool underlineLastCell)
+    public void Item(TableDescriptor itemList, bool underlineLastCell)
     {
         var philippinesCulture = new CultureInfo("en-PH");
-        itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignCenter();
-        itemList.Cell().ColumnSpan(3).Element(ItemFormat).AlignLeft();
-        itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignCenter();
-        itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignRight();
+        itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignCenter().ExtendVertical().Text("");
+        itemList.Cell().ColumnSpan(3).Element(ItemFormat).AlignLeft().ExtendVertical().Text("");
+        itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignCenter().ExtendVertical().Text("");
+        itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignRight().ExtendVertical().Text("");
         if (underlineLastCell)
-            itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignRight().PaddingLeft(10).PaddingRight(10);
+            itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignRight().PaddingLeft(10).PaddingRight(10).ExtendVertical().Text("");
         else
-            itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignRight().PaddingLeft(10).PaddingRight(10);
+            itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignRight().PaddingLeft(10).PaddingRight(10).ExtendVertical().Text("");
     }
     public float Item(uint i, TableDescriptor itemList, string? itemName, string? description, int quantity, float unitCost,
         bool underlineLastCell = false)
     {
         var philippinesCulture = new CultureInfo("en-PH");
-
-        itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignCenter().Text(itemName).FontSize(10);
-        itemList.Cell().ColumnSpan(3).Element(ItemFormat).AlignLeft().PaddingLeft(10).Text(description).FontSize(10);
-        itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignCenter().Text(quantity.ToString()).FontSize(10);
-        itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignRight().PaddingLeft(10).PaddingRight(10).Text(unitCost.ToString("C", philippinesCulture)).FontSize(10);
+        
+        itemList.Cell().Row(i).Column(1).ColumnSpan(1).Element(ItemFormat).AlignCenter().Text(itemName).FontSize(10);
+        itemList.Cell().Row(i).Column(2).ColumnSpan(3).Element(ItemFormat).AlignLeft().PaddingLeft(10).Text(description).FontSize(10);
+        itemList.Cell().Row(i).Column(5).ColumnSpan(1).Element(ItemFormat).AlignCenter().Text(quantity.ToString()).FontSize(10);
+        itemList.Cell().Row(i).Column(6).ColumnSpan(1).Element(ItemFormat).AlignRight().PaddingLeft(10).PaddingRight(10).Text(unitCost.ToString("C", philippinesCulture)).FontSize(10);
 
         if (underlineLastCell)
-            itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignRight().PaddingLeft(10).PaddingRight(10).Text((quantity * unitCost).ToString("C", philippinesCulture)).FontSize(10).Underline();
+            itemList.Cell().Row(i).Column(7).ColumnSpan(1).Element(ItemFormat).AlignRight().PaddingLeft(10).PaddingRight(10).Text((quantity * unitCost).ToString("C", philippinesCulture)).FontSize(10).Underline();
         else
-            itemList.Cell().ColumnSpan(1).Element(ItemFormat).AlignRight().PaddingLeft(10).PaddingRight(10).Text((quantity * unitCost).ToString("C", philippinesCulture)).FontSize(10);
+            itemList.Cell().Row(i).Column(7).ColumnSpan(1).Element(ItemFormat).AlignRight().PaddingLeft(10).PaddingRight(10).Text((quantity * unitCost).ToString("C", philippinesCulture)).FontSize(10);
 
         return quantity * unitCost;
     }
