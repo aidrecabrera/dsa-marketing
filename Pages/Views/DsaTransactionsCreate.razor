@@ -1,6 +1,7 @@
 ﻿@page "/create_transaction"
 @using dsa_marketing.Models
 @using dsa_marketing.Data
+@inject NavigationManager NavigationManager
 
 <MudGrid Class="d-flex align-content-center justify-space-between flex-grow-1 pb-3">
     <MudItem Class="d-flex flex-grow-1 align-end">
@@ -296,33 +297,23 @@
         {
             item.Document = newDocument; // Set the DocumentId
             unitOfWork.TransactionItems.Add(item);
-            
         }
         unitOfWork.Complete();
-        
         if (newTransaction is { MunicipalityName: not null,BarangayName: not null })
         {
             _isSaved = true;
             _transactionInstantiated = true;
         }
-        
         if (_transactionInstantiated)
         {
             NavigateBackToOriginalPage(newTransaction.TransactionId);
         }
     }
-
 }
 
 @code {
-
-    [Inject]
-    private NavigationManager? NavigationManager { get; set; }
-
     private void NavigateBackToOriginalPage(int transactionId)
     {
-
         NavigationManager?.NavigateTo($"/transaction_info/{transactionId}");
     }
-
 }
