@@ -10,7 +10,7 @@ public class UnitOfWork : IUnitOfWork
     public UnitOfWork(DsaClusterContext context)
     {
         _context = context;
-        Transactions = new GenericRepository<Transaction>(_context);
+        Transaction = new GenericRepository<Transaction>(_context);
         TransactionDocuments = new GenericRepository<TransactionDocuments>(_context);
         PurchaseRequests = new GenericRepository<PurchaseRequest>(_context);
         PurchaseOrders = new GenericRepository<PurchaseOrder>(_context);
@@ -18,7 +18,7 @@ public class UnitOfWork : IUnitOfWork
         TransactionItems = new GenericRepository<TransactionItem>(_context);
     }
 
-    public IRepository<Transaction> Transactions { get; private set; }
+    public IRepository<Transaction> Transaction { get; private set; }
     public IRepository<TransactionDocuments> TransactionDocuments { get; private set; }
     public IRepository<PurchaseRequest> PurchaseRequests { get; private set; }
     public IRepository<PurchaseOrder> PurchaseOrders { get; private set; }

@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
+using QuestPDF.Infrastructure;
 
+QuestPDF.Settings.License = LicenseType.Community;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMudServices();
 // Add services to the container.
@@ -11,7 +13,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 // Adding connection
 var connection = @"Server=WindowsPC\SQLEXPRESS;Database=dsa_cluster;Trusted_Connection=True;TrustServerCertificate=True;";
-builder.Services.AddDbContext<DsaClusterContext>(options => options.UseSqlServer(connection), ServiceLifetime.Scoped);
+builder.Services.AddDbContext<DsaClusterContext>(options => options.UseSqlServer(connection));
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

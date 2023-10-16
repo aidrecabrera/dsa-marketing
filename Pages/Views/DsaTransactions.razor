@@ -1,9 +1,6 @@
 ﻿@page "/transactions_list"
 @using dsa_marketing.Models
-@using MudBlazor
-@using System.Net.Http.Json
-@using Bogus
-@using System.Linq.Expressions
+@using dsa_marketing.Data
 @inject NavigationManager Navigation
 
 @code {
@@ -11,13 +8,9 @@
     {
         Navigation.NavigateTo($"/transaction_info/{transactionId}");
     }
-
-    [Inject]
-    private NavigationManager NavigationManager { get; set; }
-
     void CreateNewTransaction()
     {
-        NavigationManager.NavigateTo("/create_transaction");
+        Navigation.NavigateTo("/create_transaction");
     }
 }
 
@@ -60,32 +53,30 @@
 </MudTable>
 
 @code {
+    [Inject]
+    private DsaClusterContext _context { get; set; }
     private List<Transaction> transactions;
     private List<TransactionDocuments> documentInformation;
-
-    List<Element> transactionList = new List<Element>();
-    List<Element> documentList = new List<Element>();
-    List<Element> individualTransaction = new List<Element>();
-
+    List<Element> individualTransaction;
+    UnitOfWork UnitOfWork;
+    
     private string searchTransactionInfo = "";
     private Element selectedItem1 = null;
 
     public class Element
     {
         public int TransactionId { get; set; }
-        public string MunicipalityName { get; set; }
-        public string BarangayName { get; set; }
-        public string PunongBarangayName { get; set; }
-        public string BarangayTreasurerName { get; set; }
+        public string? MunicipalityName { get; set; }
+        public string? BarangayName { get; set; }
+        public string? PunongBarangayName { get; set; }
+        public string? BarangayTreasurerName { get; set; }
     }
-
-    [Inject]
-    private DsaClusterContext _context { get; set; }
 
     protected override void OnInitialized()
     {
-        transactions = _context.Transactions.ToList();
-        documentInformation = _context.TransactionDocuments.ToList();
+        UnitOfWork = new UnitOfWork(_context);
+        transactions = UnitOfWork.Transaction.GetAll().ToList();
+        documentInformation = UnitOfWork.TransactionDocuments.GetAll().ToList();
         TransactionList();
     }
 
@@ -94,13 +85,13 @@
         individualTransaction = transactions
             .GroupJoin(documentInformation, t => t.TransactionId, d => d.TransactionId, (t, d) => new { Transaction = t, Documents = d })
             .SelectMany(g => g.Documents.DefaultIfEmpty(), (t, d) => new Element
-                {
-                    TransactionId = t.Transaction.TransactionId,
-                    MunicipalityName = t.Transaction.MunicipalityName,
-                    BarangayName = t.Transaction.BarangayName,
-                    PunongBarangayName = d?.PunongBarangayName,
-                    BarangayTreasurerName = d?.BarangayTreasurerName,
-                })
+            {
+                TransactionId = t.Transaction.TransactionId,
+                MunicipalityName = t.Transaction.MunicipalityName,
+                BarangayName = t.Transaction.BarangayName,
+                PunongBarangayName = d.PunongBarangayName,
+                BarangayTreasurerName = d.BarangayTreasurerName,
+            })
             .ToList();
     }
 
@@ -110,13 +101,13 @@
     {
         if (string.IsNullOrWhiteSpace(searchString))
             return true;
-        if (element.BarangayName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+        if (element.BarangayName != null && element.BarangayName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
             return true;
-        if (element.MunicipalityName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+        if (element.MunicipalityName != null && element.MunicipalityName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
             return true;
-        if (element.PunongBarangayName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+        if (element.PunongBarangayName != null && element.PunongBarangayName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
             return true;
-        if (element.BarangayTreasurerName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+        if (element.BarangayTreasurerName != null && element.BarangayTreasurerName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
             return true;
         return false;
     }

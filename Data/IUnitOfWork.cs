@@ -5,7 +5,7 @@ namespace dsa_marketing.Data;
 
 public interface IUnitOfWork : IDisposable
 {
-    IRepository<Transaction> Transactions { get; }
+    IRepository<Transaction> Transaction { get; }
     IRepository<TransactionDocuments> TransactionDocuments { get; }
     IRepository<PurchaseRequest> PurchaseRequests { get; }
     IRepository<PurchaseOrder> PurchaseOrders { get; }
