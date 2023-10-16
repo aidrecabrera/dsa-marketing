@@ -1,7 +1,5 @@
 ﻿@page "/create_transaction"
 @using dsa_marketing.Models
-@using Microsoft.EntityFrameworkCore
-@using dsa_marketing.Pages.Components.BeautifiedComponents
 @using dsa_marketing.Data
 
 <MudGrid Class="d-flex align-content-center justify-space-between flex-grow-1 pb-3">
@@ -231,7 +229,7 @@
     private MudTable<TransactionItem> _table;
     private List<TransactionItem> itemList = new List<TransactionItem>();
     TransactionItem newItem = new TransactionItem();
-
+    
     protected override void OnInitialized()
     {
         unitOfWork = new UnitOfWork(_context);
@@ -261,6 +259,7 @@
     }
 
     private bool _isSaved = false;
+    private bool _transactionInstantiated = false;
     
     public required string SelectedMunicipality { get; set; }
     public required string SelectedBarangay { get; set; }
@@ -300,8 +299,17 @@
             
         }
         unitOfWork.Complete();
-        _isSaved = true;
-        NavigateBackToOriginalPage();
+        
+        if (newTransaction is { MunicipalityName: not null,BarangayName: not null })
+        {
+            _isSaved = true;
+            _transactionInstantiated = true;
+        }
+        
+        if (_transactionInstantiated)
+        {
+            NavigateBackToOriginalPage(newTransaction.TransactionId);
+        }
     }
 
 }
@@ -311,9 +319,10 @@
     [Inject]
     private NavigationManager? NavigationManager { get; set; }
 
-    private void NavigateBackToOriginalPage()
+    private void NavigateBackToOriginalPage(int transactionId)
     {
-        NavigationManager?.NavigateTo("/transactions_list");
+
+        NavigationManager?.NavigateTo($"/transaction_info/{transactionId}");
     }
 
 }
