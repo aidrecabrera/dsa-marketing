@@ -8,13 +8,18 @@ using QuestPDF.Infrastructure;
 QuestPDF.Settings.License = LicenseType.Community;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMudServices();
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
 // Adding connection
-var connection = @"Server=WindowsPC\SQLEXPRESS;Database=dsa_cluster;Trusted_Connection=True;TrustServerCertificate=True;";
-builder.Services.AddDbContext<DsaClusterContext>(options => options.UseSqlServer(connection));
+builder.Configuration.AddJsonFile("appsettings.json");
+var configuration = builder.Configuration;
+var connectionString = configuration.GetConnectionString("DsaClusterContext");
+builder.Services.AddDbContext<DsaClusterContext>(options => options.UseSqlServer(connectionString));
 var app = builder.Build();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -28,11 +33,8 @@ else
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllers();
