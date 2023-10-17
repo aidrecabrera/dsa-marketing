@@ -2,9 +2,7 @@
 @using dsa_marketing.PdfServices.Immutables
 @using QuestPDF.Fluent
 @using dsa_marketing.Data
-@using dsa_marketing.Data.Repositories
 @using dsa_marketing.Models
-@using QuestPDF.Previewer
 @using PurchaseOrder = dsa_marketing.PdfServices.Templates.PurchaseOrder
 <h3>DsaPdfGeneration</h3>
 
@@ -56,6 +54,6 @@
 
     private void GeneratePdf()
     {
-        _purchaseOrderPdf.DsaTemplate(_transactionInfo, itemList).GeneratePdf("C:/Users/Administrator/Desktop/hello.pdf");
+        _purchaseOrderPdf.DsaTemplate(_transactionInfo, itemList).GeneratePdf("C:\\Users\\Svene\\Documents\\DSA Marketing Documents\\Generated\\PurchaseOrder.pdf");
     }
 }
