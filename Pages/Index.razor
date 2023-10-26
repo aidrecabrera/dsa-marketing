@@ -6,26 +6,21 @@
 
 <div class="flex flex-col w-full gap-4">
     <div class="flex flex-row text-black gap-4">
-        <div class="flex flex-col justify-start border text-left rounded-lg p-16 bg-white grow">
+        <div class="flex flex-col justify-start border border-black text-left rounded-lg p-16 bg-white grow">
             <h1 class="text-4xl text-left">Total Projects</h1>
             <h1 class="text-9xl text-left">@_projectCounts</h1>
             <h1 class="text-left">All running & completed projects</h1>
         </div>
-        <div class="flex flex-col justify-start border text-left rounded-lg p-16 bg-white grow">
+        <div class="flex flex-col justify-start border border-black text-left rounded-lg p-16 bg-white grow">
             <h1 class="text-4xl text-left">Total Expenses</h1>
             <h1 class="text-9xl text-left">@_projectCounts</h1>
             <h1 class="text-left">The total expenses from all projects</h1>
         </div>
-        <div class="flex flex-col justify-start border text-left rounded-lg p-16 bg-white grow">
-            <h1 class="text-4xl text-left">Revenue</h1>
-            <h1 class="text-9xl text-left">@_projectCounts</h1>
-            <h1 class="text-left">The total revenue from all projects</h1>
-        </div>
     </div>
-    <div class="flex flex-row gap-4 text-white flex-wrap w-full">
+    <div class="flex flex-row gap-4 text-black flex-wrap w-full">
         @foreach (var transaction in _listOfTransactions!)
         {
-            <div class="border rounded-lg w-96 h-60 p-4 align-middle grow">
+            <div class="border border-black rounded-lg w-96 h-60 p-4 align-middle grow">
                 <div class="flex flex-col content-between place-content-between justify-between p-4 gap-4">
                     <p>Transaction ID: @transaction.TransactionId</p>
                     <div>
@@ -36,7 +31,7 @@
                         <p>@transaction.PunongBarangayName</p>
                         <p>@transaction.BarangayTreasurerName</p>
                     </div>
-                    <MudButton Class="border rounded-lg bg-white align-middle text-blackView grow">View</MudButton>
+                    <MudButton Class="border rounded-lg align-middle text-black grow">View</MudButton>
                 </div>
 
             </div>

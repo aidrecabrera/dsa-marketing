@@ -441,13 +441,6 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.page-title {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -560,52 +553,24 @@ video {
   display: flex;
 }
 
-.h-64 {
-  height: 16rem;
+.h-60 {
+  height: 15rem;
 }
 
 .h-screen {
   height: 100vh;
 }
 
-.h-60 {
-  height: 15rem;
-}
-
-.h-full {
-  height: 100%;
-}
-
 .w-1\/6 {
   width: 16.666667%;
 }
 
-.w-4\/6 {
-  width: 66.666667%;
+.w-96 {
+  width: 24rem;
 }
 
 .w-full {
   width: 100%;
-}
-
-.w-2\/6 {
-  width: 33.333333%;
-}
-
-.w-3\/6 {
-  width: 50%;
-}
-
-.w-56 {
-  width: 14rem;
-}
-
-.w-72 {
-  width: 18rem;
-}
-
-.w-96 {
-  width: 24rem;
 }
 
 .grow {
@@ -644,20 +609,29 @@ video {
   justify-content: space-between;
 }
 
-.gap-4 {
-  gap: 1rem;
+.gap-3 {
+  gap: 0.75rem;
 }
 
-.rounded-lg {
-  border-radius: 0.5rem;
+.gap-4 {
+  gap: 1rem;
 }
 
 .rounded-2xl {
   border-radius: 1rem;
 }
 
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
 .border {
   border-width: 1px;
+}
+
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .bg-black {
@@ -670,6 +644,10 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.p-14 {
+  padding: 3.5rem;
+}
+
 .p-16 {
   padding: 4rem;
 }
@@ -678,18 +656,9 @@ video {
   padding: 1rem;
 }
 
-.p-14 {
-  padding: 3.5rem;
-}
-
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-}
-
-.px-16 {
-  padding-left: 4rem;
-  padding-right: 4rem;
 }
 
 .px-4 {
@@ -716,12 +685,8 @@ video {
   padding-bottom: 0.75rem;
 }
 
-.pt-14 {
-  padding-top: 3.5rem;
-}
-
-.pb-16 {
-  padding-bottom: 4rem;
+.pt-3 {
+  padding-top: 0.75rem;
 }
 
 .text-left {
@@ -740,18 +705,9 @@ video {
   font-family: Inter, sans-serif;
 }
 
-.font-montserrat {
-  font-family: Montserrat, sans-serif;
-}
-
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
-}
-
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
 }
 
 .text-9xl {
@@ -759,16 +715,16 @@ video {
   line-height: 1;
 }
 
-.font-black {
-  font-weight: 900;
-}
-
-.font-medium {
-  font-weight: 500;
-}
-
 .font-bold {
   font-weight: 700;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-black {
+  font-weight: 900;
 }
 
 .text-black {

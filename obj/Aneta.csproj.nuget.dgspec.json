@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Svene\\RiderProjects\\New folder\\Aneta.csproj": {}
+    "C:\\Users\\Svene\\.dev\\dsa-marketing\\Aneta.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Svene\\RiderProjects\\New folder\\Aneta.csproj": {
+    "C:\\Users\\Svene\\.dev\\dsa-marketing\\Aneta.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Svene\\RiderProjects\\New folder\\Aneta.csproj",
+        "projectUniqueName": "C:\\Users\\Svene\\.dev\\dsa-marketing\\Aneta.csproj",
         "projectName": "Aneta",
-        "projectPath": "C:\\Users\\Svene\\RiderProjects\\New folder\\Aneta.csproj",
+        "projectPath": "C:\\Users\\Svene\\.dev\\dsa-marketing\\Aneta.csproj",
         "packagesPath": "C:\\Users\\Svene\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Svene\\RiderProjects\\New folder\\obj\\",
+        "outputPath": "C:\\Users\\Svene\\.dev\\dsa-marketing\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
