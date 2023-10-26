@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dsa-marketing", "dsa-marketing.csproj", "{991930EB-398C-484D-A2A1-ACB452942C91}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aneta", "..\Aneta\Aneta.csproj", "{1F0ECDF6-430C-4FDE-B0DB-FE3793C74101}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aneta", "Aneta.csproj", "{1F0ECDF6-430C-4FDE-B0DB-FE3793C74101}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

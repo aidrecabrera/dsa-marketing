@@ -3270,11 +3270,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Svene\\.dev\\projects\\Aneta\\Aneta.csproj",
+      "projectUniqueName": "C:\\Users\\Svene\\RiderProjects\\dsa-marketing-aneta\\Aneta.csproj",
       "projectName": "Aneta",
-      "projectPath": "C:\\Users\\Svene\\.dev\\projects\\Aneta\\Aneta.csproj",
+      "projectPath": "C:\\Users\\Svene\\RiderProjects\\dsa-marketing-aneta\\Aneta.csproj",
       "packagesPath": "C:\\Users\\Svene\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Svene\\.dev\\projects\\Aneta\\obj\\",
+      "outputPath": "C:\\Users\\Svene\\RiderProjects\\dsa-marketing-aneta\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3290,7 +3290,6 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
-        "https://api.nuget.org/v3/index.json": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
