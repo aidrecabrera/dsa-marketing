@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EfCoreDialogsState">
+    <option name="keyValueStorage">
+      <map>
+        <entry key="Common:1f0ecdf6-430c-4fde-b0db-fe3793c74101:dbContext" value="Aneta.Models.DsaClusterContext" />
+        <entry key="Common:buildConfiguration" value="Debug" />
+        <entry key="Common:dbContextFolder" value="Models" />
+        <entry key="Common:dbContextName" value="DsaClusterContext" />
+        <entry key="Common:generateOnConfiguring" value="true" />
+        <entry key="Common:noBuild" value="true" />
+        <entry key="Common:outputFolder" value="Models" />
+        <entry key="Common:provider" value="Microsoft.EntityFrameworkCore.SqlServer" />
+        <entry key="Common:schemas" value="" />
+        <entry key="Common:tables" value="" />
+        <entry key="Common:useAttributes" value="false" />
+        <entry key="Common:useDatabaseNames" value="true" />
+        <entry key="Common:useDefaultConnection" value="true" />
+        <entry key="Common:usePluralizer" value="true" />
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace dsa_marketing.Models;
+namespace Aneta.Models;
 
 public partial class Transaction
 {
@@ -11,5 +11,5 @@ public partial class Transaction
 
     public string? BarangayName { get; set; }
 
-    public virtual ICollection<TransactionDocuments> TransactionDocuments { get; set; } = new List<TransactionDocuments>();
+    public virtual ICollection<TransactionDocument> TransactionDocuments { get; set; } = new List<TransactionDocument>();
 }

@@ -1,36 +1,17 @@
-@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase
+<MudThemeProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 
 <PageTitle>Aneta</PageTitle>
-<MudThemeProvider Theme="DSA" />
-<MudDialogProvider />
-<MudSnackbarProvider />
 
-<div class="flex flex-row justify-center gap-3">
-    <div class="vh-100 justify-center align">
-        <MudImage
-            Src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Awwards-logotype-2018.svg/2560px-Awwards-logotype-2018.svg.png" 
-            Elevation="0"
-            Class="rounded-lg px-10 py-6"
-            Width="250"/>
+<div class="flex flex-row bg-black font-inter">
+    <div class="h-screen w-1/6">
         <NavMenu />
     </div>
-
-    <main>
-        <article class="content px-4">
+    <main class="w-full flex flex-row">
+        <article class="grow p-14">
             @Body
         </article>
     </main>
 </div>
-
-@code {
-    MudTheme DSA = new MudTheme()
-        {
-            Palette = new PaletteLight()
-            {
-                Primary = Colors.Shades.Black,
-                Secondary = Colors.Green.Accent4,
-                AppbarBackground = Colors.Red.Default,
-                SuccessDarken = Colors.Shades.Black,
-            },
-        };
-}
