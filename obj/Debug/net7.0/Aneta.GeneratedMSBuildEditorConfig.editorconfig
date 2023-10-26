@@ -9,45 +9,45 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Aneta
 build_property.RootNamespace = Aneta
-build_property.ProjectDir = C:\Users\Svene\RiderProjects\dsa-marketing-aneta\
+build_property.ProjectDir = C:\Users\Svene\RiderProjects\New folder\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Svene\RiderProjects\dsa-marketing-aneta
+build_property.MSBuildProjectDirectory = C:\Users\Svene\RiderProjects\New folder
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Svene/RiderProjects/dsa-marketing-aneta/App.razor]
+[C:/Users/Svene/RiderProjects/New folder/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/RiderProjects/dsa-marketing-aneta/Pages/Index.razor]
+[C:/Users/Svene/RiderProjects/New folder/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/RiderProjects/dsa-marketing-aneta/Pages/Transactions/Transactions.razor]
+[C:/Users/Svene/RiderProjects/New folder/Pages/Transactions/Transactions.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhbnNhY3Rpb25zXFRyYW5zYWN0aW9ucy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/RiderProjects/dsa-marketing-aneta/Pages/Transactions/TransactionsCreate.razor]
+[C:/Users/Svene/RiderProjects/New folder/Pages/Transactions/TransactionsCreate.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhbnNhY3Rpb25zXFRyYW5zYWN0aW9uc0NyZWF0ZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/RiderProjects/dsa-marketing-aneta/_Imports.razor]
+[C:/Users/Svene/RiderProjects/New folder/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/RiderProjects/dsa-marketing-aneta/Shared/MainLayout.razor]
+[C:/Users/Svene/RiderProjects/New folder/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-1ezxi6hbgv
 
-[C:/Users/Svene/RiderProjects/dsa-marketing-aneta/Shared/NavMenu.razor]
+[C:/Users/Svene/RiderProjects/New folder/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-5f367l4gyo
 
-[C:/Users/Svene/RiderProjects/dsa-marketing-aneta/Pages/Error.cshtml]
+[C:/Users/Svene/RiderProjects/New folder/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/RiderProjects/dsa-marketing-aneta/Pages/_Host.cshtml]
+[C:/Users/Svene/RiderProjects/New folder/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

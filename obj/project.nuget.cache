@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QMq1lW1FC0sn6alsC3lajPn/bqs3EnVIUaN9Op8ZnSCVzlc79L5bUdcV4DE0iq/d8zwARq8p6uVz+47Xjy+fHQ==",
+  "dgSpecHash": "ZPlMpcKNuH/vMBDTuAcbKkQgNnpp4ddSVAoalIBXN8E+VqIYTH/looAXd6prAWilWMl3uI03XHWEYKZIFDYg5g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Svene\\RiderProjects\\dsa-marketing-aneta\\Aneta.csproj",
+  "projectFilePath": "C:\\Users\\Svene\\RiderProjects\\New folder\\Aneta.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Svene\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Svene\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
