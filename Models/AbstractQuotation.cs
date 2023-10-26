@@ -1,6 +1,9 @@
-﻿namespace dsa_marketing.Models;
+﻿using System;
+using System.Collections.Generic;
 
-public sealed class AbstractQuotation
+namespace Aneta.Models;
+
+public partial class AbstractQuotation
 {
     public int AbstractId { get; set; }
 
@@ -16,5 +19,5 @@ public sealed class AbstractQuotation
 
     public string? OpeningQuotationsOffice { get; set; }
 
-    public TransactionDocuments? Document { get; set; }
+    public virtual TransactionDocument? Document { get; set; }
 }

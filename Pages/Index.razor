@@ -1,46 +1,65 @@
-@page "/home"
+﻿@page "/"
+@using Aneta.Models
+@using Aneta.Data
 
-<PageTitle>DSA Marketing, Inc.</PageTitle>
+<PageTitle>Home</PageTitle>
 
-@code {
-    private string homeSearch = "";
-
-    void Search()
-    {
-        
-    }
-}
-
-<MudGrid Class="d-flex align-content-center align-center justify-space-between flex-grow-1 pb-3">
-    <MudItem Class="d-flex flex-grow-1 align-center">
-        <MudText Typo="Typo.h3" Class="fw-bold" Style="@($"color:{Colors.Shades.Black};")">Dashboard</MudText>
-    </MudItem>
-    <MudItem Class="w-25 align-center">
-        <MudTextField @bind-Value="homeSearch" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-    </MudItem>
-    <MudItem Class="d-flex align-center">
-        <MudAvatar Color="Color.Primary">A</MudAvatar>
-    </MudItem>
-</MudGrid>
-
-<div class="flex flex-col gap-2">
-    <div class="flex-grow-0 content-start">
-        <dsa_marketing.Pages.Views.DsaTransactionsMetrics />
+<div class="flex flex-col w-full gap-4">
+    <div class="flex flex-row text-black gap-4">
+        <div class="flex flex-col justify-start border text-left rounded-lg p-16 bg-white grow">
+            <h1 class="text-4xl text-left">Total Projects</h1>
+            <h1 class="text-9xl text-left">@_projectCounts</h1>
+            <h1 class="text-left">All running & completed projects</h1>
+        </div>
+        <div class="flex flex-col justify-start border text-left rounded-lg p-16 bg-white grow">
+            <h1 class="text-4xl text-left">Total Expenses</h1>
+            <h1 class="text-9xl text-left">@_projectCounts</h1>
+            <h1 class="text-left">The total expenses from all projects</h1>
+        </div>
+        <div class="flex flex-col justify-start border text-left rounded-lg p-16 bg-white grow">
+            <h1 class="text-4xl text-left">Revenue</h1>
+            <h1 class="text-9xl text-left">@_projectCounts</h1>
+            <h1 class="text-left">The total revenue from all projects</h1>
+        </div>
     </div>
-    <div class="flex flex-col flex-grow-1">
-        <dsa_marketing.Pages.Views.DsaTransactionsRecent />
+    <div class="flex flex-row gap-4 text-white flex-wrap w-full">
+        @foreach (var transaction in _listOfTransactions!)
+        {
+            <div class="border rounded-lg w-96 h-60 p-4 align-middle grow">
+                <div class="flex flex-col content-between place-content-between justify-between p-4 gap-4">
+                    <p>: @transaction.TransactionId</p>
+                    <div>
+                        <p>@transaction.MunicipalityName</p>
+                        <p>@transaction.BarangayName</p>
+                    </div>
+                    <div>
+                        <p>@transaction.PunongBarangayName</p>
+                        <p>@transaction.BarangayTreasurerName</p>
+                    </div>
+                    <MudButton Class="border rounded-lg bg-white align-middle text-blackView grow">View</MudButton>
+                </div>
+
+            </div>
+        }
     </div>
 </div>
 
+@code {
 
+    [Inject]
+    private DsaClusterContext? Context { get; set; }
 
+    private List<ExistingTransactionsSummary>? _listOfTransactions;
+    private List<TransactionSummary>? _transactionDetails;
+    private int _projectCounts = 0;
+    private decimal _projectExpenses = 0;
 
+    protected override void OnInitialized()
+    {
+        UnitOfWork unitOfWork = new UnitOfWork(Context);
+        _listOfTransactions = unitOfWork.ExistingTransactionsSummary?.GetAll().ToList();
+        _projectCounts = _listOfTransactions!.Count;
+        _listOfTransactions = _listOfTransactions!.OrderByDescending(t => t.TransactionId).Take(6).ToList();
+    }
 
-
-
-
-
-
-
-
-
+}

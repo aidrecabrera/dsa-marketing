@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace dsa_marketing.Models;
+namespace Aneta.Models;
 
 public partial class PurchaseOrder
 {
@@ -11,5 +11,5 @@ public partial class PurchaseOrder
 
     public string? ModeOfProcurement { get; set; }
 
-    public virtual TransactionDocuments? Document { get; set; }
+    public virtual TransactionDocument? Document { get; set; }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace dsa_marketing.Models;
+namespace Aneta.Models;
 
 public partial class TransactionItem
 {
@@ -21,5 +21,5 @@ public partial class TransactionItem
 
     public decimal? Price { get; set; }
 
-    public virtual TransactionDocuments? Document { get; set; }
+    public virtual TransactionDocument? Document { get; set; }
 }

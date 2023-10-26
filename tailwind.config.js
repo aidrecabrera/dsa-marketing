@@ -1,12 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ["./**/*.{razor,html,cshtml}"],
-    theme: {
-        extend: {
-            fontFamily: {
-                'grotesk': ['Familjen Grotesk', 'sans-serif'],
-            },
-        },
+  content: ["./**/*.{razor,html,cshtml}"],
+  theme: {
+    extend: {
+      fontFamily: {
+        'montserrat': ['Montserrat', 'sans-serif'],
+        'inter': ['Inter', 'sans-serif'],
+      },
     },
-    plugins: [],
+  },
+  plugins: [],
 }

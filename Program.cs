@@ -1,31 +1,24 @@
-using dsa_marketing.Models;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Identity;
+using Aneta.Models;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
-using QuestPDF.Infrastructure;
 
-QuestPDF.Settings.License = LicenseType.Community;
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddMudServices();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-
-// Adding connection
+builder.Services.AddMudServices();
+builder.Services.AddScoped<Aneta.Data.UnitOfWork>();
+// Database Cluster Context
 builder.Configuration.AddJsonFile("appsettings.json");
 var configuration = builder.Configuration;
-var connectionString = configuration.GetConnectionString("DsaClusterContext");
+var connectionString = configuration.GetConnectionString("default");
 builder.Services.AddDbContext<DsaClusterContext>(options => options.UseSqlServer(connectionString));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseMigrationsEndPoint();
-}
-else
+if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -33,11 +26,11 @@ else
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
-app.UseAuthorization();
 
-app.MapControllers();
+app.UseStaticFiles();
+
+app.UseRouting();
+
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
