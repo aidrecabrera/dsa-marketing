@@ -1,0 +1,221 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = dsa_marketing
+build_property.RootNamespace = dsa_marketing
+build_property.ProjectDir = C:\Users\Svene\.dev\projects\dsa-marketing\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Svene\.dev\projects\dsa-marketing
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Aneta/App.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxBbmV0YVxBcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Aneta/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxBbmV0YVxQYWdlc1xJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Aneta/Pages/Transactions/Transactions.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxBbmV0YVxQYWdlc1xUcmFuc2FjdGlvbnNcVHJhbnNhY3Rpb25zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Aneta/Pages/Transactions/TransactionsCreate.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxBbmV0YVxQYWdlc1xUcmFuc2FjdGlvbnNcVHJhbnNhY3Rpb25zQ3JlYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Aneta/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxBbmV0YVxfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/App.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxBcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Components/00_TransactionCommonParameters.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xDb21wb25lbnRzXDAwX1RyYW5zYWN0aW9uQ29tbW9uUGFyYW1ldGVycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Components/01_TransactionList.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xDb21wb25lbnRzXDAxX1RyYW5zYWN0aW9uTGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Components/02_TransactionPurchaseOrder.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xDb21wb25lbnRzXDAyX1RyYW5zYWN0aW9uUHVyY2hhc2VPcmRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Components/03_TransactionAbstractQuotation.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xDb21wb25lbnRzXDAzX1RyYW5zYWN0aW9uQWJzdHJhY3RRdW90YXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Components/04_TransactionPurchaseRequest.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xDb21wb25lbnRzXDA0X1RyYW5zYWN0aW9uUHVyY2hhc2VSZXF1ZXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Components/05_TransactionInspectionAndAcceptanceReport.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xDb21wb25lbnRzXDA1X1RyYW5zYWN0aW9uSW5zcGVjdGlvbkFuZEFjY2VwdGFuY2VSZXBvcnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Components/BeautifiedComponents/00_TransactionCommonParameters.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xDb21wb25lbnRzXEJlYXV0aWZpZWRDb21wb25lbnRzXDAwX1RyYW5zYWN0aW9uQ29tbW9uUGFyYW1ldGVycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Components/BeautifiedComponents/01_TransactionList.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xDb21wb25lbnRzXEJlYXV0aWZpZWRDb21wb25lbnRzXDAxX1RyYW5zYWN0aW9uTGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xDb3VudGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/FetchData.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xGZXRjaERhdGEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Mains/Dashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xNYWluc1xEYXNoYm9hcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Mains/Inventory.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xNYWluc1xJbnZlbnRvcnkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Mains/Transactions.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xNYWluc1xUcmFuc2FjdGlvbnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Test.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xUZXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Test2.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xUZXN0Mi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Views/DsaDocuments.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xWaWV3c1xEc2FEb2N1bWVudHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Views/DsaTransactions.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xWaWV3c1xEc2FUcmFuc2FjdGlvbnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Views/DsaTransactionsCreate.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xWaWV3c1xEc2FUcmFuc2FjdGlvbnNDcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Views/DsaTransactionsMetrics.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xWaWV3c1xEc2FUcmFuc2FjdGlvbnNNZXRyaWNzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Views/DsaTransactionsRecent.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xWaWV3c1xEc2FUcmFuc2FjdGlvbnNSZWNlbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Views/DsaTransactionsWelcome.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xWaWV3c1xEc2FUcmFuc2FjdGlvbnNXZWxjb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Views/Pdf/DsaPdfGeneration.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xWaWV3c1xQZGZcRHNhUGRmR2VuZXJhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Views/TransactionDocument.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xWaWV3c1xUcmFuc2FjdGlvbkRvY3VtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Views/ViewTransaction.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xWaWV3c1xWaWV3VHJhbnNhY3Rpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Shared/LoginDisplay.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxTaGFyZWRcTG9naW5EaXNwbGF5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxTaGFyZWRcU3VydmV5UHJvbXB0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Pages/Transactions/Transactions.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhbnNhY3Rpb25zXFRyYW5zYWN0aW9ucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Pages/Transactions/TransactionsCreate.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhbnNhY3Rpb25zXFRyYW5zYWN0aW9uc0NyZWF0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Aneta/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxBbmV0YVxTaGFyZWRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-gi0t27paxx
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Aneta/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxBbmV0YVxTaGFyZWRcTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-qx9bzw77gm
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxTaGFyZWRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-al9u0ug77m
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxTaGFyZWRcTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-szuz22ljjz
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-qz5tgfpudp
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-onziqg1iwr
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Aneta/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxBbmV0YVxQYWdlc1xFcnJvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Aneta/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxBbmV0YVxQYWdlc1xfSG9zdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xFcnJvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Deprecated/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RGVwcmVjYXRlZFxQYWdlc1xfSG9zdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects/dsa-marketing/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

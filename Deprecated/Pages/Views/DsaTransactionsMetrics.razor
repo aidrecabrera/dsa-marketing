@@ -1,0 +1,67 @@
+﻿@using System.Globalization;
+@using dsa_marketing.Models;
+
+<div class="flex flex-row flex-grow gap-2">
+    <MudPaper Elevation="0" class="border-2 border-black p-4 text-black" Width="100%" Height="20%">
+        <div>
+            <MudText Typo="Typo.h6">Transactions</MudText>
+            <MudText Typo="Typo.h3">@totalTransactions</MudText>
+            <MudText Typo="Typo.caption">All running & completed projects</MudText>
+        </div>
+    </MudPaper>
+    <MudPaper Elevation="0" class="border-2 border-black p-4 text-black" Width="100%" Height="20%">
+        <div>
+            <MudText Typo="Typo.h6">Expenses</MudText>
+            <MudText Typo="Typo.h3">@totalExpenses</MudText>
+            <MudText Typo="Typo.caption">The total expenses from all projects</MudText>
+        </div>
+    </MudPaper>
+    <MudPaper Elevation="0" class="border-2 border-black p-4 text-black" Width="100%" Height="20%">
+        <div>
+            <MudText Typo="Typo.h6">Revenue</MudText>
+            <MudText Typo="Typo.h3">@totalRevenue</MudText>
+            <MudText Typo="Typo.caption">The total revenue from all projects</MudText>
+        </div>
+    </MudPaper>
+</div>
+
+@code {
+    [Inject]
+    private DsaClusterContext _context { get; set; }
+    private int totalTransactions;
+    private string totalExpenses;
+    private string totalRevenue;
+
+    protected override void OnInitialized()
+    {
+        // Initialize the metrics by querying the database
+        LoadMetrics();
+    }
+    
+    private void LoadMetrics()
+    {
+        // Calculate the total transactions
+        totalTransactions = _context.Transactions.Count();
+
+        // Calculate the total expenses (adjust the table and property names as per your data model)
+        decimal? totalExpensesValue = _context.TransactionItems.Sum(item => item.Cost);
+        totalExpenses = FormatAsPhpCurrency(totalExpensesValue);
+
+        // Calculate the total revenue (adjust the table and property names as per your data model)
+        decimal? totalRevenueValue = _context.TransactionItems.Sum(item => item.Amount);
+        totalRevenue = FormatAsPhpCurrency(totalRevenueValue);
+    }
+
+    private string FormatAsPhpCurrency(decimal? value)
+    {
+        if (value.HasValue)
+        {
+            CultureInfo cultureInfo = new CultureInfo("en-PH"); // Philippines culture for PHP currency
+            return value.Value.ToString("C", cultureInfo);
+        }
+        else
+        {
+            return "N/A"; // Display "N/A" for null values
+        }
+    }
+}

@@ -1,0 +1,34 @@
+
+<!-- PurchaseOrderForm.razor -->
+
+<h1>Purchase Order Form</h1>
+
+<!-- Form fields -->
+<div>
+    <h3>Mode of Procurement</h3>
+    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+    <label for="vehicle1">Bidding</label><br>
+    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+    <label for="vehicle2">Negotiated</label><br>
+    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3">Over the Counter</label><br>
+</div>
+
+@code {
+    // Define a model for the Purchase Order
+
+    // Define a method to generate the Purchase Order
+    private void GeneratePurchaseOrder()
+    {
+        // Implement logic to generate the Purchase Order document here
+        // You can use a library like IronPDF to generate the PDF document
+        // Example: IronPdf.PdfDocument pdf = GeneratePdfDocument(purchaseOrder);
+
+        // Once the PDF is generated, you can save, display, or perform other actions as needed
+    }
+}
+
+
+@code {
+
+}

@@ -1,0 +1,17 @@
+﻿@inherits LayoutComponentBase
+<MudThemeProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+<PageTitle>Aneta</PageTitle>
+
+<div class="flex flex-row bg-black font-inter">
+    <div class="h-screen w-1/6">
+        <NavMenu />
+    </div>
+    <main class="w-full flex flex-row">
+        <article class="grow p-14">
+            @Body
+        </article>
+    </main>
+</div>

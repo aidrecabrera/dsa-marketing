@@ -1,0 +1,38 @@
+<MudNavMenu Color="Color.Primary" Bordered="true">
+    <MudNavLink Href="home" Style="@($"color:{Colors.Grey.Darken4   }; background:{Colors.Shades.Transparent};")">
+        <div class="flex flex-row align-center">
+            <span class="material-symbols-outlined">
+                contract
+            </span>
+            <div class="flex flex-col align-center justify-center item-center pt-3">
+                <h6>
+                    Transactions
+                </h6>
+            </div>
+        </div>
+    </MudNavLink>
+    <MudNavLink Href="documents" Style="@($"color:{Colors.Grey.Darken4   }; background:{Colors.Shades.Transparent};")">
+        <div class="flex flex-row align-center">
+            <span class="material-symbols-outlined">
+                description
+            </span>
+            <div class="flex flex-col align-center justify-center item-center pt-3">
+                <h6>
+                    Documents
+                </h6>
+            </div>
+        </div>
+    </MudNavLink>
+</MudNavMenu>
+
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

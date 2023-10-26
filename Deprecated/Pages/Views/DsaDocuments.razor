@@ -1,0 +1,123 @@
+﻿@page "/documents"
+@using dsa_marketing.Models
+@using MudBlazor
+@using System.Net.Http.Json
+@using Bogus
+@using System.Linq.Expressions
+@inject NavigationManager Navigation
+
+@code {
+    private void NavigateToTransactionInfo(int transactionId)
+    {
+        Navigation.NavigateTo($"/transaction_info/{transactionId}");
+    }
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
+    void CreateNewTransaction()
+    {
+        NavigationManager.NavigateTo("/create_transaction");
+    }
+}
+
+
+<MudGrid Class="d-flex align-content-center justify-space-between flex-grow-1 pb-3">
+    <MudItem Class="d-flex flex-grow-1 align-end">
+        <MudText Typo="Typo.h3" Class="fw-bold font-grotesk" Style="@($"color:{Colors.Shades.Black};")">Transactions</MudText>
+    </MudItem>
+    <MudItem Class="w-25">
+        <MudTextField @bind-Value="searchTransactionInfo" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </MudItem>
+    <MudItem Class="d-flex align-center">
+        <MudButton StartIcon="@Icons.Material.Filled.AddCircleOutline" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" @onclick="CreateNewTransaction">Create</MudButton>
+    </MudItem>
+</MudGrid>
+
+<MudTable Items="@individualTransaction" Hover="true" @bind-SelectedItem="selectedItem1" Filter="FilterFunc1">
+    <HeaderContent>
+        <MudTh>TID</MudTh>
+        <MudTh>City/Municipality</MudTh>
+        <MudTh>Barangay</MudTh>
+        <MudTh>Punong Barangay</MudTh>
+        <MudTh>Barangay Treasurer</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="TID">@context.TransactionId</MudTd>
+        <MudTd DataLabel="City/Municipality">@context.MunicipalityName</MudTd>
+        <MudTd DataLabel="Barangay">@context.BarangayName</MudTd>
+        <MudTd DataLabel="Punong Barangay">@context.PunongBarangayName</MudTd>
+        <MudTd DataLabel="Treasurer">@context.BarangayTreasurerName</MudTd>
+        <MudTd DataLabel="View">
+            <MudButton @onclick="() => NavigateToTransactionInfo(context.TransactionId)">
+                View Details
+            </MudButton>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager Style="height: 113px" />
+    </PagerContent>
+</MudTable>
+
+@code {
+    private List<Transaction> transactions;
+    private List<TransactionDocuments> documentInformation;
+
+    List<Element> transactionList = new List<Element>();
+    List<Element> documentList = new List<Element>();
+    List<Element> individualTransaction = new List<Element>();
+
+    private string searchTransactionInfo = "";
+    private Element selectedItem1 = null;
+
+    public class Element
+    {
+        public int TransactionId { get; set; }
+        public string MunicipalityName { get; set; }
+        public string BarangayName { get; set; }
+        public string PunongBarangayName { get; set; }
+        public string BarangayTreasurerName { get; set; }
+    }
+
+    [Inject]
+    private DsaClusterContext _context { get; set; }
+
+    protected override void OnInitialized()
+    {
+        transactions = _context.Transactions.ToList();
+        documentInformation = _context.TransactionDocuments.ToList();
+        TransactionList();
+    }
+
+    private void TransactionList()
+    {
+        individualTransaction = transactions
+            .GroupJoin(documentInformation, t => t.TransactionId, d => d.TransactionId, (t, d) => new { Transaction = t, Documents = d })
+            .SelectMany(g => g.Documents.DefaultIfEmpty(), (t, d) => new Element
+                {
+                    TransactionId = t.Transaction.TransactionId,
+                    MunicipalityName = t.Transaction.MunicipalityName,
+                    BarangayName = t.Transaction.BarangayName,
+                    PunongBarangayName = d?.PunongBarangayName,
+                    BarangayTreasurerName = d?.BarangayTreasurerName,
+                })
+            .ToList();
+    }
+
+    private bool FilterFunc1(Element element) => FilterFunc(element, searchTransactionInfo);
+
+    private bool FilterFunc(Element element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.BarangayName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.MunicipalityName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.PunongBarangayName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.BarangayTreasurerName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        return false;
+    }
+}

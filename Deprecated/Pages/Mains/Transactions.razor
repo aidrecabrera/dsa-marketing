@@ -1,0 +1,45 @@
+﻿@page "/hello"
+@using dsa_marketing.Models
+
+<h1>Transactions</h1>
+
+@if (transactions != null && transactions.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Municipality Name</th>
+                <th>Barangay Name</th>
+                <!-- Add other column headers here -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in transactions)
+            {
+                <tr>
+                    <td>@transaction.TransactionId</td>
+                    <td>@transaction.MunicipalityName</td>
+                    <td>@transaction.BarangayName</td>
+                    <!-- Add other columns here -->
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No transactions found.</p>
+}
+
+@code {
+    private List<Transaction> transactions;
+
+    [Inject]
+    private DsaClusterContext _context { get; set; }
+
+    protected override void OnInitialized()
+    {
+        transactions = _context.Transactions.ToList();
+    }
+}

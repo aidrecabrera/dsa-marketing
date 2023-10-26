@@ -1,0 +1,51 @@
+﻿<div class="flex flex-col bg-black justify-center h-screen px-10 py-4 text-white">
+    <div class="py-8">
+        <div class="flex flex-row justify-center text-center">
+            <img src="dsa_marketing.png" class="invert" alt="DSA Marketing">
+            <button title="Navigation menu" @onclick="ToggleNavMenu">
+                <span></span>
+            </button>
+        </div>
+    </div>
+
+    <div @onclick="ToggleNavMenu">
+        <nav class="flex flex-col navigation-bar font-light">
+            <div class="flex flex-row py-2 align-middle">
+                <span aria-hidden="true" class="material-icons px-4">
+                    home
+                </span>
+                <NavLink href="" Match="NavLinkMatch.All">
+                    Home
+                </NavLink>
+            </div>
+            <div class="flex flex-row py-2 align-middle">
+                <span aria-hidden="true" class="material-symbols-rounded px-4">
+                    contract
+                </span>
+                <NavLink href="transactions" Match="NavLinkMatch.All">
+                    Transaction
+                </NavLink>
+            </div>
+            <div class="flex flex-row py-2 align-middle">
+                <span aria-hidden="true" class="material-icons px-4">
+                    add_circle
+                </span>
+                <NavLink href="documents" Match="NavLinkMatch.All">
+                    Create
+                </NavLink>
+            </div>
+        </nav>
+    </div>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+}
