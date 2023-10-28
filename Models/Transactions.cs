@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Aneta.Models;
 
-public partial class Transaction
+public partial class Transactions
 {
     public int TransactionId { get; set; }
 

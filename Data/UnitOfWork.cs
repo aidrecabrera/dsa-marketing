@@ -7,11 +7,12 @@ namespace Aneta.Data;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly DsaClusterContext? _context;
+    private IUnitOfWork _unitOfWorkImplementation;
 
     public UnitOfWork(DsaClusterContext? context)
     {
         _context = context;
-        Transaction = new SqlRepository<Transaction>(_context);
+        Transactions = new SqlRepository<Transactions>(_context);
         TransactionDocuments = new SqlRepository<TransactionDocument>(_context);
         PurchaseRequests = new SqlRepository<PurchaseRequest>(_context);
         PurchaseOrders = new SqlRepository<PurchaseOrder>(_context);
@@ -21,7 +22,7 @@ public class UnitOfWork : IUnitOfWork
         ExistingTransactionsSummary = new SqlRepository<ExistingTransactionsSummary>(_context);
     }
 
-    public IRepository<Transaction> Transaction { get; private set; }
+    public IRepository<Transactions> Transactions { get; private set; }
     public IRepository<TransactionDocument> TransactionDocuments { get; private set; }
     public IRepository<PurchaseRequest> PurchaseRequests { get; private set; }
     public IRepository<PurchaseOrder> PurchaseOrders { get; private set; }

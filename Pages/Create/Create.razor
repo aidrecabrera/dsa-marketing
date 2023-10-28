@@ -3,111 +3,122 @@
 @using Aneta.Data
 @inject NavigationManager NavigationManager
 
-<MudGrid Class="d-flex align-content-center justify-space-between flex-grow-1 pb-3">
-    <MudItem Class="d-flex flex-grow-1 align-end">
-        <MudText Typo="Typo.h5" Class="fw-bold font-grotesk" Style="@($"color:{Colors.Shades.Black};")">New Transaction</MudText>
-    </MudItem>
-    <MudItem>
-        <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" OnClick="SaveTransaction">Save</MudButton>
-    </MudItem> 
-</MudGrid>
+<div class="text-black">
+    <MudGrid Class="d-flex align-content-center justify-space-between flex-grow-1 pb-3">
+        <MudItem Class="d-flex flex-grow-1 align-end">
+            <MudText Typo="Typo.h5" Class="fw-bold font-grotesk font-black" Style="@($"color:{Colors.Shades.Black};")">DSA TRANSACTIONS / CREATE TRANSACTION</MudText>
+        </MudItem>
+        <MudItem>
+            <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" OnClick="SaveTransaction">
+                <span class="material-symbols-rounded pr-1">
+                    book
+                </span>Save
+            </MudButton>
+            <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Error" OnClick="NavigateBackToHomePage">
+                <span class="material-symbols-rounded pr-1">
+                    scan_delete
+                </span>Cancel
+            </MudButton>
+        </MudItem>
+    </MudGrid>
 
-<div class="flex flex-row gap-3">
-    <div class="flex flex-column flex-grow-1 gap-3">
-        <div>
-            <MudCard Elevation="0" Outlined="true">
-                <MudCardContent Class="gap-3">
-                    <div>
-                        <MudSelect T="string" Label="Municipality" @bind-Value="SelectedMunicipality">
-                            @foreach (var municipality in municipalities)
-                            {
-                                <MudSelectItem T="string" Value="@municipality">@municipality</MudSelectItem>
-                            }
-                        </MudSelect>
-                        <MudSelect Label="Barangay" @bind-Value="SelectedBarangay">
-                            @foreach (var barangay in GetBarangays(SelectedMunicipality))
-                            {
-                                <MudSelectItem Value="@barangay">@barangay</MudSelectItem>
-                            }
-                        </MudSelect>
-                    </div>
-                </MudCardContent>
-            </MudCard>
-        </div>
-        <div>
-            <MudCard Elevation="0" Outlined="true">
-                <MudCardContent>
-                    <div class="form-group">
-                        <MudTextField T="string" Label="Punong Barangay" HelperTextOnFocus="true" Variant="Variant.Outlined" @bind-Value="NewPunongBarangay" AutoFocus/>
-                    </div>
-                    <div class="inspection-acceptance-report">
-                        <div class="form-group">
-                            <MudTextField T="string" Label="Barangay Treasurer" HelperTextOnFocus="true" Variant="Variant.Outlined" @bind-Value="NewBarangayTreasurer"/>
+    <div class="flex flex-row gap-3">
+        <div class="flex flex-column flex-grow-1 gap-3">
+            <div>
+                <MudCard Elevation="0" Outlined="true" Class="p-7 text-black">
+                    <MudCardContent Class="gap-3 text-black">
+                        <div>
+                            <MudSelect T="string" Label="Municipality" @bind-Value="SelectedMunicipality">
+                                @foreach (var municipality in municipalities)
+                                {
+                                    <MudSelectItem T="string" Value="@municipality">@municipality</MudSelectItem>
+                                }
+                            </MudSelect>
+                            <MudSelect Label="Barangay" @bind-Value="SelectedBarangay">
+                                @foreach (var barangay in GetBarangays(SelectedMunicipality))
+                                {
+                                    <MudSelectItem Value="@barangay">@barangay</MudSelectItem>
+                                }
+                            </MudSelect>
                         </div>
+                    </MudCardContent>
+                </MudCard>
+            </div>
+            <div>
+                <MudCard Elevation="0" Outlined="true" Class="p-7">
+                    <MudCardContent Class="flex flex-col gap-2">
+                        <div class="form-group">
+                            <MudTextField T="string" Label="Punong Barangay" HelperTextOnFocus="true" Variant="Variant.Outlined" @bind-Value="NewPunongBarangay" AutoFocus/>
+                        </div>
+                        <div class="inspection-acceptance-report">
+                            <div class="form-group">
+                                <MudTextField T="string" Label="Barangay Treasurer" HelperTextOnFocus="true" Variant="Variant.Outlined" @bind-Value="NewBarangayTreasurer"/>
+                            </div>
+                        </div>
+                    </MudCardContent>
+                </MudCard>
+            </div>
+            <div>
+                <MudPaper Elevation="0" Outlined="true" Class="p-10 gap-3">
+                    <MudText Typo="Typo.h6">Transaction Items</MudText>
+                    <MudForm Model="@_newItem">
+                        <MudTextField Label="Unit" @bind-Value="_newItem.UnitName" Variant="Variant.Text" Required="true"></MudTextField>
+                        <MudTextField Label="Particulars" @bind-Value="_newItem.Particulars" Variant="Variant.Text" Required="true"></MudTextField>
+                        <MudTextField Label="Quantity" @bind-Value="_newItem.Quantity" Variant="Variant.Text" Required="true"></MudTextField>
+                        <MudTextField Label="Cost" @bind-Value="_newItem.Cost" Variant="Variant.Text" Required="true"></MudTextField>
+                    </MudForm>
+                    <div class="pt-3">
+                        <MudButton Type="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success" OnClick="AddItemToTransactionList">
+                            <span class="material-symbols-rounded">
+                                save
+                            </span>Add
+                        </MudButton>
+                        <MudButton Type="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Error" OnClick="ClearForm">
+                            <span class="material-symbols-rounded">
+                                clear
+                            </span>
+                            Clear
+                        </MudButton>
                     </div>
-                </MudCardContent>
-            </MudCard>
+                </MudPaper>
+            </div>
         </div>
-        <div>
-            <MudPaper Elevation="0" Outlined="true" Class="p-4 gap-3">
-                <MudText Typo="Typo.h6">Transaction Items</MudText>
-                <MudForm Model="@_newItem">
-                    <MudTextField Label="Unit" @bind-Value="_newItem.UnitName" Variant="Variant.Text" Required="true"></MudTextField>
-                    <MudTextField Label="Particulars" @bind-Value="_newItem.Particulars" Variant="Variant.Text" Required="true"></MudTextField>
-                    <MudTextField Label="Quantity" @bind-Value="_newItem.Quantity" Variant="Variant.Text" Required="true"></MudTextField>
-                    <MudTextField Label="Cost" @bind-Value="_newItem.Cost" Variant="Variant.Text" Required="true"></MudTextField>
-                </MudForm>
-                <div class="pt-3">
-                    <MudButton Type="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success" OnClick="AddItemToTransactionList">
-                        <span class="material-symbols-outlined">
-                            save
-                        </span>Add
-                    </MudButton>
-                    <MudButton Type="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Error" OnClick="ClearForm">
-                        <span class="material-symbols-outlined">
-                            clear
-                        </span>
-                        Clear
-                    </MudButton>
-                </div>
-            </MudPaper>
+        <div class="flex-grow-1 grow rounded-lg">
+            <MudTable Elevation="0" Outlined="true" Class="vh-100 rounded-lg" Items="@_itemList" FixedHeader="true" FixedFooter="true" EditTrigger="TableEditTrigger.RowClick" CanCancelEdit="true" CommitEditTooltip="Commit Edit" Hover="true" Breakpoint="Breakpoint.Sm" @ref="_table">
+                <HeaderContent>
+                    <MudTh>Unit Name</MudTh>
+                    <MudTh>Particulars</MudTh>
+                    <MudTh>Quantity</MudTh>
+                    <MudTh>Unit Cost</MudTh>
+                    <MudTh>Amount</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
+                    <MudTd DataLabel="Particulars">@context.Particulars</MudTd>
+                    <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
+                    <MudTd DataLabel="Cost">@context.Cost</MudTd>
+                    <MudTd DataLabel="Amount">@context.Amount</MudTd>
+                </RowTemplate>
+                <RowEditingTemplate>
+                    <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
+                    <MudTd DataLabel="Particulars">
+                        <MudTextField @bind-Value="@context.Particulars" Required/>
+                    </MudTd>
+                    <MudTd DataLabel="Quantity">
+                        <MudTextField @bind-Value="@context.Quantity" Required/>
+                    </MudTd>
+                    <MudTd DataLabel="Cost">
+                        <MudTextField @bind-Value="@context.Cost" Required Min="1"/>
+                    </MudTd>
+                    <MudTd DataLabel="Amount">
+                        <MudTextField @bind-Value="@context.Amount" Required/>
+                    </MudTd>
+                    <MudTd>
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" OnClick="() => DeleteRow(context)"></MudIconButton>
+                    </MudTd>
+                </RowEditingTemplate>
+            </MudTable>
         </div>
-    </div>
-    <div class="flex-grow-1">
-        <MudTable Elevation="0" Outlined="true" Class="vh-100" Items="@_itemList" FixedHeader="true" FixedFooter="true" EditTrigger="TableEditTrigger.RowClick" CanCancelEdit="true" CommitEditTooltip="Commit Edit" Hover="true" Breakpoint="Breakpoint.Sm" @ref="_table">
-            <HeaderContent>
-                <MudTh>Unit Name</MudTh>
-                <MudTh>Particulars</MudTh>
-                <MudTh>Quantity</MudTh>
-                <MudTh>Unit Cost</MudTh>
-                <MudTh>Amount</MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
-                <MudTd DataLabel="Particulars">@context.Particulars</MudTd>
-                <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
-                <MudTd DataLabel="Cost">@context.Cost</MudTd>
-                <MudTd DataLabel="Amount">@context.Amount</MudTd>
-            </RowTemplate>
-            <RowEditingTemplate>
-                <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
-                <MudTd DataLabel="Particulars">
-                    <MudTextField @bind-Value="@context.Particulars" Required/>
-                </MudTd>
-                <MudTd DataLabel="Quantity">
-                    <MudTextField @bind-Value="@context.Quantity" Required/>
-                </MudTd>
-                <MudTd DataLabel="Cost">
-                    <MudTextField @bind-Value="@context.Cost" Required Min="1"/>
-                </MudTd>
-                <MudTd DataLabel="Amount">
-                    <MudTextField @bind-Value="@context.Amount" Required/>
-                </MudTd>
-                <MudTd>
-                    <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" OnClick="() => DeleteRow(context)"></MudIconButton>
-                </MudTd>
-            </RowEditingTemplate>
-        </MudTable>
     </div>
 </div>
 
@@ -223,24 +234,28 @@
 }
 
 @code {
-    [Inject] private DsaClusterContext? Context { get; set; }
-    [Inject] private UnitOfWork? UnitOfWork { get; set; }
-    
+
+    [Inject]
+    private DsaClusterContext? Context { get; set; }
+
+    [Inject]
+    private UnitOfWork? UnitOfWork { get; set; }
+
     private MudTable<TransactionItem>? _table;
     private readonly List<TransactionItem>? _itemList = new List<TransactionItem>();
     TransactionItem? _newItem = new TransactionItem();
 
-    private Transaction? _newTransaction;
+    private Transactions? _newTransaction;
     private TransactionDocument? _newTransactionDocument;
-    
+
     private bool _isSaved = false;
     private bool _transactionInstantiated = false;
-    
+
     public required string SelectedMunicipality { get; set; }
     public required string SelectedBarangay { get; set; }
     public required string NewPunongBarangay { get; set; }
     public required string NewBarangayTreasurer { get; set; }
-    
+
     void AddItemToTransactionList()
     {
         _itemList?.Add(new TransactionItem
@@ -253,26 +268,28 @@
         });
         _newItem = new TransactionItem();
     }
+
     void ClearForm()
     {
         _newItem = new TransactionItem();
     }
+
     void DeleteRow(TransactionItem item)
     {
         _itemList?.Remove(item);
         _table?.SetEditingItem(null);
         StateHasChanged();
     }
-    
-    private Transaction CreateNewTransaction()
+
+    private Transactions CreateNewTransaction()
     {
-        return new Transaction
+        return new Transactions
         {
             MunicipalityName = SelectedMunicipality,
             BarangayName = SelectedBarangay,
         };
     }
-    
+
     private TransactionDocument CreateNewDocument()
     {
         return new TransactionDocument
@@ -286,7 +303,7 @@
     {
         _newTransaction = CreateNewTransaction();
         _newTransactionDocument = CreateNewDocument();
-        
+
         _newTransaction.TransactionDocuments.Add(_newTransactionDocument);
         _newTransactionDocument.Transaction = _newTransaction;
         foreach (var transactionItem in _itemList!)
@@ -294,10 +311,10 @@
             transactionItem.Document = _newTransactionDocument; // Set the DocumentId
             _newTransactionDocument.TransactionItems.Add(transactionItem);
         }
-        UnitOfWork?.Transaction.Add(_newTransaction);
+        UnitOfWork?.Transactions.Add(_newTransaction);
         UnitOfWork?.TransactionDocuments.Add(_newTransactionDocument);
         UnitOfWork?.Complete();
-        
+
         if (_newTransaction is { MunicipalityName: not null,BarangayName: not null })
         {
             _isSaved = true;
@@ -308,11 +325,16 @@
             NavigateBackToOriginalPage(_newTransaction.TransactionId);
         }
     }
+
 }
 
 @code {
     private void NavigateBackToOriginalPage(int transactionId)
     {
-        NavigationManager?.NavigateTo($"/transaction_info/{transactionId}");
+        NavigationManager?.NavigateTo($"/view/{transactionId}");
+    }
+    private void NavigateBackToHomePage()
+    {
+        NavigationManager?.NavigateTo("/transactions");
     }
 }

@@ -1,39 +1,45 @@
 ﻿@page "/"
 @using Aneta.Models
 @using Aneta.Data
-
+@inject NavigationManager Navigation
 <PageTitle>Home</PageTitle>
 
 <div class="flex flex-col w-full gap-4">
-    <div class="flex flex-row text-black gap-4">
-        <div class="flex flex-col justify-start border border-black text-left rounded-lg p-16 bg-white grow">
+    <div class="flex flex-row text-white gap-4">
+        <div class="flex flex-col justify-start text-left rounded-lg p-16 grow bg-primary text-neutral-content">
             <h1 class="text-4xl text-left">Total Projects</h1>
             <h1 class="text-9xl text-left">@_projectCounts</h1>
             <h1 class="text-left">All running & completed projects</h1>
         </div>
-        <div class="flex flex-col justify-start border border-black text-left rounded-lg p-16 bg-white grow">
+        <div class="flex flex-col justify-start text-left bg-neutral rounded-lg p-16 grow">
             <h1 class="text-4xl text-left">Total Expenses</h1>
-            <h1 class="text-9xl text-left">@_projectCounts</h1>
+            <h1 class="text-9xl text-left">@_projectExpenses</h1>
             <h1 class="text-left">The total expenses from all projects</h1>
         </div>
     </div>
-    <div class="flex flex-row gap-4 text-black flex-wrap w-full">
+    <h1 class="text-xl font-bold text-black">Recent Transactions</h1>
+    <div class="grid grid-cols-4 gap-4 text-black w-full">
         @foreach (var transaction in _listOfTransactions!)
         {
-            <div class="border border-black rounded-lg w-96 h-60 p-4 align-middle grow">
-                <div class="flex flex-col content-between place-content-between justify-between p-4 gap-4">
-                    <p>Transaction ID: @transaction.TransactionId</p>
-                    <div>
-                        <p>@transaction.MunicipalityName</p>
-                        <p>@transaction.BarangayName</p>
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body justify-between">
+                    <div class="flex flex-col gap-2">
+                        <h2 class="card-title">
+                            <div class="badge badge-primary">#@transaction.TransactionId</div>
+                        </h2>
+                        <div>
+                            <p>@transaction.PunongBarangayName</p>
+                            <p>@transaction.BarangayTreasurerName</p>
+                        </div>
+                        <div class="card-actions justify-start">
+                            <div class="badge badge-outline bg-info text-base-100 p-3">@transaction.MunicipalityName</div>
+                            <div class="badge badge-outline bg-info text-base-100 p-3">@transaction.BarangayName</div>
+                        </div>
                     </div>
-                    <div>
-                        <p>@transaction.PunongBarangayName</p>
-                        <p>@transaction.BarangayTreasurerName</p>
+                    <div class="card-actions justify-start pt-3">
+                        <button class="btn btn-primary grow" @onclick="() => NavigateToTransactionInfo(transaction.TransactionId)">View Details</button>
                     </div>
-                    <MudButton Class="border rounded-lg align-middle text-black grow">View</MudButton>
                 </div>
-
             </div>
         }
     </div>
@@ -54,7 +60,12 @@
         UnitOfWork unitOfWork = new UnitOfWork(Context);
         _listOfTransactions = unitOfWork.ExistingTransactionsSummary?.GetAll().ToList();
         _projectCounts = _listOfTransactions!.Count;
-        _listOfTransactions = _listOfTransactions!.OrderByDescending(t => t.TransactionId).Take(6).ToList();
+        _listOfTransactions = _listOfTransactions!.OrderByDescending(t => t.TransactionId).Take(8).ToList();
+        if (_transactionDetails != null) _projectExpenses = _transactionDetails.Sum(transactions => transactions.ItemAmount)!.Value;
     }
-
+    
+    private void NavigateToTransactionInfo(int transactionId)
+    {
+        Navigation.NavigateTo($"/view/{transactionId}");
+    }
 }

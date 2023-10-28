@@ -28,8 +28,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/.dev/dsa-marketing/Pages/Transactions/Transactions.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhbnNhY3Rpb25zXFRyYW5zYWN0aW9ucy5yYXpvcg==
+[C:/Users/Svene/.dev/dsa-marketing/Pages/Transactions/TransactionsDisplay.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhbnNhY3Rpb25zXFRyYW5zYWN0aW9uc0Rpc3BsYXkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/dsa-marketing/Pages/Transactions/TransactionsView.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhbnNhY3Rpb25zXFRyYW5zYWN0aW9uc1ZpZXcucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Svene/.dev/dsa-marketing/_Imports.razor]

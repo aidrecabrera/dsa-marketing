@@ -15,7 +15,7 @@ public class SqlRepository<TEntity> : IRepository<TEntity> where TEntity : class
         _dbSet = context.Set<TEntity>();
     }
 
-    public TEntity GetById(int id)
+    public TEntity GetById(int? id)
     {
         return _dbSet.Find(id);
     }

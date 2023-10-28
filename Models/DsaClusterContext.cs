@@ -23,7 +23,7 @@ public partial class DsaClusterContext : DbContext
 
     public virtual DbSet<PurchaseRequest> PurchaseRequests { get; set; }
 
-    public virtual DbSet<Transaction> Transactions { get; set; }
+    public virtual DbSet<Transactions> Transactions { get; set; }
 
     public virtual DbSet<TransactionDocument> TransactionDocuments { get; set; }
 
@@ -101,7 +101,7 @@ public partial class DsaClusterContext : DbContext
                 .HasConstraintName("FK__PurchaseR__Docum__55009F39");
         });
 
-        modelBuilder.Entity<Transaction>(entity =>
+        modelBuilder.Entity<Transactions>(entity =>
         {
             entity.HasKey(e => e.TransactionId).HasName("PK__Transact__55433A6BDC0F81C6");
 

@@ -1,12 +1,11 @@
 ﻿// using System.Globalization;
-// using dsa_marketing.Data;
-// using dsa_marketing.Models;
+// using Aneta.Models;
 // using dsa_marketing.PdfServices.Immutables;
-// using Microsoft.EntityFrameworkCore;
+// using Humanizer;
 // using QuestPDF.Fluent;
 // using QuestPDF.Helpers;
 // using QuestPDF.Infrastructure;
-// using Humanizer;
+//
 //
 // namespace dsa_marketing.PdfServices.Templates;
 //

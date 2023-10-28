@@ -19,7 +19,7 @@ public partial class TransactionDocument
 
     public virtual ICollection<PurchaseRequest> PurchaseRequests { get; set; } = new List<PurchaseRequest>();
 
-    public virtual Transaction? Transaction { get; set; }
+    public virtual Transactions? Transaction { get; set; }
 
     public virtual ICollection<TransactionItem> TransactionItems { get; set; } = new List<TransactionItem>();
 }

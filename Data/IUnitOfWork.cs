@@ -5,7 +5,7 @@ namespace Aneta.Data;
 
 public interface IUnitOfWork : IDisposable
 {
-    IRepository<Transaction> Transaction { get; }
+    IRepository<Transactions> Transactions { get; }
     IRepository<TransactionDocument> TransactionDocuments { get; }
     IRepository<PurchaseRequest> PurchaseRequests { get; }
     IRepository<PurchaseOrder> PurchaseOrders { get; }

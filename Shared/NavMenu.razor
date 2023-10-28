@@ -1,51 +1,34 @@
-﻿<div class="flex flex-col bg-black justify-center h-screen px-10 py-4 text-white">
-    <div class="py-8">
-        <div class="flex flex-row justify-center text-center">
-            <img src="dsa_marketing.png" class="invert" alt="DSA Marketing">
-            <button title="Navigation menu" @onclick="ToggleNavMenu">
-                <span></span>
-            </button>
-        </div>
-    </div>
-
-    <div @onclick="ToggleNavMenu">
-        <nav class="flex flex-col navigation-bar font-light">
-            <div class="flex flex-row py-2 align-middle">
-                <span aria-hidden="true" class="material-icons px-4">
+﻿<div class="w-full">
+    <ul class="menu menu-lg gap-2">
+        <li>
+            <div class="flex flex-row hover:bg-secondary-focus px-5 pl-5 py-3 text-primary-content align-middle">
+                <span aria-hidden="true" class="material-icons">
                     home
                 </span>
                 <NavLink href="" Match="NavLinkMatch.All">
                     Home
                 </NavLink>
             </div>
-            <div class="flex flex-row py-2 align-middle">
-                <span aria-hidden="true" class="material-symbols-rounded px-4">
+        </li>
+        <li>
+            <div class="flex flex-row hover:bg-secondary-focus px-5 py-3 text-primary-content align-middle">
+                <span aria-hidden="true" class="material-symbols-rounded">
                     contract
                 </span>
                 <NavLink href="transactions" Match="NavLinkMatch.All">
                     Transaction
                 </NavLink>
             </div>
-            <div class="flex flex-row py-2 align-middle">
-                <span aria-hidden="true" class="material-icons px-4">
+        </li>
+        <li>
+            <div class="flex flex-row hover:bg-secondary-focus px-5 py-3 text-primary-content align-middle">
+                <span aria-hidden="true" class="material-icons">
                     add_circle
                 </span>
                 <NavLink href="create" Match="NavLinkMatch.All">
                     Create
                 </NavLink>
             </div>
-        </nav>
-    </div>
+        </li>
+    </ul>
 </div>
-
-@code {
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-
-}
