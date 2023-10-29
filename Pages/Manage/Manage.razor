@@ -1,16 +1,72 @@
 ﻿@page "/manage"
-<div class="grid grid-cols-4">
-    <div class="card w-96 h-52 bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h2 class="card-title">Card title!</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-primary">Buy Now</button>
-        </div>
-      </div>
+@using Aneta.Models
+@using Aneta.Data
+
+<div class="flex flex-col w-full gap-4">
+    <div>
+        <h1>
+            Manage Existing Transactions
+        </h1>
+    </div>
+    <div class="grid grid-cols-4 rounded-md gap-4 w-full">
+        @foreach (var transaction in _transactionsList!)
+        {
+            <div class="card rounded-md w-full h-52 bg-base-100 grow">
+                <div class="card-body justify-between">
+                    <h2 class="card-title">
+                        <div class="badge badge-primary inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">#@transaction.TransactionId</div>
+                    </h2>
+                    <div>
+                        <p>@transaction.PunongBarangayName</p>
+                        <p>@transaction.BarangayTreasurerName</p>
+                    </div>
+                    <div class="card-actions justify-start">
+                        <div class="badge badge-outline bg-info text-base-100 p-3">@transaction.MunicipalityName</div>
+                        <div class="badge badge-outline bg-info text-base-100 p-3">@transaction.BarangayName</div>
+                    </div>
+                    <div class="card-actions justify-start pt-2 ">
+                        <div class="join">
+                            <button class="btn-sm join-item text-white bg-green-600 hover:bg-green-600 font-medium px-4">Edit</button>
+                            <button class="btn-sm join-item text-white bg-red-600 hover:bg-red-600 font-medium" @onclick="() => DeleteTransaction(transaction.TransactionId, transaction.DocumentId)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
     </div>
 </div>
 
 @code {
 
+    [Inject]
+    DsaClusterContext? Context { get; set; }
+
+    [Inject]
+    UnitOfWork? UnitOfWork { get; set; }
+
+    List<ExistingTransactionsSummary>? _transactionsList;
+
+    protected override void OnInitialized()
+    {
+        UnitOfWork = new UnitOfWork(Context);
+        _transactionsList = UnitOfWork!.ExistingTransactionsSummary!.GetAll().ToList();
+    }
+
+    private void DeleteTransaction(int transactionId, int transactionDocumentId)
+    {
+        Transactions transactions = UnitOfWork?.Transactions.GetById(transactionId)!;
+        TransactionDocument transactionDocument = UnitOfWork?.TransactionDocuments.GetById(transactionDocumentId)!;
+        TransactionItem transactionItem = UnitOfWork?.TransactionItems.GetById(transactionDocumentId)!;
+        PurchaseOrder purchaseOrder = UnitOfWork?.PurchaseOrders.GetById(transactionDocumentId)!;
+        PurchaseRequest purchaseRequest = UnitOfWork?.PurchaseRequests.GetById(transactionDocumentId)!;
+        
+        UnitOfWork?.PurchaseRequests.Remove(purchaseRequest);
+        UnitOfWork?.PurchaseOrders.Remove(purchaseOrder);
+        UnitOfWork?.TransactionItems.Remove(transactionItem);
+        UnitOfWork?.TransactionDocuments.Remove(transactionDocument);
+        UnitOfWork?.Transactions.Remove(transactions);
+        
+        UnitOfWork?.Complete();
+    }
 }

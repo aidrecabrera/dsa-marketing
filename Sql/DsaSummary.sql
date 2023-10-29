@@ -1,4 +1,4 @@
-﻿CREATE VIEW TransactionSummary AS
+﻿CREATE VIEW ExistingTransactionSummary AS
 SELECT
     t.TransactionId AS TransactionId,
     t.MunicipalityName AS MunicipalityName,

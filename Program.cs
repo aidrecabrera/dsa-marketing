@@ -12,7 +12,7 @@ builder.Services.AddScoped<Aneta.Data.UnitOfWork>();
 // Database Cluster Context
 builder.Configuration.AddJsonFile("appsettings.json");
 var configuration = builder.Configuration;
-var connectionString = configuration.GetConnectionString("default");
+var connectionString = configuration.GetConnectionString("localDefault");
 builder.Services.AddDbContext<DsaClusterContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();

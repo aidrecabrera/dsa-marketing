@@ -11,7 +11,7 @@ CREATE TABLE TransactionDocuments
     TransactionId         INT,
     PunongBarangayName    NVARCHAR(255),
     BarangayTreasurerName NVARCHAR(255),
-    FOREIGN KEY (TransactionId) REFERENCES Transactions (TransactionId)
+    FOREIGN KEY (TransactionId) REFERENCES Transactions (TransactionId) ON DELETE CASCADE
 );
 
 CREATE TABLE PurchaseRequest
@@ -28,7 +28,7 @@ CREATE TABLE PurchaseRequest
     RequestedByName         NVARCHAR(255),
     ApprovedForIssuanceName NVARCHAR(255),
     RequestorName           NVARCHAR(255),
-    FOREIGN KEY (DocumentId) REFERENCES TransactionDocuments (DocumentId)
+    FOREIGN KEY (DocumentId) REFERENCES TransactionDocuments (DocumentId) ON DELETE CASCADE
 );
 
 CREATE TABLE PurchaseOrder
@@ -36,7 +36,7 @@ CREATE TABLE PurchaseOrder
     OrderId           INT PRIMARY KEY IDENTITY (1,1),
     DocumentId        INT,
     ModeOfProcurement NVARCHAR(255),
-    FOREIGN KEY (DocumentId) REFERENCES TransactionDocuments (DocumentId)
+    FOREIGN KEY (DocumentId) REFERENCES TransactionDocuments (DocumentId) ON DELETE CASCADE
 );
 
 CREATE TABLE AbstractQuotation
@@ -48,7 +48,7 @@ CREATE TABLE AbstractQuotation
     OfficeOfThe             NVARCHAR(255),
     AwardedToThe            NVARCHAR(255),
     OpeningQuotationsOffice NVARCHAR(255),
-    FOREIGN KEY (DocumentId) REFERENCES TransactionDocuments (DocumentId)
+    FOREIGN KEY (DocumentId) REFERENCES TransactionDocuments (DocumentId) ON DELETE CASCADE
 );
 
 CREATE TABLE TransactionItems
@@ -61,5 +61,5 @@ CREATE TABLE TransactionItems
     Cost        DECIMAL(10, 2),
     Amount      DECIMAL(10, 2),
     Price       DECIMAL(10, 2),
-    FOREIGN KEY (DocumentId) REFERENCES TransactionDocuments (DocumentId)
+    FOREIGN KEY (DocumentId) REFERENCES TransactionDocuments (DocumentId) ON DELETE CASCADE
 );

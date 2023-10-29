@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="dsa_cluster@dsamarketing.database.windows.net" uuid="d460b6c2-cc0d-4302-a0ba-d08960d5805c">
-      <driver-ref>azure.ms</driver-ref>
+    <data-source source="LOCAL" name="dsa_cluster@localhost" uuid="946ea9a3-b90b-40a5-a48b-9e28f8b8c993">
+      <driver-ref>sqlserver.jb</driver-ref>
       <synchronize>true</synchronize>
       <configured-by-url>true</configured-by-url>
-      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
-      <jdbc-url>jdbc:sqlserver://dsamarketing.database.windows.net:1433;database=dsa_cluster;user=aidrecabrera@dsamarketing;password=Svene@MCM717;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;</jdbc-url>
+      <jdbc-driver>com.jetbrains.jdbc.sqlserver.SqlServerDriver</jdbc-driver>
+      <jdbc-url>Server=localhost;Database=dsa_cluster;Trusted_Connection=True;</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
+      </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
