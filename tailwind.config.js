@@ -25,8 +25,8 @@ module.exports = {
         'accent-focus' : '#f4bebe',
         'accent-content' : '#322020',
 
-        'neutral' : '#5c5757',
-        'neutral-focus' : '#272525',
+        'neutral' : '#141727',
+        'neutral-focus' : '#343950',
         'neutral-content' : '#e9e7e7',
 
         'base-100' : '#e9e7e7',

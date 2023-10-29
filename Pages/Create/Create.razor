@@ -3,7 +3,7 @@
 @using Aneta.Data
 @inject NavigationManager NavigationManager
 
-<div class="text-black">
+<div class="text-black w-full">
     <MudGrid Class="d-flex align-content-center justify-space-between flex-grow-1 pb-3">
         <MudItem Class="d-flex flex-grow-1 align-end">
             <MudText Typo="Typo.h5" Class="fw-bold font-grotesk font-black" Style="@($"color:{Colors.Shades.Black};")">DSA TRANSACTIONS / CREATE TRANSACTION</MudText>
@@ -21,7 +21,6 @@
             </MudButton>
         </MudItem>
     </MudGrid>
-
     <div class="flex flex-row gap-3">
         <div class="flex flex-column flex-grow-1 gap-3">
             <div>
@@ -83,7 +82,7 @@
                 </MudPaper>
             </div>
         </div>
-        <div class="flex-grow-1 grow rounded-lg">
+        <div class="flex-grow-1 grow rounded-lg h-full">
             <MudTable Elevation="0" Outlined="true" Class="vh-100 rounded-lg" Items="@_itemList" FixedHeader="true" FixedFooter="true" EditTrigger="TableEditTrigger.RowClick" CanCancelEdit="true" CommitEditTooltip="Commit Edit" Hover="true" Breakpoint="Breakpoint.Sm" @ref="_table">
                 <HeaderContent>
                     <MudTh>Unit Name</MudTh>

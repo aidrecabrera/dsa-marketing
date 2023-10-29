@@ -6,7 +6,7 @@
 
 <PageTitle>Transactions</PageTitle>
 
-<div class="font-inter text-black">
+<div class="font-inter text-black w-full h-full">
     <div>
         <div class="flex flex-row align-middle justify-between w-full">
             <MudGrid Class="d-flex align-content-center justify-space-between flex-grow-1 pb-3">
@@ -20,8 +20,8 @@
         </div>
     </div>
 
-    <div class="">
-        <MudTable Class="font-bold grow" Elevation="0" T="ExistingTransactionsSummary" Items="@_listOfTransactions" Hover="true" @bind-SelectedItem="_selectedItem" Filter="FilterFunc1" Height="70vh" FixedHeader="true">
+    <div class="flex">
+        <MudTable Class="font-bold grow" Elevation="0" T="ExistingTransactionsSummary" Items="@_listOfTransactions" Hover="true" @bind-SelectedItem="_selectedItem" Filter="FilterFunc1" Height="76vh" FixedHeader="true">
             <HeaderContent>
                 <MudTh Class="text-black">TID</MudTh>
                 <MudTh Class="text-black">City/Municipality</MudTh>
@@ -51,10 +51,10 @@
 </div>
 
 @code {
-
     [Inject]
-    private DsaClusterContext? DbContext { get; set; }
-
+    private DsaClusterContext? Context { get; set; }
+    [Inject]
+    UnitOfWork? UnitOfWork { get; set; }
     private void NavigateToTransactionInfo(int transactionId)
     {
         Navigation.NavigateTo($"/view/{transactionId}");
@@ -67,8 +67,8 @@
 
     protected override void OnInitialized()
     {
-        var unitOfWork = new UnitOfWork(DbContext);
-        _listOfTransactions = unitOfWork.ExistingTransactionsSummary?.GetAll().ToList()!;
+        UnitOfWork = new UnitOfWork(Context);
+        _listOfTransactions = UnitOfWork.ExistingTransactionsSummary?.GetAll().ToList()!;
     }
 
     private bool FilterFunc1(ExistingTransactionsSummary element) => FilterFunc(element, _searchTransactionInfo);

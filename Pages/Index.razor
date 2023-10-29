@@ -25,7 +25,7 @@
                 <div class="card-body justify-between">
                     <div class="flex flex-col gap-2">
                         <h2 class="card-title">
-                            <div class="badge badge-primary">#@transaction.TransactionId</div>
+                            <div class="badge badge-primary inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">#@transaction.TransactionId</div>
                         </h2>
                         <div>
                             <p>@transaction.PunongBarangayName</p>
@@ -46,10 +46,10 @@
 </div>
 
 @code {
-
     [Inject]
     private DsaClusterContext? Context { get; set; }
-
+    [Inject]
+    UnitOfWork? UnitOfWork { get; set; }
     private List<ExistingTransactionsSummary>? _listOfTransactions;
     private List<TransactionSummary>? _transactionDetails;
     private int _projectCounts = 0;
@@ -57,8 +57,8 @@
 
     protected override void OnInitialized()
     {
-        UnitOfWork unitOfWork = new UnitOfWork(Context);
-        _listOfTransactions = unitOfWork.ExistingTransactionsSummary?.GetAll().ToList();
+        UnitOfWork = new UnitOfWork(Context);
+        _listOfTransactions = UnitOfWork.ExistingTransactionsSummary?.GetAll().ToList();
         _projectCounts = _listOfTransactions!.Count;
         _listOfTransactions = _listOfTransactions!.OrderByDescending(t => t.TransactionId).Take(8).ToList();
         if (_transactionDetails != null) _projectExpenses = _transactionDetails.Sum(transactions => transactions.ItemAmount)!.Value;

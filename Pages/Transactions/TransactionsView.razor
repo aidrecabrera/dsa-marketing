@@ -19,7 +19,7 @@
     private DsaClusterContext? Context { get; set; }
 
     [Inject]
-    UnitOfWork? _unitOfWork { get; set; }
+    UnitOfWork? UnitOfWork { get; set; }
 
     [Parameter]
     public int CurrentTransactionId { get; set; }
@@ -31,8 +31,8 @@
 
     protected override void OnInitialized()
     {
-        _unitOfWork = new UnitOfWork(Context);
-        _viewTransactionDisplayDetails = _unitOfWork.Transactions.GetById(CurrentTransactionId);
-        _viewTransactionDocumentDetails = _unitOfWork.TransactionDocuments.GetById(CurrentTransactionId);
+        UnitOfWork = new UnitOfWork(Context);
+        _viewTransactionDisplayDetails = UnitOfWork.Transactions.GetById(CurrentTransactionId);
+        _viewTransactionDocumentDetails = UnitOfWork.TransactionDocuments.GetById(CurrentTransactionId);
     }
 }
