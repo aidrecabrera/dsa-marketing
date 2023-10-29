@@ -21,7 +21,7 @@
     </div>
 
     <div class="flex">
-        <MudTable Class="font-bold grow" Elevation="0" T="ExistingTransactionsSummary" Items="@_listOfTransactions" Hover="true" @bind-SelectedItem="_selectedItem" Filter="FilterFunc1" Height="76vh" FixedHeader="true">
+        <MudTable Class="font-bold grow" Elevation="0" T="ExistingTransactionSummary" Items="@_listOfTransactions" Hover="true" @bind-SelectedItem="_selectedItem" Filter="FilterFunc1" Height="76vh" FixedHeader="true">
             <HeaderContent>
                 <MudTh Class="text-black">TID</MudTh>
                 <MudTh Class="text-black">City/Municipality</MudTh>
@@ -61,19 +61,19 @@
     }
 
     private string _searchTransactionInfo = "";
-    private ExistingTransactionsSummary? _selectedItem = null;
+    private ExistingTransactionSummary? _selectedItem = null;
 
-    IEnumerable<ExistingTransactionsSummary> _listOfTransactions = new List<ExistingTransactionsSummary>();
+    IEnumerable<ExistingTransactionSummary> _listOfTransactions = new List<ExistingTransactionSummary>();
 
     protected override void OnInitialized()
     {
         UnitOfWork = new UnitOfWork(Context);
-        _listOfTransactions = UnitOfWork.ExistingTransactionsSummary?.GetAll().ToList()!;
+        _listOfTransactions = UnitOfWork.ExistingTransactionSummary?.GetAll().ToList()!;
     }
 
-    private bool FilterFunc1(ExistingTransactionsSummary element) => FilterFunc(element, _searchTransactionInfo);
+    private bool FilterFunc1(ExistingTransactionSummary element) => FilterFunc(element, _searchTransactionInfo);
 
-    private bool FilterFunc(ExistingTransactionsSummary element, string searchString)
+    private bool FilterFunc(ExistingTransactionSummary element, string searchString)
     {
         if (string.IsNullOrWhiteSpace(searchString))
             return true;

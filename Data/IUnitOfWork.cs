@@ -5,11 +5,13 @@ namespace Aneta.Data;
 
 public interface IUnitOfWork : IDisposable
 {
-    IRepository<Transactions> Transactions { get; }
+    IRepository<TransactionDetail> TransactionDetails { get; }
     IRepository<TransactionDocument> TransactionDocuments { get; }
     IRepository<PurchaseRequest> PurchaseRequests { get; }
     IRepository<PurchaseOrder> PurchaseOrders { get; }
     IRepository<AbstractQuotation> AbstractQuotations { get; }
     IRepository<TransactionItem> TransactionItems { get; }
+    IRepository<TransactionSummary> TransactionSummary { get; }
+    IRepository<ExistingTransactionSummary> ExistingTransactionSummary { get; }
     int Complete();
 }

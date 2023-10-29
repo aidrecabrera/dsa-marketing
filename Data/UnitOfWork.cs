@@ -12,25 +12,24 @@ public class UnitOfWork : IUnitOfWork
     public UnitOfWork(DsaClusterContext? context)
     {
         _context = context;
-        Transactions = new SqlRepository<Transactions>(_context);
+        TransactionDetails = new SqlRepository<TransactionDetail>(_context);
         TransactionDocuments = new SqlRepository<TransactionDocument>(_context);
         PurchaseRequests = new SqlRepository<PurchaseRequest>(_context);
         PurchaseOrders = new SqlRepository<PurchaseOrder>(_context);
         AbstractQuotations = new SqlRepository<AbstractQuotation>(_context);
         TransactionItems = new SqlRepository<TransactionItem>(_context);
         TransactionSummary = new SqlRepository<TransactionSummary>(_context);
-        ExistingTransactionsSummary = new SqlRepository<ExistingTransactionsSummary>(_context);
+        ExistingTransactionSummary = new SqlRepository<ExistingTransactionSummary>(_context);
     }
 
-    public IRepository<Transactions> Transactions { get; private set; }
+    public IRepository<TransactionDetail> TransactionDetails { get; private set; }
     public IRepository<TransactionDocument> TransactionDocuments { get; private set; }
     public IRepository<PurchaseRequest> PurchaseRequests { get; private set; }
     public IRepository<PurchaseOrder> PurchaseOrders { get; private set; }
     public IRepository<AbstractQuotation> AbstractQuotations { get; private set; }
     public IRepository<TransactionItem> TransactionItems { get; private set; }
     public IRepository<TransactionSummary> TransactionSummary { get; set; }
-
-    public IRepository<ExistingTransactionsSummary>? ExistingTransactionsSummary { get; set; }
+    public IRepository<ExistingTransactionSummary> ExistingTransactionSummary { get; set; }
     
     public int Complete()
     {

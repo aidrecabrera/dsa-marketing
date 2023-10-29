@@ -1,4 +1,4 @@
-CREATE TABLE Transactions
+CREATE TABLE TransactionDetail
 (
     TransactionId    INT PRIMARY KEY IDENTITY (1,1),
     MunicipalityName NVARCHAR(255),
@@ -11,7 +11,7 @@ CREATE TABLE TransactionDocuments
     TransactionId         INT,
     PunongBarangayName    NVARCHAR(255),
     BarangayTreasurerName NVARCHAR(255),
-    FOREIGN KEY (TransactionId) REFERENCES Transactions (TransactionId) ON DELETE CASCADE
+    FOREIGN KEY (TransactionId) REFERENCES TransactionDetail (TransactionId) ON DELETE CASCADE
 );
 
 CREATE TABLE PurchaseRequest

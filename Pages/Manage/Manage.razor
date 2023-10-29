@@ -45,17 +45,17 @@
     [Inject]
     UnitOfWork? UnitOfWork { get; set; }
 
-    List<ExistingTransactionsSummary>? _transactionsList;
+    List<TransactionSummary>? _transactionsList;
 
     protected override void OnInitialized()
     {
         UnitOfWork = new UnitOfWork(Context);
-        _transactionsList = UnitOfWork!.ExistingTransactionsSummary!.GetAll().ToList();
+        _transactionsList = UnitOfWork!.TransactionSummary!.GetAll().ToList();
     }
 
     private void DeleteTransaction(int transactionId, int transactionDocumentId)
     {
-        Transactions transactions = UnitOfWork?.Transactions.GetById(transactionId)!;
+        TransactionDetail transactions = UnitOfWork?.TransactionDetails.GetById(transactionId)!;
         TransactionDocument transactionDocument = UnitOfWork?.TransactionDocuments.GetById(transactionDocumentId)!;
         TransactionItem transactionItem = UnitOfWork?.TransactionItems.GetById(transactionDocumentId)!;
         PurchaseOrder purchaseOrder = UnitOfWork?.PurchaseOrders.GetById(transactionDocumentId)!;
@@ -65,7 +65,7 @@
         UnitOfWork?.PurchaseOrders.Remove(purchaseOrder);
         UnitOfWork?.TransactionItems.Remove(transactionItem);
         UnitOfWork?.TransactionDocuments.Remove(transactionDocument);
-        UnitOfWork?.Transactions.Remove(transactions);
+        UnitOfWork?.TransactionDetails.Remove(transactions);
         
         UnitOfWork?.Complete();
     }

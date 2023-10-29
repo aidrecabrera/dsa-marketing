@@ -244,7 +244,7 @@
     private readonly List<TransactionItem>? _itemList = new List<TransactionItem>();
     TransactionItem? _newItem = new TransactionItem();
 
-    private Transactions? _newTransaction;
+    private TransactionDetail? _newTransaction;
     private TransactionDocument? _newTransactionDocument;
 
     private bool _isSaved = false;
@@ -280,9 +280,9 @@
         StateHasChanged();
     }
 
-    private Transactions CreateNewTransaction()
+    private TransactionDetail CreateNewTransaction()
     {
-        return new Transactions
+        return new TransactionDetail
         {
             MunicipalityName = SelectedMunicipality,
             BarangayName = SelectedBarangay,
@@ -310,7 +310,7 @@
             transactionItem.Document = _newTransactionDocument; // Set the DocumentId
             _newTransactionDocument.TransactionItems.Add(transactionItem);
         }
-        UnitOfWork?.Transactions.Add(_newTransaction);
+        UnitOfWork?.TransactionDetails.Add(_newTransaction);
         UnitOfWork?.TransactionDocuments.Add(_newTransactionDocument);
         UnitOfWork?.Complete();
 

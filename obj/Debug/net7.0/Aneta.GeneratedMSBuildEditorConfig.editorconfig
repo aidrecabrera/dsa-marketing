@@ -9,53 +9,53 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Aneta
 build_property.RootNamespace = Aneta
-build_property.ProjectDir = C:\Users\Svene\.dev\dsa-marketing\
+build_property.ProjectDir = C:\Users\Svene\.dev\projects-production\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Svene\.dev\dsa-marketing
+build_property.MSBuildProjectDirectory = C:\Users\Svene\.dev\projects-production
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Svene/.dev/dsa-marketing/App.razor]
+[C:/Users/Svene/.dev/projects-production/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/.dev/dsa-marketing/Pages/Create/Create.razor]
+[C:/Users/Svene/.dev/projects-production/Pages/Create/Create.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRlXENyZWF0ZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/.dev/dsa-marketing/Pages/Index.razor]
+[C:/Users/Svene/.dev/projects-production/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/.dev/dsa-marketing/Pages/Manage/Manage.razor]
+[C:/Users/Svene/.dev/projects-production/Pages/Manage/Manage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlXE1hbmFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/.dev/dsa-marketing/Pages/Transactions/TransactionsDisplay.razor]
+[C:/Users/Svene/.dev/projects-production/Pages/Transactions/TransactionsDisplay.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhbnNhY3Rpb25zXFRyYW5zYWN0aW9uc0Rpc3BsYXkucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/.dev/dsa-marketing/Pages/Transactions/TransactionsView.razor]
+[C:/Users/Svene/.dev/projects-production/Pages/Transactions/TransactionsView.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhbnNhY3Rpb25zXFRyYW5zYWN0aW9uc1ZpZXcucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/.dev/dsa-marketing/_Imports.razor]
+[C:/Users/Svene/.dev/projects-production/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/.dev/dsa-marketing/Shared/MainLayout.razor]
+[C:/Users/Svene/.dev/projects-production/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-1ezxi6hbgv
 
-[C:/Users/Svene/.dev/dsa-marketing/Shared/NavMenu.razor]
+[C:/Users/Svene/.dev/projects-production/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-5f367l4gyo
 
-[C:/Users/Svene/.dev/dsa-marketing/Pages/Error.cshtml]
+[C:/Users/Svene/.dev/projects-production/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/.dev/dsa-marketing/Pages/_Host.cshtml]
+[C:/Users/Svene/.dev/projects-production/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

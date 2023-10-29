@@ -24,7 +24,7 @@
     [Parameter]
     public int CurrentTransactionId { get; set; }
 
-    private Transactions _viewTransactionDisplayDetails;
+    private TransactionDetail _viewTransactionDisplayDetails;
     private TransactionDocument _viewTransactionDocumentDetails;
 
     private List<TransactionItem> _transactionItems;
@@ -32,7 +32,7 @@
     protected override void OnInitialized()
     {
         UnitOfWork = new UnitOfWork(Context);
-        _viewTransactionDisplayDetails = UnitOfWork.Transactions.GetById(CurrentTransactionId);
+        _viewTransactionDisplayDetails = UnitOfWork.TransactionDetails.GetById(CurrentTransactionId);
         _viewTransactionDocumentDetails = UnitOfWork.TransactionDocuments.GetById(CurrentTransactionId);
     }
 }

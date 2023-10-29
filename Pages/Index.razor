@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using Aneta.Models
 @using Aneta.Data
+@using System.Transactions
 @inject NavigationManager Navigation
 <PageTitle>Home</PageTitle>
 
@@ -50,7 +51,7 @@
     private DsaClusterContext? Context { get; set; }
     [Inject]
     UnitOfWork? UnitOfWork { get; set; }
-    private List<ExistingTransactionsSummary>? _listOfTransactions;
+    private List<ExistingTransactionSummary>? _listOfTransactions;
     private List<TransactionSummary>? _transactionDetails;
     private int _projectCounts = 0;
     private decimal _projectExpenses = 0;
@@ -58,10 +59,9 @@
     protected override void OnInitialized()
     {
         UnitOfWork = new UnitOfWork(Context);
-        _listOfTransactions = UnitOfWork.ExistingTransactionsSummary?.GetAll().ToList();
+        _listOfTransactions = UnitOfWork.ExistingTransactionSummary?.GetAll().ToList();
         _projectCounts = _listOfTransactions!.Count;
         _listOfTransactions = _listOfTransactions!.OrderByDescending(t => t.TransactionId).Take(8).ToList();
-        if (_transactionDetails != null) _projectExpenses = _transactionDetails.Sum(transactions => transactions.ItemAmount)!.Value;
     }
     
     private void NavigateToTransactionInfo(int transactionId)

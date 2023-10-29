@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/TqMzVhQCP/bW5rxmOVBpXH7i17FJs/f9ldn9CpIZtk=",
+  "Hash": "8UZD5vXmwzCEoI3viK47Nq7K67fd/iUyImF3qseiEfk=",
   "Source": "Aneta",
   "BasePath": "_content/Aneta",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "Aneta\\wwwroot",
       "Source": "Aneta",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\obj\\Debug\\net7.0\\scopedcss\\bundle\\Aneta.styles.css",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\obj\\Debug\\net7.0\\scopedcss\\bundle\\Aneta.styles.css",
       "SourceId": "Aneta",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\obj\\Debug\\net7.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\obj\\Debug\\net7.0\\scopedcss\\bundle\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "Aneta.styles.css",
       "AssetKind": "All",
@@ -31,13 +31,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Svene\\.dev\\dsa-marketing\\obj\\Debug\\net7.0\\scopedcss\\bundle\\Aneta.styles.css"
+      "OriginalItemSpec": "C:\\Users\\Svene\\.dev\\projects-production\\obj\\Debug\\net7.0\\scopedcss\\bundle\\Aneta.styles.css"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Aneta.bundle.scp.css",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Aneta.bundle.scp.css",
       "SourceId": "Aneta",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "Aneta.bundle.scp.css",
       "AssetKind": "All",
@@ -48,13 +48,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Svene\\.dev\\dsa-marketing\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Aneta.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\Svene\\.dev\\projects-production\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Aneta.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\css\\app.css",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\app.css",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "css/app.css",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\css\\app.css"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\css\\app.min.css",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\app.min.css",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "css/app.min.css",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\css\\app.min.css"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "css/open-iconic/FONT-LICENSE",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "css/open-iconic/font/css/open-iconic-bootstrap.min.css",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.eot",
       "AssetKind": "All",
@@ -136,10 +136,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.otf",
       "AssetKind": "All",
@@ -153,10 +153,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.svg",
       "AssetKind": "All",
@@ -170,10 +170,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.ttf",
       "AssetKind": "All",
@@ -187,10 +187,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.woff",
       "AssetKind": "All",
@@ -204,10 +204,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "css/open-iconic/ICON-LICENSE",
       "AssetKind": "All",
@@ -221,10 +221,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\ICON-LICENSE"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\css\\open-iconic\\README.md",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\open-iconic\\README.md",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "css/open-iconic/README.md",
       "AssetKind": "All",
@@ -238,10 +238,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\README.md"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\css\\site.css",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\site.css",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -255,10 +255,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\dsa_marketing.png",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\dsa_marketing.png",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "dsa_marketing.png",
       "AssetKind": "All",
@@ -272,10 +272,10 @@
       "OriginalItemSpec": "wwwroot\\dsa_marketing.png"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\favicon.png",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Svene\\.dev\\dsa-marketing\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
