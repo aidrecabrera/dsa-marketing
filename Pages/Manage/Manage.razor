@@ -11,6 +11,24 @@
     <div class="grid grid-cols-4 rounded-md gap-4 w-full">
         @foreach (var transaction in _transactionsList!)
         {
+            <dialog id="deleteModal" class="absolute m-auto top-0 bottom-0 left-0 right-0 inset-0 rounded-lg">
+                <div class="rounded-sm p-10 bg-green-50">
+                    <div>
+                        <h3 class="font-bold text-lg">WARNING!</h3>
+                        <p class="py-4">Are you sure you want to delete Transaction: @transaction.TransactionId?</p>
+                        <div class="modal-action">
+                            <form method="dialog">
+                                <button class="btn bg-red-800 hover:bg-red-600 text-white" @onclick="() => DeleteTransaction(transaction.TransactionId)">Delete</button>
+                            </form>
+                            <form method="dialog">
+                                <button class="btn btn-ghost bg-base-100 hover:bg-base-200">close</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </dialog>
+
             <div class="card rounded-md w-full h-52 bg-base-100 grow">
                 <div class="card-body justify-between">
                     <h2 class="card-title">
@@ -27,11 +45,10 @@
                     <div class="card-actions justify-start pt-2 ">
                         <div class="join">
                             <button class="btn-sm join-item text-white bg-green-600 hover:bg-green-600 font-medium px-4">Edit</button>
-                            <button class="btn-sm join-item text-white bg-red-600 hover:bg-red-600 font-medium" @onclick="() => DeleteTransaction(transaction.TransactionId)">Delete</button>
+                            <button class="btn-sm join-item text-white bg-red-600 hover:bg-red-600 font-medium" onclick="deleteModal.showModal()">Delete</button>
                         </div>
                     </div>
                 </div>
-
             </div>
         }
     </div>
@@ -58,5 +75,8 @@
         TransactionDetail transactions = UnitOfWork?.TransactionDetails.GetById(transactionId)!;
         UnitOfWork?.TransactionDetails.Remove(transactions);
         UnitOfWork?.Complete();
+        _transactionsList?.Remove(_transactionsList.Find(t => t.TransactionId == transactionId) ?? throw new InvalidOperationException());
+        StateHasChanged();
     }
+
 }
