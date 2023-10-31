@@ -57,7 +57,7 @@
     UnitOfWork? UnitOfWork { get; set; }
     private void NavigateToTransactionInfo(int transactionId)
     {
-        Navigation.NavigateTo($"/view/{transactionId}");
+        Navigation.NavigateTo($"/manage/edit/{transactionId}");
     }
 
     private string _searchTransactionInfo = "";
