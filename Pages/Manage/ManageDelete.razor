@@ -1,0 +1,32 @@
+﻿@using Aneta.Models
+@using Aneta.Data
+@using System.Transactions
+<MudDialog>
+    <DialogContent>
+        <MudText>Do you really want to delete these this transaction? This process cannot be undone.</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="Delete">Delete</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Inject]
+    private DsaClusterContext Context { get; set; }
+    [Inject]
+    private UnitOfWork UnitOfWork { get; set; }
+    [Parameter]
+    public int? _transactionId { get; set; }
+    TransactionDetail? _transactionList;
+    List<ExistingTransactionSummary>? _transactionsList;
+    void Cancel() => MudDialog.Cancel();
+    void Delete()
+    {
+        TransactionDetail transactions = UnitOfWork?.TransactionDetails.GetById(_transactionId)!;
+        UnitOfWork?.TransactionDetails.Remove(transactions);
+        UnitOfWork?.Complete();
+        _transactionsList?.Remove(_transactionsList.Find(t => t.TransactionId == _transactionId) ?? throw new InvalidOperationException());
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+}

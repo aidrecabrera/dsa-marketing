@@ -52,6 +52,7 @@
     [Inject]
     UnitOfWork? UnitOfWork { get; set; }
     private List<ExistingTransactionSummary>? _listOfTransactions;
+    private List<TransactionItem>? _allItems;
     private List<TransactionSummary>? _transactionDetails;
     private int _projectCounts = 0;
     private decimal _projectExpenses = 0;
@@ -60,7 +61,9 @@
     {
         UnitOfWork = new UnitOfWork(Context);
         _listOfTransactions = UnitOfWork.ExistingTransactionSummary?.GetAll().ToList();
+        _allItems = UnitOfWork.TransactionItems?.GetAll().ToList();
         _projectCounts = _listOfTransactions!.Count;
+        _projectExpenses = _allItems!.Sum(amount => amount.Amount.HasValue ? amount.Amount.Value : 0);
         _listOfTransactions = _listOfTransactions!.OrderByDescending(t => t.TransactionId).Take(8).ToList();
     }
     

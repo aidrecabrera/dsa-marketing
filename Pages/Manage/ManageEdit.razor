@@ -4,87 +4,111 @@
 @inject ISnackbar Snackbar
 @inject IDialogService DialogService
 
-<div class="flex flex-row w-full gap-2">
-    <MudPaper Class="flex flex-col w-1/3 h-full">
-    </MudPaper>
-    <MudTable MultiSelection="true" @bind-SelectedItems="multiSelectedItems" Class="w-2/3 h-full p-4" Items="@_currentTransaction" Dense="@dense" Hover="@hover" ReadOnly="@ronly" CanCancelEdit="@canCancelEdit" Filter="new Func<TransactionItem, bool>(FilterFunc)"
-              @bind-SelectedItem="selectedItem1" SortLabel="Sort By" CommitEditTooltip="Commit Edit"
-              OnCommitEditClick="@(() => Snackbar.Add("Item Information Edited", Severity.Success))" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues"
-              RowEditCommit="ItemHasBeenCommitted" IsEditRowSwitchingBlocked="@blockSwitch" ApplyButtonPosition="@applyButtonPosition" EditButtonPosition="@editButtonPosition" EditTrigger="@editTrigger">
-        <ToolBarContent>
-            <MudText Typo="Typo.h6">Transaction Items</MudText>
-            <MudSpacer/>
-            <MudSpacer/>
-            <MudSpacer/>
-            <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 w-1/12"></MudTextField>
-            <div class="pl-2 items-end">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(AddNewItem)">Add</MudButton>
-            </div>
-            <div class="pl-2 items-end">
-                <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(DeleteNewItem)">Delete</MudButton>
-            </div>
-        </ToolBarContent>
-        <ColGroup>
-            @if (applyButtonPosition.DisplayApplyButtonAtStart() || (editButtonPosition.DisplayEditButtonAtStart() && editTrigger == TableEditTrigger.EditButton))
-            {
-                <col style="width:5px;"/>
-            }
-            <col style="width:5%;"/>
-            <col style="width:10%;"/>
-            <col style="width:15%;"/>
-            <col style="width:40%;"/>
-            <col/>
-            @if (applyButtonPosition.DisplayApplyButtonAtEnd() || (editButtonPosition.DisplayEditButtonAtEnd() && editTrigger == TableEditTrigger.EditButton))
-            {
+<div class="flex flex-col w-full h-full">
+    <div>
+        <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
+    </div>
+    <div class="flex flex-row h-full w-full gap-4">
+        <div class="flex flex-col w-1/3 h-full text-black text-2xl gap-4">
+            <MudCard Elevation="0" Outlined="true" Class="p-7 text-black w-full">
+                <MudCardContent Class="flex flex-col gap-3 text-black">
+                    <MudTextField T="string" Label="Punong Barangay" HelperTextOnFocus="true" Variant="Variant.Outlined" @bind-Value="_currentTransactionDocument.PunongBarangayName"/>
+                    <MudTextField T="string" Label="Barangay Treasurer" HelperTextOnFocus="true" Variant="Variant.Outlined" @bind-Value="_currentTransactionDocument.BarangayTreasurerName"/>
+                </MudCardContent>
+            </MudCard>
+            <MudCard Elevation="0" Outlined="true" Class="p-7 w-full">
+                <MudCardContent Class="flex flex-col gap-3">
+                    <MudTextField T="string" Label="Punong Barangay" HelperTextOnFocus="true" Variant="Variant.Outlined" @bind-Value="_currentTransactionDetail.MunicipalityName"/>
+                    <MudTextField T="string" Label="Barangay Treasurer" HelperTextOnFocus="true" Variant="Variant.Outlined" @bind-Value="_currentTransactionDetail.BarangayName"/>
+                </MudCardContent>
+            </MudCard>
+        </div>
+        <MudTable Elevation="0" MultiSelection="true" @bind-SelectedItems="multiSelectedItems" Class="w-2/3 h-full p-4" Items="@_currentTransactionItems" Dense="@dense" Hover="@hover" ReadOnly="@ronly" CanCancelEdit="@canCancelEdit" Filter="new Func<TransactionItem, bool>(FilterFunc)"
+                  @bind-SelectedItem="selectedItem1" SortLabel="Sort By" CommitEditTooltip="Commit Edit"
+                  OnCommitEditClick="@(() => EditRow())" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues"
+                  RowEditCommit="ItemHasBeenCommitted" IsEditRowSwitchingBlocked="@blockSwitch" ApplyButtonPosition="@applyButtonPosition" EditButtonPosition="@editButtonPosition" EditTrigger="@editTrigger">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Transaction Items</MudText>
+                <MudSpacer/>
+                <MudSpacer/>
+                <MudSpacer/>
+                <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 w-1/12"></MudTextField>
+                <div class="pl-2 items-end">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(AddNewItem)">Add</MudButton>
+                </div>
+                <div class="pl-2 items-end">
+                    <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(DeleteNewItem)">Delete</MudButton>
+                </div>
+            </ToolBarContent>
+            <ColGroup>
+                @if (applyButtonPosition.DisplayApplyButtonAtStart() || (editButtonPosition.DisplayEditButtonAtStart() && editTrigger == TableEditTrigger.EditButton))
+                {
+                    <col style="width:5px;"/>
+                }
+                <col style="width:5%;"/>
                 <col style="width:10%;"/>
-            }
-        </ColGroup>
-        <HeaderContent>
-            <MudTh>
-                <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.DocumentId)">ID</MudTableSortLabel>
-            </MudTh>
-            <MudTh>
-                <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.UnitName)">Unit Name</MudTableSortLabel>
-            </MudTh>
-            <MudTh>
-                <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.Particulars)">Particulars</MudTableSortLabel>
-            </MudTh>
-            <MudTh>
-                <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.Quantity)">Quantity</MudTableSortLabel>
-            </MudTh>
-            <MudTh>
-                <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.Amount)">Amount</MudTableSortLabel>
-            </MudTh>
-        </HeaderContent>
-        <RowTemplate>
-            <MudTd DataLabel="Item ID">@context.ItemId</MudTd>
-            <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
-            <MudTd DataLabel="Particulars">@context.Particulars</MudTd>
-            <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
-            <MudTd DataLabel="Amount">@context.Amount</MudTd>
-        </RowTemplate>
-        <RowEditingTemplate>
-            <MudTd DataLabel="ID">@context.ItemId</MudTd>
-            <MudTd DataLabel="Unit Name">
-                <MudTextField @bind-Value="@context.UnitName" Required/>
-            </MudTd>
-            <MudTd DataLabel="Particulars">
-                <MudTextField @bind-Value="@context.Particulars" Required/>
-            </MudTd>
-            <MudTd DataLabel="Quantity">
-                <MudNumericField @bind-Value="@context.Quantity" Required Min="1"/>
-            </MudTd>
-            <MudTd DataLabel="Amount">
-                <MudTextField @bind-Value="@context.Amount" Required/>
-            </MudTd>
-        </RowEditingTemplate>
-        <PagerContent>
-            <MudTablePager/>
-        </PagerContent>
-        <EditButtonContent Context="button">
-            <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" Class="pa-0" OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled"/>
-        </EditButtonContent>
-    </MudTable>
+                <col style="width:15%;"/>
+                <col style="width:40%;"/>
+                <col/>
+                @if (applyButtonPosition.DisplayApplyButtonAtEnd() || (editButtonPosition.DisplayEditButtonAtEnd() && editTrigger == TableEditTrigger.EditButton))
+                {
+                    <col style="width:10%;"/>
+                }
+            </ColGroup>
+            <HeaderContent>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.DocumentId)">ID</MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.UnitName)">Unit Name</MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.Particulars)">Particulars</MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.Quantity)">Quantity</MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.Cost)">Cost</MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.Amount)">Amount</MudTableSortLabel>
+                </MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Item ID">@context.ItemId</MudTd>
+                <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
+                <MudTd DataLabel="Particulars">@context.Particulars</MudTd>
+                <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
+                <MudTd DataLabel="Cost">@context.Cost</MudTd>
+                <MudTd DataLabel="Amount">@context.Amount</MudTd>
+            </RowTemplate>
+            <RowEditingTemplate>
+                <MudTd DataLabel="ID">@context.ItemId</MudTd>
+                <MudTd DataLabel="Unit Name">
+                    <MudTextField @bind-Value="@context.UnitName" Required/>
+                </MudTd>
+                <MudTd DataLabel="Particulars">
+                    <MudTextField @bind-Value="@context.Particulars" Required/>
+                </MudTd>
+                <MudTd DataLabel="Quantity">
+                    <MudNumericField @bind-Value="@context.Quantity" Required Min="1"/>
+                </MudTd>
+                <MudTd DataLabel="Cost">
+                    <MudNumericField @bind-Value="@context.Cost" Required Min="1"/>
+                </MudTd>
+                <MudTd DataLabel="Amount">
+                    <MudTextField @bind-Value="@context.Amount" ReadOnly="true"/>
+                </MudTd>
+            </RowEditingTemplate>
+            <PagerContent>
+                <MudTablePager/>
+            </PagerContent>
+            <EditButtonContent Context="button">
+                <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" Class="pa-0" OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled"/>
+            </EditButtonContent>
+        </MudTable>
+    </div>
 </div>
 
 @code {
@@ -106,13 +130,20 @@
 
     private void AddNewItem()
     {
-        if (_currentTransaction != null)
+        if (_currentTransactionItems != null)
         {
-            var parameters = new DialogParameters<ManageAddDialog>{{ x => x.documentId, documentId }};
-            DialogService.Show<ManageAddDialog>("Add", parameters);
+            var parameters = new DialogParameters<ManageEditAddDialog> { { x => x.documentId, documentId } };
+            DialogService.Show<ManageEditAddDialog>("Add", parameters);
         }
-        _currentTransaction = UnitOfWork?.TransactionItems.Find(x => x.DocumentId == transactionId);
+        _currentTransactionItems = UnitOfWork?.TransactionItems.Find(x => x.DocumentId == transactionId);
         StateHasChanged();
+    }
+
+    private void EditRow()
+    {
+        Snackbar.Clear();
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomEnd;
+        Snackbar.Add("Item Information Edited", Severity.Success);
     }
 
     private void DeleteNewItem()
@@ -178,7 +209,7 @@
         UpdateDatabase((TransactionItem)element);
         AddEditionEvent($"RowEditCommit event: Changes to Transaction {((TransactionItem)element).DocumentId} committed");
 
-        _currentTransaction = UnitOfWork?.TransactionItems.Find(x => x.DocumentId == transactionId);
+        _currentTransactionItems = UnitOfWork?.TransactionItems.Find(x => x.DocumentId == transactionId);
 
         ClearEventLog();
         selectedItem1 = null;
@@ -205,21 +236,32 @@
 
     [Parameter]
     public int? transactionId { get; set; }
+
     public int? documentId { get; set; }
-    
+
     [Inject]
     private DsaClusterContext? Context { get; set; }
 
     [Inject]
     private UnitOfWork? UnitOfWork { get; set; }
 
-    IEnumerable<TransactionItem>? _currentTransaction;
+    private List<BreadcrumbItem> _items;
+    private TransactionDetail _currentTransactionDetail;
+    private TransactionDocument _currentTransactionDocument;
+    IEnumerable<TransactionItem>? _currentTransactionItems;
 
     protected override void OnInitialized()
     {
+        _items = new List<BreadcrumbItem>
+        {
+            new BreadcrumbItem("Transaction", href: "manage"),
+            new BreadcrumbItem("#" + transactionId, href: null, disabled: true)
+        };
         UnitOfWork = new UnitOfWork(Context);
-        _currentTransaction = UnitOfWork.TransactionItems.Find(x => x.DocumentId == transactionId);
-        documentId = _currentTransaction.FirstOrDefault()?.DocumentId;
+        _currentTransactionDetail = UnitOfWork.TransactionDetails.Find(x => x.TransactionId == transactionId).FirstOrDefault();
+        _currentTransactionDocument = UnitOfWork.TransactionDocuments.Find(x => x.DocumentId == transactionId).FirstOrDefault();
+        _currentTransactionItems = UnitOfWork.TransactionItems.Find(x => x.DocumentId == transactionId);
+        documentId = _currentTransactionItems.FirstOrDefault()?.DocumentId;
     }
 
 }

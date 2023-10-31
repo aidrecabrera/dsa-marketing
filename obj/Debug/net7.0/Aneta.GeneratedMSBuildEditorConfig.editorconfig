@@ -32,12 +32,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlXE1hbmFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Svene/.dev/projects-production/Pages/Manage/ManageAddDialog.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlXE1hbmFnZUFkZERpYWxvZy5yYXpvcg==
+[C:/Users/Svene/.dev/projects-production/Pages/Manage/ManageDelete.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlXE1hbmFnZURlbGV0ZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Svene/.dev/projects-production/Pages/Manage/ManageEdit.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlXE1hbmFnZUVkaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Svene/.dev/projects-production/Pages/Manage/ManageEditAddDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlXE1hbmFnZUVkaXRBZGREaWFsb2cucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Svene/.dev/projects-production/Pages/Transactions/TransactionsDisplay.razor]
