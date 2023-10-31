@@ -1,6 +1,7 @@
 ﻿@page "/manage"
 @using Aneta.Models
 @using Aneta.Data
+@inject NavigationManager Navigation
 
 <div class="flex flex-col w-full gap-4">
     <div>
@@ -44,7 +45,7 @@
                     </div>
                     <div class="card-actions justify-start pt-2 ">
                         <div class="join">
-                            <button class="btn-sm join-item text-white bg-green-600 hover:bg-green-600 font-medium px-4">Edit</button>
+                            <button class="btn-sm join-item text-white bg-green-600 hover:bg-green-600 font-medium px-4" @onclick="() => NavigateEdit(transaction.DocumentId)">Edit</button>
                             <button class="btn-sm join-item text-white bg-red-600 hover:bg-red-600 font-medium" onclick="deleteModal.showModal()">Delete</button>
                         </div>
                     </div>
@@ -55,7 +56,10 @@
 </div>
 
 @code {
-
+    private void NavigateEdit(int transactionId)
+    {
+        Navigation.NavigateTo($"/manage/edit/{transactionId}");
+    }
     [Inject]
     DsaClusterContext? Context { get; set; }
 

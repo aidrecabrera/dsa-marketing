@@ -5,13 +5,30 @@
 @using Aneta.Data
 @using Transaction = System.Transactions.Transaction
 
-<div>
-    <h1>Transaction ID: @CurrentTransactionId</h1>
-    <h1>@_viewTransactionDisplayDetails.MunicipalityName</h1>
-    <h1>@_viewTransactionDisplayDetails.BarangayName</h1>
-    <h1>@_viewTransactionDocumentDetails.PunongBarangayName</h1>
-    <h1>@_viewTransactionDocumentDetails.BarangayTreasurerName</h1>
-    
+<div class="flex flex-row h-full w-full justify-between">
+    <div class="flex flex-row justify-between w-full">
+        <h1 class="font-medium text-black text-2xl">
+            Transaction View
+        </h1>
+        <div>
+            @foreach (var items in _ListofTransactionItems)
+            {
+                <h1>@items.Particulars</h1>
+            }
+        </div>
+    </div>
+    <div>
+        <div class="flex flex-col gap-2">
+            <div class="card w-96 bg-base-100 rounded-lg">
+              <div class="card-body">
+                <div class="badge badge-primary">Transaction ID: @_viewTransactionDisplayDetails.TransactionId</div>
+                <div class="badge badge-primary">Municipality: @_viewTransactionDisplayDetails.MunicipalityName</div>
+                <div class="badge badge-primary">Barangay: @_viewTransactionDisplayDetails.BarangayName</div>
+              </div>
+            </div>
+            <button class="btn bg-info text-white">PRINT</button>
+        </div>
+    </div>
 </div>
 
 @code {
@@ -27,12 +44,42 @@
     private TransactionDetail _viewTransactionDisplayDetails;
     private TransactionDocument _viewTransactionDocumentDetails;
 
-    private List<TransactionItem> _transactionItems;
+    private List<TransactionItem> _ListofTransactionItems;
 
+    private List<TransactionItem?> _transactionItem;
+    
+    private List<string> editEvents = new();
+    private bool dense = false;
+    private bool hover = true;
+    private bool ronly = false;
+    private bool canCancelEdit = false;
+    private bool blockSwitch = false;
+    private string searchString = "";
+    private TransactionItem selectedItem1 = null;
+    private TransactionItem elementBeforeEdit;
+    private HashSet<TransactionItem> selectedItems1 = new HashSet<TransactionItem>();
+    private TableApplyButtonPosition applyButtonPosition = TableApplyButtonPosition.End;
+    private TableEditButtonPosition editButtonPosition = TableEditButtonPosition.End;
+    private TableEditTrigger editTrigger = TableEditTrigger.RowClick;
+    private IEnumerable<TransactionItem> Elements = new List<TransactionItem>();
+    private int transactionId;
+    
     protected override void OnInitialized()
     {
         UnitOfWork = new UnitOfWork(Context);
         _viewTransactionDisplayDetails = UnitOfWork.TransactionDetails.GetById(CurrentTransactionId);
         _viewTransactionDocumentDetails = UnitOfWork.TransactionDocuments.GetById(CurrentTransactionId);
+        _transactionItem = UnitOfWork.TransactionItems.Find(x => x.DocumentId == CurrentTransactionId).ToList();
+    }
+    
+    private void ClearEventLog()
+    {
+        editEvents.Clear();
+    }
+
+    private void AddEditionEvent(string message)
+    {
+        editEvents.Add(message);
+        StateHasChanged();
     }
 }

@@ -1,6 +1,150 @@
-﻿@page "/ManageEdit"
-<h3>ManageEdit</h3>
+﻿@page "/manage/edit/{transactionId:int}"
+@using Aneta.Models
+@using Aneta.Data
+@inject ISnackbar Snackbar
+
+<div class="flex flex-row w-full">
+    <MudTable Class="w-full" Items="@_currentTransaction" Dense="@dense" Hover="@hover" ReadOnly="@ronly" CanCancelEdit="@canCancelEdit" Filter="new Func<TransactionItem,bool>(FilterFunc)"
+              @bind-SelectedItem="selectedItem1" SortLabel="Sort By" CommitEditTooltip="Commit Edit"
+              OnCommitEditClick="@(() => Snackbar.Add("Commit Edit Handler Invoked"))" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues"
+              RowEditCommit="ItemHasBeenCommitted" IsEditRowSwitchingBlocked="@blockSwitch" ApplyButtonPosition="@applyButtonPosition" EditButtonPosition="@editButtonPosition" EditTrigger="@editTrigger">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Periodic Elements</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <ColGroup>
+            @if (applyButtonPosition.DisplayApplyButtonAtStart() || (editButtonPosition.DisplayEditButtonAtStart() && editTrigger == TableEditTrigger.EditButton))
+            {
+                <col style="width:50px;" />
+            }
+            <col style="width:50px;" />
+            <col style="width:80px;" />
+            <col style="width:50%;" />
+            <col />
+            <col />
+            @if (applyButtonPosition.DisplayApplyButtonAtEnd() || (editButtonPosition.DisplayEditButtonAtEnd() && editTrigger == TableEditTrigger.EditButton))
+            {
+                <col style="width:50px;" />
+            }
+        </ColGroup>
+        <HeaderContent>
+            <MudTh><MudTableSortLabel SortBy="new Func<TransactionItem, object>(x=>x.UnitName)">Unit Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<TransactionItem, object>(x=>x.Particulars)">Particulars</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<TransactionItem, object>(x=>x.Quantity)">Quantity</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<TransactionItem, object>(x=>x.Amount)">Mass</MudTableSortLabel></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
+            <MudTd DataLabel="Particulars">@context.Particulars</MudTd>
+            <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
+            <MudTd DataLabel="Amount">@context.Amount</MudTd>
+        </RowTemplate>
+        <RowEditingTemplate>
+            <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
+            <MudTd DataLabel="Particulars">
+                <MudTextField @bind-Value="@context.Particulars" Required />
+            </MudTd>
+            <MudTd DataLabel="Quantity">
+                <MudNumericField @bind-Value="@context.Quantity" Required Min="1" />
+            </MudTd>
+            <MudTd DataLabel="Amount">
+                <MudTextField @bind-Value="@context.Amount" Required />
+            </MudTd>
+        </RowEditingTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+        <EditButtonContent Context="button">
+            <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" Class="pa-0" OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled" />
+        </EditButtonContent>
+    </MudTable>
+</div>
 
 @code {
+    private IEnumerable<TransactionItem> Elements = new List<TransactionItem>();
+    private List<string> editEvents = new();
+    private bool dense = false;
+    private bool hover = true;
+    private bool ronly = false;
+    private bool canCancelEdit = false;
+    private bool blockSwitch = false;
+    private string searchString = "";
+    private TransactionItem selectedItem1 = null;
+    private TransactionItem elementBeforeEdit;
+    private HashSet<TransactionItem> selectedItems1 = new HashSet<TransactionItem>();
+    private TableApplyButtonPosition applyButtonPosition = TableApplyButtonPosition.End;
+    private TableEditButtonPosition editButtonPosition = TableEditButtonPosition.End;
+    private TableEditTrigger editTrigger = TableEditTrigger.RowClick;
     
+
+    private void ClearEventLog()
+    {
+        editEvents.Clear();
+    }
+
+    private void AddEditionEvent(string message)
+    {
+        editEvents.Add(message);
+        StateHasChanged();
+    }
+
+    private void BackupItem(object element)
+    {
+        elementBeforeEdit = new()
+            {
+                UnitName = ((TransactionItem)element).UnitName,
+                Particulars = ((TransactionItem)element).Particulars,
+                Price = ((TransactionItem)element).Price,
+                Quantity = ((TransactionItem)element).Quantity,
+                Amount = ((TransactionItem)element).Amount
+            };
+        AddEditionEvent($"RowEditPreview event: made a backup of Transaction {((TransactionItem)element).DocumentId}");
+    }
+
+    private void ResetItemToOriginalValues(object element)
+    {
+        ((TransactionItem)element).UnitName = elementBeforeEdit.UnitName;
+        ((TransactionItem)element).Particulars = elementBeforeEdit.Particulars;
+        ((TransactionItem)element).Price = elementBeforeEdit.Price;
+        ((TransactionItem)element).Quantity = elementBeforeEdit.Quantity;
+        ((TransactionItem)element).Amount = elementBeforeEdit.Amount;
+        AddEditionEvent($"RowEditPreview event: made a backup of Transaction {((TransactionItem)element).DocumentId}");
+    }
+
+    private void ItemHasBeenCommitted(object element)
+    {
+        AddEditionEvent($"RowEditCommit event: Changes to Transaction {((TransactionItem)element).DocumentId} committed");
+    }
+    
+    private bool FilterFunc(TransactionItem individualItem)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (individualItem.UnitName != null && individualItem.UnitName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (individualItem.Particulars != null && individualItem.Particulars.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if ($"{individualItem.DocumentId} {individualItem.Price} {individualItem.Quantity} {individualItem.Amount}".Contains(searchString))
+            return true;
+        return false;
+    }
+}
+
+
+@code {
+    [Parameter]
+    public int? transactionId { get; set; }
+    [Inject]
+    private DsaClusterContext? Context { get; set; }
+    [Inject]
+    private UnitOfWork? UnitOfWork { get; set; }
+    
+    IEnumerable<TransactionItem>? _currentTransaction;
+
+    protected override void OnInitialized()
+    {
+        UnitOfWork = new UnitOfWork(Context);
+        _currentTransaction = UnitOfWork.TransactionItems.Find(x => x.DocumentId == transactionId);
+    }
 }

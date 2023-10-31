@@ -19,7 +19,7 @@ public class SqlRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         return _dbSet.Find(id);
     }
-
+    
     public IEnumerable<TEntity> GetAll()
     {
         return _dbSet.ToList();
