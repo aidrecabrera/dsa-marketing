@@ -1,6 +1,7 @@
 ﻿@page "/create"
 @using Aneta.Models
 @using Aneta.Data
+@using System.Linq.Expressions
 @inject NavigationManager NavigationManager
 
 <div class="text-black w-full">
@@ -288,7 +289,6 @@
             BarangayName = SelectedBarangay,
         };
     }
-
     private TransactionDocument CreateNewDocument()
     {
         return new TransactionDocument
@@ -298,6 +298,8 @@
         };
     }
 
+    private List<TransactionDetail>? _recentTransaction;
+    private int? _recentTransactionId;
     private void SaveTransaction()
     {
         _newTransaction = CreateNewTransaction();
@@ -312,25 +314,19 @@
         }
         UnitOfWork?.TransactionDetails.Add(_newTransaction);
         UnitOfWork?.TransactionDocuments.Add(_newTransactionDocument);
+        _isSaved = true;
+        _transactionInstantiated = true;
         UnitOfWork?.Complete();
-
-        if (_newTransaction is { MunicipalityName: not null,BarangayName: not null })
-        {
-            _isSaved = true;
-            _transactionInstantiated = true;
-        }
-        if (_transactionInstantiated)
-        {
-            NavigateBackToOriginalPage(_newTransaction.TransactionId);
-        }
+        var recentTransactionDetail = UnitOfWork?.TransactionDetails.GetAll().ToList().LastOrDefault();
+        _recentTransactionId = recentTransactionDetail?.TransactionId;
+        NavigateBackToOriginalPage(_recentTransactionId);
     }
-
 }
 
 @code {
-    private void NavigateBackToOriginalPage(int transactionId)
+    private void NavigateBackToOriginalPage(int? transactionId)
     {
-        NavigationManager?.NavigateTo($"/view/{transactionId}");
+        NavigationManager?.NavigateTo($"/manage/edit/{transactionId}");
     }
     private void NavigateBackToHomePage()
     {
