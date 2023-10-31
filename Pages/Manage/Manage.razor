@@ -1,6 +1,7 @@
 ﻿@page "/manage"
 @using Aneta.Models
 @using Aneta.Data
+@using Microsoft.IdentityModel.Tokens
 @inject NavigationManager Navigation
 @inject IDialogService DialogService
 @inject NavigationManager NavigationManager
@@ -12,56 +13,77 @@
         </h1>
     </div>
     <div class="grid grid-cols-4 rounded-md gap-4 w-full">
-        @foreach (var transaction in _transactionsList!)
+        @if (_transactionsList.IsNullOrEmpty())
         {
-            <dialog id="deleteModal" class="absolute m-auto top-0 bottom-0 left-0 right-0 inset-0 rounded-lg">
-                <div class="rounded-sm p-10 bg-green-50">
-                    <div>
-                        <h3 class="font-bold text-lg">WARNING!</h3>
-                        <p class="py-4">Are you sure you want to delete Transaction: @transaction.TransactionId?</p>
-                        <div class="modal-action">
-                            <form method="dialog">
-                                <button class="btn bg-red-800 hover:bg-red-600 text-white" @onclick="() => DeleteTransaction(transaction.TransactionId)">Delete</button>
-                            </form>
-                            <form method="dialog">
-                                <button class="btn btn-ghost bg-base-100 hover:bg-base-200">close</button>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </dialog>
-
-            <div class="card rounded-md w-full h-52 bg-base-100 grow">
-                <div class="card-body justify-between">
-                    <h2 class="card-title">
-                        <div class="badge badge-primary inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">#@transaction.TransactionId</div>
-                    </h2>
-                    <div>
-                        <p>@transaction.PunongBarangayName</p>
-                        <p>@transaction.BarangayTreasurerName</p>
-                    </div>
-                    <div class="card-actions justify-start">
-                        <div class="badge badge-outline bg-info text-base-100 p-3">@transaction.MunicipalityName</div>
-                        <div class="badge badge-outline bg-info text-base-100 p-3">@transaction.BarangayName</div>
-                    </div>
-                    <div class="card-actions justify-start pt-2 ">
-                        <div class="join">
-                            <button class="btn-sm join-item text-white bg-green-600 hover:bg-green-600 font-medium px-4" @onclick="() => NavigateEdit(transaction.DocumentId)">Edit</button>
-                            <button class="btn-sm join-item text-white bg-red-600 hover:bg-red-600 font-medium" @onclick="() => DeleteTransaction(transaction.TransactionId)">Delete</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="card rounded-md w-full h-52 bg-transparent bg-base-100 grow justify-center">
+                <button class="btn hover:bg-blue-600 bg-info text-white h-full" @onclick="NavigateEdit">
+                    <span class="material-symbols-rounded">
+                    add_circle
+                    </span> 
+                    New Transaction
+                </button>
             </div>
+        }
+        else
+        {
+            @foreach (var transaction in _transactionsList!)
+            {
+                <dialog id="deleteModal" class="absolute m-auto top-0 bottom-0 left-0 right-0 inset-0 rounded-lg">
+                    <div class="rounded-sm p-10 bg-green-50">
+                        <div>
+                            <h3 class="font-bold text-lg">WARNING!</h3>
+                            <p class="py-4">Are you sure you want to delete Transaction: @transaction.TransactionId?</p>
+                            <div class="modal-action">
+                                <form method="dialog">
+                                    <button class="btn bg-red-800 hover:bg-red-600 text-white" @onclick="() => DeleteTransaction(transaction.TransactionId)">Delete</button>
+                                </form>
+                                <form method="dialog">
+                                    <button class="btn btn-ghost bg-base-100 hover:bg-base-200">close</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </dialog>
+
+                <div class="card rounded-md w-full h-52 bg-base-100 grow">
+                    <div class="card-body justify-between">
+                        <h2 class="card-title">
+                            <div class="badge badge-primary inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">#@transaction.TransactionId</div>
+                        </h2>
+                        <div>
+                            <p>@transaction.PunongBarangayName</p>
+                            <p>@transaction.BarangayTreasurerName</p>
+                        </div>
+                        <div class="card-actions justify-start">
+                            <div class="badge badge-outline bg-info text-base-100 p-3">@transaction.MunicipalityName</div>
+                            <div class="badge badge-outline bg-info text-base-100 p-3">@transaction.BarangayName</div>
+                        </div>
+                        <div class="card-actions justify-start pt-2 ">
+                            <div class="join">
+                                <button class="btn-sm join-item text-white bg-green-600 hover:bg-green-600 font-medium px-4" @onclick="() => NavigateEdit(transaction.DocumentId)">Edit</button>
+                                <button class="btn-sm join-item text-white bg-red-600 hover:bg-red-600 font-medium" @onclick="() => DeleteTransaction(transaction.TransactionId)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         }
     </div>
 </div>
 
 @code {
+
     private void NavigateEdit(int transactionId)
     {
         Navigation.NavigateTo($"/manage/edit/{transactionId}");
     }
+
+    private void NavigateEdit()
+    {
+        Navigation.NavigateTo($"/create");
+    }
+
     [Inject]
     DsaClusterContext? Context { get; set; }
 
@@ -78,7 +100,8 @@
 
     private void DeleteTransaction(int transactionId)
     {
-        var parameters = new DialogParameters<ManageDelete> {{ x => x._transactionId, transactionId }};
+        var parameters = new DialogParameters<ManageDelete> { { x => x._transactionId, transactionId } };
         DialogService.Show<ManageDelete>("Delete", parameters);
     }
+
 }
