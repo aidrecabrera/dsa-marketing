@@ -2,61 +2,87 @@
 @using Aneta.Models
 @using Aneta.Data
 @inject ISnackbar Snackbar
+@inject IDialogService DialogService
 
-<div class="flex flex-row w-full">
-    <MudTable Class="w-full" Items="@_currentTransaction" Dense="@dense" Hover="@hover" ReadOnly="@ronly" CanCancelEdit="@canCancelEdit" Filter="new Func<TransactionItem,bool>(FilterFunc)"
+<div class="flex flex-row w-full gap-2">
+    <MudPaper Class="flex flex-col w-1/3 h-full">
+    </MudPaper>
+    <MudTable MultiSelection="true" @bind-SelectedItems="multiSelectedItems" Class="w-2/3 h-full p-4" Items="@_currentTransaction" Dense="@dense" Hover="@hover" ReadOnly="@ronly" CanCancelEdit="@canCancelEdit" Filter="new Func<TransactionItem, bool>(FilterFunc)"
               @bind-SelectedItem="selectedItem1" SortLabel="Sort By" CommitEditTooltip="Commit Edit"
-              OnCommitEditClick="@(() => Snackbar.Add("Commit Edit Handler Invoked"))" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues"
+              OnCommitEditClick="@(() => Snackbar.Add("Item Information Edited", Severity.Success))" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues"
               RowEditCommit="ItemHasBeenCommitted" IsEditRowSwitchingBlocked="@blockSwitch" ApplyButtonPosition="@applyButtonPosition" EditButtonPosition="@editButtonPosition" EditTrigger="@editTrigger">
         <ToolBarContent>
-            <MudText Typo="Typo.h6">Periodic Elements</MudText>
-            <MudSpacer />
-            <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            <MudText Typo="Typo.h6">Transaction Items</MudText>
+            <MudSpacer/>
+            <MudSpacer/>
+            <MudSpacer/>
+            <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 w-1/12"></MudTextField>
+            <div class="pl-2 items-end">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(AddNewItem)">Add</MudButton>
+            </div>
+            <div class="pl-2 items-end">
+                <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(DeleteNewItem)">Delete</MudButton>
+            </div>
         </ToolBarContent>
         <ColGroup>
             @if (applyButtonPosition.DisplayApplyButtonAtStart() || (editButtonPosition.DisplayEditButtonAtStart() && editTrigger == TableEditTrigger.EditButton))
             {
-                <col style="width:50px;" />
+                <col style="width:5px;"/>
             }
-            <col style="width:50px;" />
-            <col style="width:80px;" />
-            <col style="width:50%;" />
-            <col />
-            <col />
+            <col style="width:5%;"/>
+            <col style="width:10%;"/>
+            <col style="width:15%;"/>
+            <col style="width:40%;"/>
+            <col/>
             @if (applyButtonPosition.DisplayApplyButtonAtEnd() || (editButtonPosition.DisplayEditButtonAtEnd() && editTrigger == TableEditTrigger.EditButton))
             {
-                <col style="width:50px;" />
+                <col style="width:10%;"/>
             }
         </ColGroup>
         <HeaderContent>
-            <MudTh><MudTableSortLabel SortBy="new Func<TransactionItem, object>(x=>x.UnitName)">Unit Name</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<TransactionItem, object>(x=>x.Particulars)">Particulars</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<TransactionItem, object>(x=>x.Quantity)">Quantity</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<TransactionItem, object>(x=>x.Amount)">Mass</MudTableSortLabel></MudTh>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.DocumentId)">ID</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.UnitName)">Unit Name</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.Particulars)">Particulars</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.Quantity)">Quantity</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<TransactionItem, object>(x => x.Amount)">Amount</MudTableSortLabel>
+            </MudTh>
         </HeaderContent>
         <RowTemplate>
+            <MudTd DataLabel="Item ID">@context.ItemId</MudTd>
             <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
             <MudTd DataLabel="Particulars">@context.Particulars</MudTd>
             <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
             <MudTd DataLabel="Amount">@context.Amount</MudTd>
         </RowTemplate>
         <RowEditingTemplate>
-            <MudTd DataLabel="Unit Name">@context.UnitName</MudTd>
+            <MudTd DataLabel="ID">@context.ItemId</MudTd>
+            <MudTd DataLabel="Unit Name">
+                <MudTextField @bind-Value="@context.UnitName" Required/>
+            </MudTd>
             <MudTd DataLabel="Particulars">
-                <MudTextField @bind-Value="@context.Particulars" Required />
+                <MudTextField @bind-Value="@context.Particulars" Required/>
             </MudTd>
             <MudTd DataLabel="Quantity">
-                <MudNumericField @bind-Value="@context.Quantity" Required Min="1" />
+                <MudNumericField @bind-Value="@context.Quantity" Required Min="1"/>
             </MudTd>
             <MudTd DataLabel="Amount">
-                <MudTextField @bind-Value="@context.Amount" Required />
+                <MudTextField @bind-Value="@context.Amount" Required/>
             </MudTd>
         </RowEditingTemplate>
         <PagerContent>
-            <MudTablePager />
+            <MudTablePager/>
         </PagerContent>
         <EditButtonContent Context="button">
-            <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" Class="pa-0" OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled" />
+            <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" Class="pa-0" OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled"/>
         </EditButtonContent>
     </MudTable>
 </div>
@@ -67,7 +93,7 @@
     private bool dense = false;
     private bool hover = true;
     private bool ronly = false;
-    private bool canCancelEdit = false;
+    private bool canCancelEdit = true;
     private bool blockSwitch = false;
     private string searchString = "";
     private TransactionItem selectedItem1 = null;
@@ -76,7 +102,42 @@
     private TableApplyButtonPosition applyButtonPosition = TableApplyButtonPosition.End;
     private TableEditButtonPosition editButtonPosition = TableEditButtonPosition.End;
     private TableEditTrigger editTrigger = TableEditTrigger.RowClick;
-    
+    private HashSet<TransactionItem> multiSelectedItems = new HashSet<TransactionItem>();
+
+    private void AddNewItem()
+    {
+        if (_currentTransaction != null)
+        {
+            var parameters = new DialogParameters<ManageAddDialog>{{ x => x.documentId, documentId }};
+            DialogService.Show<ManageAddDialog>("Add", parameters);
+        }
+        _currentTransaction = UnitOfWork?.TransactionItems.Find(x => x.DocumentId == transactionId);
+        StateHasChanged();
+    }
+
+    private void DeleteNewItem()
+    {
+        try
+        {
+            UnitOfWork?.TransactionItems.RemoveRange(multiSelectedItems);
+            UnitOfWork?.Complete();
+            StateHasChanged();
+            Snackbar.Clear();
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomEnd;
+            Snackbar.Add("Item/s Deleted", Severity.Error);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    private void UpdateDatabase(TransactionItem item)
+    {
+        UnitOfWork?.TransactionItems.Update(item);
+        UnitOfWork?.Complete();
+    }
 
     private void ClearEventLog()
     {
@@ -92,13 +153,13 @@
     private void BackupItem(object element)
     {
         elementBeforeEdit = new()
-            {
-                UnitName = ((TransactionItem)element).UnitName,
-                Particulars = ((TransactionItem)element).Particulars,
-                Price = ((TransactionItem)element).Price,
-                Quantity = ((TransactionItem)element).Quantity,
-                Amount = ((TransactionItem)element).Amount
-            };
+        {
+            UnitName = ((TransactionItem)element).UnitName,
+            Particulars = ((TransactionItem)element).Particulars,
+            Price = ((TransactionItem)element).Price,
+            Quantity = ((TransactionItem)element).Quantity,
+            Amount = ((TransactionItem)element).Amount
+        };
         AddEditionEvent($"RowEditPreview event: made a backup of Transaction {((TransactionItem)element).DocumentId}");
     }
 
@@ -114,9 +175,16 @@
 
     private void ItemHasBeenCommitted(object element)
     {
+        UpdateDatabase((TransactionItem)element);
+        AddEditionEvent($"RowEditCommit event: Changes to Transaction {((TransactionItem)element).DocumentId} committed");
+
+        _currentTransaction = UnitOfWork?.TransactionItems.Find(x => x.DocumentId == transactionId);
+
+        ClearEventLog();
+        selectedItem1 = null;
         AddEditionEvent($"RowEditCommit event: Changes to Transaction {((TransactionItem)element).DocumentId} committed");
     }
-    
+
     private bool FilterFunc(TransactionItem individualItem)
     {
         if (string.IsNullOrWhiteSpace(searchString))
@@ -129,22 +197,29 @@
             return true;
         return false;
     }
+
 }
 
 
 @code {
+
     [Parameter]
     public int? transactionId { get; set; }
+    public int? documentId { get; set; }
+    
     [Inject]
     private DsaClusterContext? Context { get; set; }
+
     [Inject]
     private UnitOfWork? UnitOfWork { get; set; }
-    
+
     IEnumerable<TransactionItem>? _currentTransaction;
 
     protected override void OnInitialized()
     {
         UnitOfWork = new UnitOfWork(Context);
         _currentTransaction = UnitOfWork.TransactionItems.Find(x => x.DocumentId == transactionId);
+        documentId = _currentTransaction.FirstOrDefault()?.DocumentId;
     }
+
 }

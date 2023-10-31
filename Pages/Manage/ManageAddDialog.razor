@@ -1,0 +1,66 @@
+﻿@using Aneta.Models
+@using Aneta.Data
+@inject ISnackbar Snackbar
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.DeleteForever" Class="mr-3 mb-n1"/>
+            @documentId
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField Label="Unit" @bind-Value="_unitName" Variant="Variant.Text" Required="true"></MudTextField>
+        <MudTextField Label="Particulars" @bind-Value="_particulars" Variant="Variant.Text" Required="true"></MudTextField>
+        <MudTextField Label="Quantity" @bind-Value="_quantity" Variant="Variant.Text" Required="true"></MudTextField>
+        <MudTextField Label="Cost" @bind-Value="_cost" Variant="Variant.Text" Required="true"></MudTextField>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Error" OnClick="AddTransactionItem">Add Item</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    public MudDialogInstance? MudDialog { get; set; }
+    [Inject]
+    public DsaClusterContext Context { get; set; }
+    [Inject]
+    public UnitOfWork UnitOfWork { get; set; }
+    [Parameter]
+    public int? documentId { get; set; }
+    static string? _unitName = "";
+    static string? _particulars = "";
+    static int? _quantity = 0;
+    static int? _cost = 0;
+    
+    private void Cancel()
+    {
+        MudDialog?.Cancel();
+    }
+
+    private void AddTransactionItem()
+    {
+        TransactionItem _newTransactionItem = new TransactionItem
+        {
+            DocumentId = documentId,
+            UnitName = _unitName,
+            Particulars = _particulars,
+            Quantity = _quantity,
+            Cost = _cost,
+            Amount = _quantity * _cost
+        };
+        UnitOfWork = new UnitOfWork(Context);
+        UnitOfWork.TransactionItems.Add(_newTransactionItem);
+        UnitOfWork.Complete();
+        Snackbar.Clear();
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomEnd;
+        Snackbar.Add("Item Added", Severity.Success);
+        MudDialog?.Close(DialogResult.Ok(documentId));
+        _unitName = "";
+        _particulars = "";
+        _quantity = 0;
+        _cost = 0;
+    }
+}
