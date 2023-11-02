@@ -14,6 +14,7 @@
 @using System.Threading.Tasks;
 @using Microsoft.AspNetCore.Mvc.Formatters
 @using Microsoft.JSInterop
+@using Document = System.Reflection.Metadata.Document
 
 <div class="flex flex-col w-full h-full">
     <div>
@@ -192,9 +193,38 @@
     </div>
 </div>
 
+<script>
+async function downloadFileFromStream(fileName, contentStreamReference) {
+    const arrayBuffer = await contentStreamReference.arrayBuffer();
+
+    const blob = new Blob([arrayBuffer], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
+
+    const anchorElement = document.createElement('a');
+    anchorElement.href = url;
+
+    if (fileName) {
+        anchorElement.download = fileName;
+    }
+
+    anchorElement.target = "_blank";
+    document.body.appendChild(anchorElement);
+    anchorElement.innerText = "Click to download!";
+
+    anchorElement.click();
+    document.body.removeChild(anchorElement);
+    anchorElement.remove();
+
+    URL.revokeObjectURL(url);
+}
+</script>
+
 @code {
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; }
+    private object? _purchaseOrder;
     private readonly PurchaseOrderTemplate _purchaseOrderTemplate = new PurchaseOrderTemplate();
-    private void _printPurchaseOrder()
+    private async Task _printPurchaseOrder()
     {
         TransactionInfo transactionInfo = new TransactionInfo
         {
@@ -214,7 +244,14 @@
             TotalAmount = _currentTransactionItems?.Sum(x => x.Price)
         };
         var document = _purchaseOrderTemplate.DsaTemplate(transactionInfo, _currentTransactionItems!);
-        document.GeneratePdf("Hello PDF");
+        var file = document.GeneratePdf();
+        string fileName = $"{_currentTransactionDetail.TransactionId}";
+        using var streamRef = new DotNetStreamReference(new MemoryStream(file));
+        await JSRuntime.InvokeVoidAsync(
+            "downloadFileFromStream",
+            $"Purchase Order - {fileName}.pdf",
+            streamRef
+            ).ConfigureAwait(false);
     }
 }
 
