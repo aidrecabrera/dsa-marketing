@@ -1,8 +1,19 @@
 ﻿@page "/manage/edit/{transactionId:int}"
 @using Aneta.Models
 @using Aneta.Data
+@using Aneta.PdfServices.Immutables
+@using Aneta.PdfServices.Templates
+@using QuestPDF.Fluent
+@inject IJSRuntime JsRuntime
 @inject ISnackbar Snackbar
 @inject IDialogService DialogService
+@using Microsoft.AspNetCore.Components;
+@using System;
+@using System.IO;
+@using System.Net.Http.Headers
+@using System.Threading.Tasks;
+@using Microsoft.AspNetCore.Mvc.Formatters
+@using Microsoft.JSInterop
 
 <div class="flex flex-col w-full h-full">
     <div>
@@ -22,8 +33,78 @@
                     <MudTextField T="string" Label="Barangay Treasurer" HelperTextOnFocus="true" Variant="Variant.Outlined" @bind-Value="_currentTransactionDetail.BarangayName"/>
                 </MudCardContent>
             </MudCard>
+            <MudPaper Elevation="0" Outlined="true" Class="w-full">
+                <MudList>
+                    <MudListItem>
+                        <div class="flex flex-row justify-between items-center">
+                            <h1>All Documents</h1>
+                            <div>
+                                <button class="btn btn-sm text-white bg-info hover:bg-info w-20">Print</button>
+                            </div>
+                        </div>
+                    </MudListItem>
+                    <MudDivider/>
+                    <MudListItem>
+                        <div class="flex flex-row justify-between items-center">
+                            <h1>Purchase Order</h1>
+                            <button class="btn btn-sm text-white bg-info hover:bg-info w-20" @onclick="() => _printPurchaseOrder()">Print</button>
+                        
+                        </div>
+                    </MudListItem>
+                    <MudDivider/>
+                    <MudListItem>
+                        <div class="flex flex-row justify-between items-center">
+                            <h1>Inspection and Acceptance Report</h1>
+                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20">Print</button>
+                        </div>
+                    </MudListItem>
+                    <MudDivider/>
+                    <MudListItem>
+                        <div class="flex flex-row justify-between items-center">
+                            <h1>Abstract of Quotation</h1>
+                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20">Print</button>
+                        </div>
+                    </MudListItem>
+                    <MudDivider/>
+                    <MudListItem>
+                        <div class="flex flex-row justify-between items-center">
+                            <h1>Purchase Request</h1>
+                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20">Print</button>
+                        </div>
+                    </MudListItem>
+                    <MudDivider/>
+                    <MudListItem>
+                        <div class="flex flex-row justify-between items-center">
+                            <h1>Acknowledgment Receipt</h1>
+                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20">Print</button>
+                        </div>
+                    </MudListItem>
+                    <MudDivider/>
+                    <MudListItem>
+                        <div class="flex flex-row justify-between items-center">
+                            <h1>Disbursement Voucher</h1>
+                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20">Print</button>
+                        </div>
+                    </MudListItem>
+                    <MudDivider/>
+                    <MudListItem>
+                        <div class="flex flex-row justify-between items-center">
+                            <h1>Canvas Form</h1>
+                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20">Print</button>
+                        </div>
+                    </MudListItem>
+                    <MudDivider/>
+                    <MudListItem>
+                        <div class="flex flex-row justify-between items-center">
+                            <h1>Requisition and Issue Slip</h1>
+                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20">Print</button>
+                        </div>
+                    </MudListItem>
+                    <MudDivider/>
+                </MudList>
+            </MudPaper>
         </div>
-        <MudTable Elevation="0" MultiSelection="true" @bind-SelectedItems="multiSelectedItems" Class="w-2/3 h-full p-4" Items="@_currentTransactionItems" Dense="@dense" Hover="@hover" ReadOnly="@ronly" CanCancelEdit="@canCancelEdit" Filter="new Func<TransactionItem, bool>(FilterFunc)"
+        <MudTable Elevation="0" MultiSelection="true" @bind-SelectedItems="multiSelectedItems" Class="w-2/3 h-[85vh] p-4" Items="@_currentTransactionItems" Dense="@dense" Hover="@hover" ReadOnly="@ronly" CanCancelEdit="@canCancelEdit" Filter="new Func<TransactionItem, bool>(FilterFunc)"
                   @bind-SelectedItem="selectedItem1" SortLabel="Sort By" CommitEditTooltip="Commit Edit"
                   OnCommitEditClick="@(() => EditRow())" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues"
                   RowEditCommit="ItemHasBeenCommitted" IsEditRowSwitchingBlocked="@blockSwitch" ApplyButtonPosition="@applyButtonPosition" EditButtonPosition="@editButtonPosition" EditTrigger="@editTrigger">
@@ -110,6 +191,32 @@
         </MudTable>
     </div>
 </div>
+
+@code {
+    private readonly PurchaseOrderTemplate _purchaseOrderTemplate = new PurchaseOrderTemplate();
+    private void _printPurchaseOrder()
+    {
+        TransactionInfo transactionInfo = new TransactionInfo
+        {
+            Barangay = _currentTransactionDetail.BarangayName,
+            Municipality = _currentTransactionDetail.MunicipalityName,
+            PunongBarangay = _currentTransactionDocument.PunongBarangayName,
+            BarangayTreasurer = _currentTransactionDocument.BarangayTreasurerName,
+            Supplier = "DSA Marketing",
+            Address = "Poblacion, San Jose, Occidental Mindoro",
+            DeliveryDate = DateTime.Now.ToString(),
+            DeliveryPlace = "Poblacion, San Jose, Occidental Mindoro",
+            Province = "Davao del Sur",
+            Po = _currentTransactionDocument.DocumentId.ToString(),
+            Tin = "000-000-000-000",
+            TermDelivery = "30 Days",
+            TermPayment = "n/6 n/12",
+            TotalAmount = _currentTransactionItems?.Sum(x => x.Price)
+        };
+        var document = _purchaseOrderTemplate.DsaTemplate(transactionInfo, _currentTransactionItems!);
+        document.GeneratePdf("Hello PDF");
+    }
+}
 
 @code {
     private IEnumerable<TransactionItem> Elements = new List<TransactionItem>();
@@ -231,25 +338,18 @@
 
 }
 
-
 @code {
-
     [Parameter]
     public int? transactionId { get; set; }
-
     public int? documentId { get; set; }
-
     [Inject]
     private DsaClusterContext? Context { get; set; }
-
     [Inject]
     private UnitOfWork? UnitOfWork { get; set; }
-
     private List<BreadcrumbItem> _items;
     private TransactionDetail _currentTransactionDetail;
     private TransactionDocument _currentTransactionDocument;
     IEnumerable<TransactionItem>? _currentTransactionItems;
-
     protected override void OnInitialized()
     {
         _items = new List<BreadcrumbItem>
@@ -263,5 +363,4 @@
         _currentTransactionItems = UnitOfWork.TransactionItems.Find(x => x.DocumentId == transactionId);
         documentId = _currentTransactionItems.FirstOrDefault()?.DocumentId;
     }
-
 }

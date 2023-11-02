@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Nehif1KkrByXC+32USncetevjU7vJdtLtPifbe+i98WN3ul0uShQ3UzpFdpDlR/BEw+Qwevt/ASgldu4/x64Vw==",
+  "dgSpecHash": "jH8zE/4AjnqBLYbeHY91diNSvEaO6Mrqs7NeTdqH9feCAsucFRPjv9tMC3oBs1ACmf7yHGP4we6wZVMgHZqaIA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Svene\\.dev\\projects-production\\Aneta.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Svene\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Svene\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\Svene\\.nuget\\packages\\harfbuzzsharp\\2.6.1.9\\harfbuzzsharp.2.6.1.9.nupkg.sha512",
     "C:\\Users\\Svene\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Svene\\.nuget\\packages\\microsoft.aspnetcore.authorization\\7.0.5\\microsoft.aspnetcore.authorization.7.0.5.nupkg.sha512",
     "C:\\Users\\Svene\\.nuget\\packages\\microsoft.aspnetcore.components\\7.0.5\\microsoft.aspnetcore.components.7.0.5.nupkg.sha512",
@@ -51,6 +52,9 @@
     "C:\\Users\\Svene\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Svene\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\Svene\\.nuget\\packages\\mudblazor\\6.11.0\\mudblazor.6.11.0.nupkg.sha512",
+    "C:\\Users\\Svene\\.nuget\\packages\\questpdf\\2202.8.2\\questpdf.2202.8.2.nupkg.sha512",
+    "C:\\Users\\Svene\\.nuget\\packages\\skiasharp\\2.80.4\\skiasharp.2.80.4.nupkg.sha512",
+    "C:\\Users\\Svene\\.nuget\\packages\\skiasharp.harfbuzz\\2.80.4\\skiasharp.harfbuzz.2.80.4.nupkg.sha512",
     "C:\\Users\\Svene\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\Svene\\.nuget\\packages\\system.configuration.configurationmanager\\6.0.1\\system.configuration.configurationmanager.6.0.1.nupkg.sha512",
     "C:\\Users\\Svene\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",

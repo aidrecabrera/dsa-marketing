@@ -46,6 +46,40 @@
           }
         }
       },
+      "HarfBuzzSharp/2.6.1.9": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/HarfBuzzSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/HarfBuzzSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/osx/native/libHarfBuzzSharp.dylib": {
+            "assetType": "native",
+            "rid": "osx"
+          },
+          "runtimes/win-arm64/native/libHarfBuzzSharp.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-x64/native/libHarfBuzzSharp.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/libHarfBuzzSharp.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -797,6 +831,70 @@
           "buildMultiTargeting/MudBlazor.props": {}
         }
       },
+      "QuestPDF/2202.8.2": {
+        "type": "package",
+        "dependencies": {
+          "SkiaSharp": "2.80.4",
+          "SkiaSharp.HarfBuzz": "2.80.4"
+        },
+        "compile": {
+          "lib/net6.0/QuestPDF.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/QuestPDF.dll": {}
+        }
+      },
+      "SkiaSharp/2.80.4": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/SkiaSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/SkiaSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/osx/native/libSkiaSharp.dylib": {
+            "assetType": "native",
+            "rid": "osx"
+          },
+          "runtimes/win-arm64/native/libSkiaSharp.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-x64/native/libSkiaSharp.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/libSkiaSharp.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
+      "SkiaSharp.HarfBuzz/2.80.4": {
+        "type": "package",
+        "dependencies": {
+          "HarfBuzzSharp": "2.6.1.9",
+          "SkiaSharp": "2.80.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/SkiaSharp.HarfBuzz.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/SkiaSharp.HarfBuzz.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.CodeDom/4.4.0": {
         "type": "package",
         "compile": {
@@ -1268,6 +1366,72 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
+      ]
+    },
+    "HarfBuzzSharp/2.6.1.9": {
+      "sha512": "yx6dCVHTMn25r7z5oBfJxiXN/MUhk25rw0YZxv1g3cwXk3qtvGD/oJP5t9undelpjVXw+IJA4bd1AquOLXmLdw==",
+      "type": "package",
+      "path": "harfbuzzsharp/2.6.1.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/monoandroid1.0/HarfBuzzSharp.targets",
+        "build/monoandroid1.0/arm/libHarfBuzzSharp.so",
+        "build/monoandroid1.0/arm64/libHarfBuzzSharp.so",
+        "build/monoandroid1.0/x64/libHarfBuzzSharp.so",
+        "build/monoandroid1.0/x86/libHarfBuzzSharp.so",
+        "build/net462/HarfBuzzSharp.targets",
+        "build/tizen40/HarfBuzzSharp.targets",
+        "build/tizen40/arm/libHarfBuzzSharp.so",
+        "build/tizen40/x86/libHarfBuzzSharp.so",
+        "build/xamarinios1.0/HarfBuzzSharp.targets",
+        "build/xamarinios1.0/libHarfBuzzSharp.a",
+        "build/xamarinmac2.0/HarfBuzzSharp.targets",
+        "build/xamarintvos1.0/HarfBuzzSharp.targets",
+        "build/xamarintvos1.0/libHarfBuzzSharp.a",
+        "build/xamarinwatchos1.0/HarfBuzzSharp.targets",
+        "build/xamarinwatchos1.0/libHarfBuzzSharp.a",
+        "buildTransitive/monoandroid1.0/HarfBuzzSharp.targets",
+        "buildTransitive/net462/HarfBuzzSharp.targets",
+        "buildTransitive/tizen40/HarfBuzzSharp.targets",
+        "buildTransitive/xamarinios1.0/HarfBuzzSharp.targets",
+        "buildTransitive/xamarinmac2.0/HarfBuzzSharp.targets",
+        "buildTransitive/xamarintvos1.0/HarfBuzzSharp.targets",
+        "buildTransitive/xamarinwatchos1.0/HarfBuzzSharp.targets",
+        "harfbuzzsharp.2.6.1.9.nupkg.sha512",
+        "harfbuzzsharp.nuspec",
+        "lib/monoandroid1.0/HarfBuzzSharp.dll",
+        "lib/monoandroid1.0/HarfBuzzSharp.xml",
+        "lib/net462/HarfBuzzSharp.dll",
+        "lib/net462/HarfBuzzSharp.xml",
+        "lib/netstandard1.3/HarfBuzzSharp.dll",
+        "lib/netstandard1.3/HarfBuzzSharp.xml",
+        "lib/netstandard2.0/HarfBuzzSharp.dll",
+        "lib/netstandard2.0/HarfBuzzSharp.xml",
+        "lib/tizen40/HarfBuzzSharp.dll",
+        "lib/tizen40/HarfBuzzSharp.xml",
+        "lib/uap10.0.10240/HarfBuzzSharp.dll",
+        "lib/uap10.0.10240/HarfBuzzSharp.xml",
+        "lib/uap10.0.16299/HarfBuzzSharp.dll",
+        "lib/uap10.0.16299/HarfBuzzSharp.xml",
+        "lib/xamarinios1.0/HarfBuzzSharp.dll",
+        "lib/xamarinios1.0/HarfBuzzSharp.xml",
+        "lib/xamarinmac2.0/HarfBuzzSharp.dll",
+        "lib/xamarinmac2.0/HarfBuzzSharp.xml",
+        "lib/xamarintvos1.0/HarfBuzzSharp.dll",
+        "lib/xamarintvos1.0/HarfBuzzSharp.xml",
+        "lib/xamarinwatchos1.0/HarfBuzzSharp.dll",
+        "lib/xamarinwatchos1.0/HarfBuzzSharp.xml",
+        "runtimes/osx/native/libHarfBuzzSharp.dylib",
+        "runtimes/win-arm64/native/libHarfBuzzSharp.dll",
+        "runtimes/win-x64/native/libHarfBuzzSharp.dll",
+        "runtimes/win-x86/native/libHarfBuzzSharp.dll",
+        "runtimes/win10-arm/nativeassets/uap10.0/libHarfBuzzSharp.dll",
+        "runtimes/win10-arm64/nativeassets/uap10.0/libHarfBuzzSharp.dll",
+        "runtimes/win10-x64/nativeassets/uap10.0/libHarfBuzzSharp.dll",
+        "runtimes/win10-x86/nativeassets/uap10.0/libHarfBuzzSharp.dll"
       ]
     },
     "Humanizer.Core/2.14.1": {
@@ -2335,6 +2499,129 @@
         "staticwebassets/MudBlazor.min.js"
       ]
     },
+    "QuestPDF/2202.8.2": {
+      "sha512": "eBPv+ofiy6mxjW4JYTJLHW+Uo6hSVXQmCvQUSXv4yfiIT3zljx/0oGJvE2o3QvP1j5Q+JH9JCSCUeJlNLAaW3w==",
+      "type": "package",
+      "path": "questpdf/2202.8.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Logo.png",
+        "lib/net462/QuestPDF.dll",
+        "lib/net6.0/QuestPDF.dll",
+        "lib/netcoreapp2.0/QuestPDF.dll",
+        "lib/netcoreapp3.0/QuestPDF.dll",
+        "lib/netstandard2.0/QuestPDF.dll",
+        "questpdf.2202.8.2.nupkg.sha512",
+        "questpdf.nuspec"
+      ]
+    },
+    "SkiaSharp/2.80.4": {
+      "sha512": "lVzAGA969C2Taxpf1wg17PODiYDTk2hnMWBu1bPrjftNxuO+hCPIFgrieMBI6NpiHuF1ahCIMlS+CTw0NwjVnA==",
+      "type": "package",
+      "path": "skiasharp/2.80.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/monoandroid1.0/SkiaSharp.targets",
+        "build/monoandroid1.0/arm/libSkiaSharp.so",
+        "build/monoandroid1.0/arm64/libSkiaSharp.so",
+        "build/monoandroid1.0/x64/libSkiaSharp.so",
+        "build/monoandroid1.0/x86/libSkiaSharp.so",
+        "build/net462/SkiaSharp.targets",
+        "build/tizen40/SkiaSharp.targets",
+        "build/tizen40/arm/libSkiaSharp.so",
+        "build/tizen40/x86/libSkiaSharp.so",
+        "build/xamarinios1.0/SkiaSharp.targets",
+        "build/xamarinios1.0/libSkiaSharp.framework/Info.plist",
+        "build/xamarinios1.0/libSkiaSharp.framework/Modules/module.modulemap",
+        "build/xamarinios1.0/libSkiaSharp.framework/_CodeSignature/CodeResources",
+        "build/xamarinios1.0/libSkiaSharp.framework/libSkiaSharp",
+        "build/xamarinmac2.0/SkiaSharp.targets",
+        "build/xamarintvos1.0/SkiaSharp.targets",
+        "build/xamarintvos1.0/libSkiaSharp.framework/Info.plist",
+        "build/xamarintvos1.0/libSkiaSharp.framework/Modules/module.modulemap",
+        "build/xamarintvos1.0/libSkiaSharp.framework/_CodeSignature/CodeResources",
+        "build/xamarintvos1.0/libSkiaSharp.framework/libSkiaSharp",
+        "build/xamarinwatchos1.0/SkiaSharp.targets",
+        "build/xamarinwatchos1.0/libSkiaSharp.framework/Info.plist",
+        "build/xamarinwatchos1.0/libSkiaSharp.framework/Modules/module.modulemap",
+        "build/xamarinwatchos1.0/libSkiaSharp.framework/_CodeSignature/CodeResources",
+        "build/xamarinwatchos1.0/libSkiaSharp.framework/libSkiaSharp",
+        "buildTransitive/monoandroid1.0/SkiaSharp.targets",
+        "buildTransitive/net462/SkiaSharp.targets",
+        "buildTransitive/tizen40/SkiaSharp.targets",
+        "buildTransitive/xamarinios1.0/SkiaSharp.targets",
+        "buildTransitive/xamarinmac2.0/SkiaSharp.targets",
+        "buildTransitive/xamarintvos1.0/SkiaSharp.targets",
+        "buildTransitive/xamarinwatchos1.0/SkiaSharp.targets",
+        "interactive-extensions/dotnet/SkiaSharp.DotNet.Interactive.dll",
+        "lib/monoandroid1.0/SkiaSharp.dll",
+        "lib/monoandroid1.0/SkiaSharp.xml",
+        "lib/net462/SkiaSharp.dll",
+        "lib/net462/SkiaSharp.xml",
+        "lib/netstandard1.3/SkiaSharp.dll",
+        "lib/netstandard1.3/SkiaSharp.xml",
+        "lib/netstandard2.0/SkiaSharp.dll",
+        "lib/netstandard2.0/SkiaSharp.xml",
+        "lib/tizen40/SkiaSharp.dll",
+        "lib/tizen40/SkiaSharp.xml",
+        "lib/uap10.0.10240/SkiaSharp.dll",
+        "lib/uap10.0.10240/SkiaSharp.xml",
+        "lib/uap10.0.16299/SkiaSharp.dll",
+        "lib/uap10.0.16299/SkiaSharp.xml",
+        "lib/xamarinios1.0/SkiaSharp.dll",
+        "lib/xamarinios1.0/SkiaSharp.xml",
+        "lib/xamarinmac2.0/SkiaSharp.dll",
+        "lib/xamarinmac2.0/SkiaSharp.xml",
+        "lib/xamarintvos1.0/SkiaSharp.dll",
+        "lib/xamarintvos1.0/SkiaSharp.xml",
+        "lib/xamarinwatchos1.0/SkiaSharp.dll",
+        "lib/xamarinwatchos1.0/SkiaSharp.xml",
+        "runtimes/osx/native/libSkiaSharp.dylib",
+        "runtimes/win-arm64/native/libSkiaSharp.dll",
+        "runtimes/win-x64/native/libSkiaSharp.dll",
+        "runtimes/win-x86/native/libSkiaSharp.dll",
+        "runtimes/win10-arm/nativeassets/uap10.0/libEGL.dll",
+        "runtimes/win10-arm/nativeassets/uap10.0/libGLESv2.dll",
+        "runtimes/win10-arm/nativeassets/uap10.0/libSkiaSharp.dll",
+        "runtimes/win10-arm/nativeassets/uap10.0/zlib1.dll",
+        "runtimes/win10-arm64/nativeassets/uap10.0/libEGL.dll",
+        "runtimes/win10-arm64/nativeassets/uap10.0/libGLESv2.dll",
+        "runtimes/win10-arm64/nativeassets/uap10.0/libSkiaSharp.dll",
+        "runtimes/win10-arm64/nativeassets/uap10.0/zlib1.dll",
+        "runtimes/win10-x64/nativeassets/uap10.0/libEGL.dll",
+        "runtimes/win10-x64/nativeassets/uap10.0/libGLESv2.dll",
+        "runtimes/win10-x64/nativeassets/uap10.0/libSkiaSharp.dll",
+        "runtimes/win10-x64/nativeassets/uap10.0/zlib1.dll",
+        "runtimes/win10-x86/nativeassets/uap10.0/libEGL.dll",
+        "runtimes/win10-x86/nativeassets/uap10.0/libGLESv2.dll",
+        "runtimes/win10-x86/nativeassets/uap10.0/libSkiaSharp.dll",
+        "runtimes/win10-x86/nativeassets/uap10.0/zlib1.dll",
+        "skiasharp.2.80.4.nupkg.sha512",
+        "skiasharp.nuspec"
+      ]
+    },
+    "SkiaSharp.HarfBuzz/2.80.4": {
+      "sha512": "Beok7PChz8M2Iz3xo0Bzuj6Whw7zT6GfVTJQIIQLH1ycfrIM4XEXgiQLYViGBwwDDpalUCSxkk/Ccxp+5YAtaQ==",
+      "type": "package",
+      "path": "skiasharp.harfbuzz/2.80.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/net462/SkiaSharp.HarfBuzz.dll",
+        "lib/net462/SkiaSharp.HarfBuzz.xml",
+        "lib/netstandard1.3/SkiaSharp.HarfBuzz.dll",
+        "lib/netstandard1.3/SkiaSharp.HarfBuzz.xml",
+        "lib/netstandard2.0/SkiaSharp.HarfBuzz.dll",
+        "lib/netstandard2.0/SkiaSharp.HarfBuzz.xml",
+        "skiasharp.harfbuzz.2.80.4.nupkg.sha512",
+        "skiasharp.harfbuzz.nuspec"
+      ]
+    },
     "System.CodeDom/4.4.0": {
       "sha512": "2sCCb7doXEwtYAbqzbF/8UAeDRMNmPaQbU2q50Psg1J9KzumyVVCgKQY8s53WIPTufNT0DpSe9QRvVjOzfDWBA==",
       "type": "package",
@@ -3261,7 +3548,8 @@
       "Microsoft.EntityFrameworkCore.Design >= 7.0.13",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.13",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.13",
-      "MudBlazor >= 6.11.0"
+      "MudBlazor >= 6.11.0",
+      "QuestPDF >= 2202.8.2"
     ]
   },
   "packageFolders": {
@@ -3336,6 +3624,10 @@
           "MudBlazor": {
             "target": "Package",
             "version": "[6.11.0, )"
+          },
+          "QuestPDF": {
+            "target": "Package",
+            "version": "[2202.8.2, )"
           }
         },
         "imports": [

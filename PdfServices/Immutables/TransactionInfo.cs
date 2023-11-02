@@ -1,4 +1,4 @@
-﻿namespace dsa_marketing.PdfServices.Immutables
+﻿namespace Aneta.PdfServices.Immutables
 {
     public struct TransactionInfo
     {

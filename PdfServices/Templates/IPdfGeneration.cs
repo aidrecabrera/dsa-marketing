@@ -1,10 +1,6 @@
-﻿// using dsa_marketing.Data;
-// using dsa_marketing.PdfServices.Templates;
-// using QuestPDF.Fluent;
-//
-// namespace dsa_marketing.PdfServices.Immutables;
-//
-// public interface IPdfGeneration
-// {
-//     Document RenderPdf();
-// }
+﻿using QuestPDF.Fluent;
+namespace Aneta.PdfServices.Templates;
+public interface IPdfGeneration
+{
+    Document RenderPdf();
+}

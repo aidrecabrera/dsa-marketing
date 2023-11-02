@@ -72,6 +72,10 @@
             "MudBlazor": {
               "target": "Package",
               "version": "[6.11.0, )"
+            },
+            "QuestPDF": {
+              "target": "Package",
+              "version": "[2202.8.2, )"
             }
           },
           "imports": [

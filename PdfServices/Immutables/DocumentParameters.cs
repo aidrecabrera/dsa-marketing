@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace dsa_marketing.PdfServices.Immutables;
+namespace Aneta.PdfServices.Immutables;
 
 public struct DocumentParameters
 {
