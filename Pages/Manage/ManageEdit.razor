@@ -63,7 +63,7 @@
                     <MudListItem>
                         <div class="flex flex-row justify-between items-center">
                             <h1>Abstract of Quotation</h1>
-                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20">Print</button>
+                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20" @onclick="() => _printAbstractQuotation()">Print</button>
                         </div>
                     </MudListItem>
                     <MudDivider/>
@@ -221,10 +221,12 @@ async function downloadFileFromStream(fileName, contentStreamReference) {
 
 @code {
     [Inject]
-    private IJSRuntime JSRuntime { get; set; }
+    private IJSRuntime? JSRuntime { get; set; }
     private object? _purchaseOrder;
     private readonly PurchaseOrderTemplate _purchaseOrderTemplate = new PurchaseOrderTemplate();
     private readonly InspectionAcceptanceTemplate _inspectionAcceptanceTemplate = new InspectionAcceptanceTemplate();
+    private readonly AbstractQuotationTemplate _abstractQuotationTemplate = new AbstractQuotationTemplate();
+    
     private async Task _printPurchaseOrder()
     {
         TransactionInfo transactionInfo = new TransactionInfo
@@ -274,6 +276,35 @@ async function downloadFileFromStream(fileName, contentStreamReference) {
             TotalAmount = _currentTransactionItems?.Sum(x => x.Price)
         };
         var document = _inspectionAcceptanceTemplate.DsaTemplate(transactionInfo, _currentTransactionItems!);
+        var file = document.GeneratePdf();
+        string fileName = $"{_currentTransactionDetail.TransactionId}";
+        using var streamRef = new DotNetStreamReference(new MemoryStream(file));
+        await JSRuntime.InvokeVoidAsync(
+            "downloadFileFromStream",
+            $"Inspection and Acceptance Report - {fileName}.pdf",
+            streamRef
+            ).ConfigureAwait(false);
+    }
+    private async Task _printAbstractQuotation()
+    {
+        TransactionInfo transactionInfo = new TransactionInfo
+        {
+            Barangay = _currentTransactionDetail.BarangayName,
+            Municipality = _currentTransactionDetail.MunicipalityName,
+            PunongBarangay = _currentTransactionDocument.PunongBarangayName,
+            BarangayTreasurer = _currentTransactionDocument.BarangayTreasurerName,
+            Supplier = "DSA Marketing",
+            Address = "Poblacion, San Jose, Occidental Mindoro",
+            DeliveryDate = DateTime.Now.ToString(),
+            DeliveryPlace = "Poblacion, San Jose, Occidental Mindoro",
+            Province = "Davao del Sur",
+            Po = _currentTransactionDocument.DocumentId.ToString(),
+            Tin = "000-000-000-000",
+            TermDelivery = "30 Days",
+            TermPayment = "n/6 n/12",
+            TotalAmount = _currentTransactionItems?.Sum(x => x.Price)
+        };
+        var document = _abstractQuotationTemplate.DsaTemplate(transactionInfo, _currentTransactionItems!);
         var file = document.GeneratePdf();
         string fileName = $"{_currentTransactionDetail.TransactionId}";
         using var streamRef = new DotNetStreamReference(new MemoryStream(file));
