@@ -49,7 +49,6 @@
                         <div class="flex flex-row justify-between items-center">
                             <h1>Purchase Order</h1>
                             <button class="btn btn-sm text-white bg-info hover:bg-info w-20" @onclick="() => _printPurchaseOrder()">Print</button>
-                        
                         </div>
                     </MudListItem>
                     <MudDivider/>
@@ -218,6 +217,24 @@ async function downloadFileFromStream(fileName, contentStreamReference) {
     URL.revokeObjectURL(url);
 }
 </script>
+
+<MudDialog @bind-IsVisible="_visible" Options="_dialogOptions" Class="w-screen h-screen grow">
+    <DialogContent>
+        <embed src="2083.pdf" height="768px" width="100%"/>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary">Print</MudButton>
+        <MudButton OnClick="CloseDialog">Close</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    private bool _visible;
+    private void OpenPrintDialog() => _visible = true;
+    void CloseDialog() =>  _visible = false;
+    private readonly DialogOptions _dialogOptions = new() { FullWidth = true, CloseOnEscapeKey = true, MaxWidth = MaxWidth.Large };
+}
+
 
 @code {
     [Inject]

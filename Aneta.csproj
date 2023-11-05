@@ -21,9 +21,4 @@
       <PackageReference Include="MudBlazor" Version="6.11.0" />
       <PackageReference Include="QuestPDF" Version="2202.8.2" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Models\" />
-    </ItemGroup>
-
 </Project>

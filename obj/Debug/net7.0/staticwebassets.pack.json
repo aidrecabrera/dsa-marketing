@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Aneta.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\2083.pdf",
+      "PackagePath": "staticwebassets\\2083.pdf"
+    },
+    {
       "Id": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\app.css",
       "PackagePath": "staticwebassets\\css\\app.css"
     },
@@ -53,12 +57,20 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\dsa.jpg",
+      "PackagePath": "staticwebassets\\dsa.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\dsa.png",
+      "PackagePath": "staticwebassets\\dsa.png"
+    },
+    {
       "Id": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\dsa_marketing.png",
       "PackagePath": "staticwebassets\\dsa_marketing.png"
     },
     {
-      "Id": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\favicon.png",
-      "PackagePath": "staticwebassets\\favicon.png"
+      "Id": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\faveicon.png",
+      "PackagePath": "staticwebassets\\faveicon.png"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.Aneta.Microsoft.AspNetCore.StaticWebAssets.props",

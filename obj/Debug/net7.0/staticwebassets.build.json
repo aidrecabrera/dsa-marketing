@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8UZD5vXmwzCEoI3viK47Nq7K67fd/iUyImF3qseiEfk=",
+  "Hash": "+dWzQxbs9S0V3iO7biR/kG3w6idvoi596SvyzgLfJlM=",
   "Source": "Aneta",
   "BasePath": "_content/Aneta",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Svene\\.dev\\projects-production\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Aneta.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\2083.pdf",
+      "SourceId": "Aneta",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
+      "BasePath": "_content/Aneta",
+      "RelativePath": "2083.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\2083.pdf"
     },
     {
       "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\css\\app.css",
@@ -272,12 +289,12 @@
       "OriginalItemSpec": "wwwroot\\dsa_marketing.png"
     },
     {
-      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\dsa.jpg",
       "SourceId": "Aneta",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
       "BasePath": "_content/Aneta",
-      "RelativePath": "favicon.png",
+      "RelativePath": "dsa.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -286,7 +303,41 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.png"
+      "OriginalItemSpec": "wwwroot\\dsa.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\dsa.png",
+      "SourceId": "Aneta",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
+      "BasePath": "_content/Aneta",
+      "RelativePath": "dsa.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\dsa.png"
+    },
+    {
+      "Identity": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\faveicon.png",
+      "SourceId": "Aneta",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Svene\\.dev\\projects-production\\wwwroot\\",
+      "BasePath": "_content/Aneta",
+      "RelativePath": "faveicon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\faveicon.png"
     },
     {
       "Identity": "C:\\Users\\Svene\\.nuget\\packages\\mudblazor\\6.11.0\\staticwebassets\\MudBlazor.min.css",
