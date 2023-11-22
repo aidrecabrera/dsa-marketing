@@ -30,10 +30,7 @@ public partial class DsaClusterContext : DbContext
     public virtual DbSet<TransactionItem> TransactionItems { get; set; }
 
     public virtual DbSet<TransactionSummary> TransactionSummaries { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;Database=dsa_cluster;Trusted_Connection=True;TrustServerCertificate=True");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer("Server=tcp:dsamarketing.database.windows.net,1433;Initial Catalog=dsa_cluster;Persist Security Info=False;User ID=aidrecabrera;Password=SveneMCM717;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

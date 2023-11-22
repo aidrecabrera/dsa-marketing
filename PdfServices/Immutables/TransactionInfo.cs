@@ -10,6 +10,7 @@
         public string? Address { get; set; }
 
         public string? Po { get; set; }
+        public string? Pr { get; set; }
         public string? Tin { get; set; }
 
         public string[] Mode => new string[] { "Bidding", "Negotiated", "Over the Counter" };
@@ -23,5 +24,7 @@
         public decimal? TotalAmount { get; set; }
         public string? PunongBarangay { get; set; }
         public string? BarangayTreasurer { get; set; }
+        
+        public string? Requestor { get; set; }
     }
 }

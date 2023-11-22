@@ -1,6 +1,6 @@
 ﻿@using Aneta.Models
 @using Aneta.Data
-@using System.Transactions
+@inject NavigationManager NavigationManager
 <MudDialog>
     <DialogContent>
         <MudText>Do you really want to delete these this transaction? This process cannot be undone.</MudText>
@@ -28,5 +28,6 @@
         UnitOfWork?.Complete();
         _transactionsList?.Remove(_transactionsList.Find(t => t.TransactionId == _transactionId) ?? throw new InvalidOperationException());
         MudDialog.Close(DialogResult.Ok(true));
+        NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
     }
 }

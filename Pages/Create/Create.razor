@@ -61,19 +61,19 @@
             <div>
                 <MudPaper Elevation="0" Outlined="true" Class="p-10 gap-3">
                     <MudText Typo="Typo.h6">Transaction Items</MudText>
-                    <MudForm Model="@_newItem">
+                    <EditForm Model="@_newItem" OnValidSubmit="@AddItemToTransactionList">
                         <MudTextField Label="Unit" @bind-Value="_newItem.UnitName" Variant="Variant.Text" Required="true"></MudTextField>
                         <MudTextField Label="Particulars" @bind-Value="_newItem.Particulars" Variant="Variant.Text" Required="true"></MudTextField>
                         <MudTextField Label="Quantity" @bind-Value="_newItem.Quantity" Variant="Variant.Text" Required="true"></MudTextField>
                         <MudTextField Label="Cost" @bind-Value="_newItem.Cost" Variant="Variant.Text" Required="true"></MudTextField>
-                    </MudForm>
+                    </EditForm>
                     <div class="pt-3">
-                        <MudButton Type="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success" OnClick="AddItemToTransactionList">
+                        <MudButton Type="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success" OnClick="@AddItemToTransactionList">
                             <span class="material-symbols-rounded">
                                 save
                             </span>Add
                         </MudButton>
-                        <MudButton Type="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Error" OnClick="ClearForm">
+                        <MudButton Type="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Error" OnClick="@ClearForm">
                             <span class="material-symbols-rounded">
                                 clear
                             </span>
@@ -266,12 +266,21 @@
             Cost = _newItem?.Cost,
             Amount = _newItem?.Quantity * _newItem?.Cost,
         });
-        _newItem = new TransactionItem();
+        _newItem = new TransactionItem
+        {
+            UnitName = null,
+            Particulars = null,
+            Quantity = null,
+            Cost = null,
+            Amount = null,
+        };
+        StateHasChanged();
     }
 
     void ClearForm()
     {
         _newItem = new TransactionItem();
+        StateHasChanged();
     }
 
     void DeleteRow(TransactionItem item)
@@ -289,6 +298,7 @@
             BarangayName = SelectedBarangay,
         };
     }
+
     private TransactionDocument CreateNewDocument()
     {
         return new TransactionDocument
@@ -300,6 +310,7 @@
 
     private List<TransactionDetail>? _recentTransaction;
     private int? _recentTransactionId;
+
     private void SaveTransaction()
     {
         _newTransaction = CreateNewTransaction();
@@ -321,15 +332,19 @@
         _recentTransactionId = recentTransactionDetail?.TransactionId;
         NavigateBackToOriginalPage(_recentTransactionId);
     }
+
 }
 
 @code {
+
     private void NavigateBackToOriginalPage(int? transactionId)
     {
         NavigationManager?.NavigateTo($"/manage/edit/{transactionId}");
     }
+
     private void NavigateBackToHomePage()
     {
         NavigationManager?.NavigateTo("/transactions");
     }
+
 }

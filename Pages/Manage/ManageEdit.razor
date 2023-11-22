@@ -8,13 +8,8 @@
 @inject ISnackbar Snackbar
 @inject IDialogService DialogService
 @using Microsoft.AspNetCore.Components;
-@using System;
 @using System.IO;
-@using System.Net.Http.Headers
-@using System.Threading.Tasks;
-@using Microsoft.AspNetCore.Mvc.Formatters
-@using Microsoft.JSInterop
-@using Document = System.Reflection.Metadata.Document
+@inject NavigationManager NavigationManager
 
 <div class="flex flex-col w-full h-full">
     <div>
@@ -65,42 +60,12 @@
                             <button class="btn btn-sm text-white bg-info hover-bg-info w-20" @onclick="() => _printAbstractQuotation()">Print</button>
                         </div>
                     </MudListItem>
-                    <MudDivider/>
                     <MudListItem>
                         <div class="flex flex-row justify-between items-center">
                             <h1>Purchase Request</h1>
-                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20">Print</button>
+                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20" @onclick="() => _printPurchaseRequest()">Print</button>
                         </div>
                     </MudListItem>
-                    <MudDivider/>
-                    <MudListItem>
-                        <div class="flex flex-row justify-between items-center">
-                            <h1>Acknowledgment Receipt</h1>
-                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20">Print</button>
-                        </div>
-                    </MudListItem>
-                    <MudDivider/>
-                    <MudListItem>
-                        <div class="flex flex-row justify-between items-center">
-                            <h1>Disbursement Voucher</h1>
-                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20">Print</button>
-                        </div>
-                    </MudListItem>
-                    <MudDivider/>
-                    <MudListItem>
-                        <div class="flex flex-row justify-between items-center">
-                            <h1>Canvas Form</h1>
-                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20">Print</button>
-                        </div>
-                    </MudListItem>
-                    <MudDivider/>
-                    <MudListItem>
-                        <div class="flex flex-row justify-between items-center">
-                            <h1>Requisition and Issue Slip</h1>
-                            <button class="btn btn-sm text-white bg-info hover-bg-info w-20">Print</button>
-                        </div>
-                    </MudListItem>
-                    <MudDivider/>
                 </MudList>
             </MudPaper>
         </div>
@@ -231,19 +196,21 @@ async function downloadFileFromStream(fileName, contentStreamReference) {
 @code {
     private bool _visible;
     private void OpenPrintDialog() => _visible = true;
-    void CloseDialog() =>  _visible = false;
+    void CloseDialog() => _visible = false;
     private readonly DialogOptions _dialogOptions = new() { FullWidth = true, CloseOnEscapeKey = true, MaxWidth = MaxWidth.Large };
 }
 
 
 @code {
+
     [Inject]
     private IJSRuntime? JSRuntime { get; set; }
+
     private object? _purchaseOrder;
     private readonly PurchaseOrderTemplate _purchaseOrderTemplate = new PurchaseOrderTemplate();
     private readonly InspectionAcceptanceTemplate _inspectionAcceptanceTemplate = new InspectionAcceptanceTemplate();
     private readonly AbstractQuotationTemplate _abstractQuotationTemplate = new AbstractQuotationTemplate();
-    
+    private readonly PurchaseRequestTemplate _purchaseRequestTemplate = new PurchaseRequestTemplate();
     private async Task _printPurchaseOrder()
     {
         TransactionInfo transactionInfo = new TransactionInfo
@@ -273,6 +240,7 @@ async function downloadFileFromStream(fileName, contentStreamReference) {
             streamRef
             ).ConfigureAwait(false);
     }
+
     private async Task _printInspectionAcceptance()
     {
         TransactionInfo transactionInfo = new TransactionInfo
@@ -302,6 +270,7 @@ async function downloadFileFromStream(fileName, contentStreamReference) {
             streamRef
             ).ConfigureAwait(false);
     }
+
     private async Task _printAbstractQuotation()
     {
         TransactionInfo transactionInfo = new TransactionInfo
@@ -327,7 +296,38 @@ async function downloadFileFromStream(fileName, contentStreamReference) {
         using var streamRef = new DotNetStreamReference(new MemoryStream(file));
         await JSRuntime.InvokeVoidAsync(
             "downloadFileFromStream",
-            $"Inspection and Acceptance Report - {fileName}.pdf",
+            $"Abstract Quotation - {fileName}.pdf",
+            streamRef
+            ).ConfigureAwait(false);
+    }
+    private async Task _printPurchaseRequest()
+    {
+        TransactionInfo transactionInfo = new TransactionInfo
+        {
+            Barangay = _currentTransactionDetail.BarangayName,
+            Municipality = _currentTransactionDetail.MunicipalityName,
+            PunongBarangay = _currentTransactionDocument.PunongBarangayName,
+            BarangayTreasurer = _currentTransactionDocument.BarangayTreasurerName,
+            Supplier = "DSA Marketing",
+            Address = "Poblacion, San Jose, Occidental Mindoro",
+            DeliveryDate = DateTime.Now.ToString(),
+            DeliveryPlace = "Poblacion, San Jose, Occidental Mindoro",
+            Province = "Davao del Sur",
+            Po = _currentTransactionDocument.DocumentId.ToString(),
+            Pr = "",
+            Tin = "000-000-000-000",
+            TermDelivery = "30 Days",
+            TermPayment = "n/6 n/12",
+            TotalAmount = _currentTransactionItems?.Sum(x => x.Price),
+            Requestor = "",
+        };
+        var document = _purchaseRequestTemplate.DsaTemplate(transactionInfo, _currentTransactionItems!);
+        var file = document.GeneratePdf();
+        string fileName = $"{_currentTransactionDetail.TransactionId}";
+        using var streamRef = new DotNetStreamReference(new MemoryStream(file));
+        await JSRuntime.InvokeVoidAsync(
+            "downloadFileFromStream",
+            $"Purchase Request - {fileName}.pdf",
             streamRef
             ).ConfigureAwait(false);
     }
@@ -374,10 +374,10 @@ async function downloadFileFromStream(fileName, contentStreamReference) {
         {
             UnitOfWork?.TransactionItems.RemoveRange(multiSelectedItems);
             UnitOfWork?.Complete();
-            StateHasChanged();
             Snackbar.Clear();
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomEnd;
             Snackbar.Add("Item/s Deleted", Severity.Error);
+            StateHasChanged();
         }
         catch (Exception e)
         {
@@ -454,17 +454,23 @@ async function downloadFileFromStream(fileName, contentStreamReference) {
 }
 
 @code {
+
     [Parameter]
     public int? transactionId { get; set; }
+
     public int? documentId { get; set; }
+
     [Inject]
     private DsaClusterContext? Context { get; set; }
+
     [Inject]
     private UnitOfWork? UnitOfWork { get; set; }
+
     private List<BreadcrumbItem> _items;
     private TransactionDetail _currentTransactionDetail;
     private TransactionDocument _currentTransactionDocument;
     IEnumerable<TransactionItem>? _currentTransactionItems;
+
     protected override void OnInitialized()
     {
         _items = new List<BreadcrumbItem>
@@ -478,4 +484,5 @@ async function downloadFileFromStream(fileName, contentStreamReference) {
         _currentTransactionItems = UnitOfWork.TransactionItems.Find(x => x.DocumentId == transactionId);
         documentId = _currentTransactionItems.FirstOrDefault()?.DocumentId;
     }
+
 }
