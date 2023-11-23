@@ -320,10 +320,10 @@ public class PurchaseOrderTemplate
     {
         var philippinesCulture = new CultureInfo("en-PH");
 
-        itemList.Cell().Row(i).Column(1).ColumnSpan(1).Element(ItemFormat).AlignCenter().Text(itemName).FontSize(10);
+        itemList.Cell().Row(i).Column(1).ColumnSpan(1).Element(ItemFormat).AlignCenter().PaddingLeft(10).PaddingRight(10).Text(itemName).FontSize(10);
         itemList.Cell().Row(i).Column(2).ColumnSpan(3).Element(ItemFormat).AlignLeft().PaddingLeft(10).Text(description)
             .FontSize(10);
-        itemList.Cell().Row(i).Column(5).ColumnSpan(1).Element(ItemFormat).AlignCenter().Text(quantity.ToString())
+        itemList.Cell().Row(i).Column(5).ColumnSpan(1).Element(ItemFormat).AlignCenter().PaddingLeft(10).PaddingRight(10).Text(quantity.ToString())
             .FontSize(10);
         itemList.Cell().Row(i).Column(6).ColumnSpan(1).Element(ItemFormat).AlignRight().PaddingLeft(10).PaddingRight(10)
             .Text(unitCost.ToString("C", philippinesCulture)).FontSize(10);

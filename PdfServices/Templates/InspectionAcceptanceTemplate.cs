@@ -26,7 +26,7 @@ public class InspectionAcceptanceTemplate
                 page.Size(PageSizes.Letter);
                 page.Margin(1, Unit.Centimetre);
                 page.PageColor(Colors.White);
-                page.DefaultTextStyle(x => x.FontSize(10));
+                page.DefaultTextStyle(x => x.FontSize(8));
                 page.DefaultTextStyle(x => x.FontFamily(Fonts.Calibri));
 
                 page.Content().Column(tableRow =>
@@ -37,7 +37,7 @@ public class InspectionAcceptanceTemplate
                         header.Cell().Text(text =>
                         {
                             text.AlignCenter();
-                            text.Span("INSPECTION AND ACCEPTANCE REPORT").Bold().FontSize(25);
+                            text.Span("INSPECTION AND ACCEPTANCE REPORT").Bold().FontSize(20);
                         });
                     });
 
@@ -50,13 +50,13 @@ public class InspectionAcceptanceTemplate
                         });
                         main.Cell().Element(TableContents).Text(text =>
                         {
-                            text.Span("Barangay: ");
-                            text.Span("\nTel No.: ");
+                            text.Span("Barangay: ").FontSize(11);
+                            text.Span("\nTel No.: ").FontSize(11);
                         });
                         main.Cell().Element(TableContents).Text(text =>
                         {
-                            text.Span("Municipality: ");
-                            text.Span("\nProvince: ");
+                            text.Span("Municipality: ").FontSize(11);
+                            text.Span("\nProvince: ").FontSize(11);
                         });
                     });
 
@@ -69,25 +69,125 @@ public class InspectionAcceptanceTemplate
                             columns.RelativeColumn();
                             columns.RelativeColumn();
                         });
-                        main.Cell().BorderRight(0.5f).Element(TableContents).Text(text =>
+                        main.Cell().Width(128.5f).BorderRight(0.5f).Element(TableContents).Text(text =>
                         {
-                            text.Span("Supplier");
-                            text.Span("\nP.O.No.");
+                            text.Span("Supplier").FontSize(11);
+                            text.Span("\nP.O.No.").FontSize(11);
                         });
-                        main.Cell().BorderRight(0.5f).Element(TableContents).Text(text =>
+                        main.Cell().Width(128.5f).BorderRight(0.5f).Element(TableContents).Text(text =>
                         {
-                            text.Span("Invoice No.: ");
-                            text.Span("\nInvoice Date: ");
+                            text.Span("Invoice No.: ").FontSize(11);
+                            text.Span("\nInvoice Date: ").FontSize(11);
                         });
-                        main.Cell().BorderRight(0.5f).Element(TableContents).Text(text =>
+                        main.Cell().ExtendHorizontal().BorderRight(0.5f).Element(TableContents).Text(text =>
                         {
-                            text.Span("IAR No.: ");
-                            text.Span("\nRIS Date: ");
+                            text.Span("IAR No.: ").FontSize(11);
+                            text.Span("\nRIS Date: ").FontSize(11);
                         });
                         main.Cell().Element(TableContents).Text(text =>
                         {
-                            text.Span("Date: ");
-                            text.Span("\nDate: ");
+                            text.Span("Date: ").FontSize(11);
+                            text.Span("\nDate: ").FontSize(11);
+                        });
+                    });
+
+                    tableRow.Item().Border(0.5f).Height(370).Table(tableContainer =>
+                    {
+                        tableContainer.ColumnsDefinition(columns => { columns.RelativeColumn(); });
+                        tableContainer.Cell().Table(container =>
+                        {
+                            container.ColumnsDefinition(columns => { columns.RelativeColumn(); });
+                            container.Cell().Table(list =>
+                            {
+                                list.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn();
+                                    columns.RelativeColumn();
+                                    columns.RelativeColumn();
+                                    columns.RelativeColumn();
+                                });
+                                list.Cell().ColumnSpan(1).Element(ListTableHeader).Text(listTableHeader =>
+                                {
+                                    listTableHeader.Span("Unit").FontSize(11);
+                                });
+                                list.Cell().ColumnSpan(2).Width(273f).Element(ListTableHeader).Text(listTableHeader =>
+                                {
+                                    listTableHeader.Span("Description").FontSize(11);
+                                });
+                                list.Cell().ColumnSpan(1).BorderBottom(0.5f).Element(ListTableHeader).Text(listTableHeader =>
+                                {
+                                    listTableHeader.Span("Quantity").FontSize(11);
+                                });
+                            });
+
+                            // List of Transaction Items
+                            container.Cell().ExtendVertical().Table(list =>
+                            {
+                                list.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn();
+                                    columns.RelativeColumn();
+                                    columns.RelativeColumn();
+                                    columns.RelativeColumn();
+                                });
+                                list.Cell().ColumnSpan(1).AlignCenter().Border(0.5f).ExtendVertical().Table(qty =>
+                                {
+                                    qty.ColumnsDefinition(column => { column.RelativeColumn(); });
+                                    qty.Cell().AlignCenter().Table(qty =>
+                                    {
+                                        qty.ColumnsDefinition(column => { column.RelativeColumn(); });
+                                        foreach (var item in transactionItems)
+                                        {
+                                            qty.Cell().AlignCenter().Element(ListTableItemsCenter).Table(each =>
+                                            {
+                                                each.ColumnsDefinition(column => { column.RelativeColumn(); });
+                                                each.Cell().AlignCenter().Text(listTableHeader =>
+                                                {
+                                                    listTableHeader.Span(item.UnitName).FontSize(11); // Unit
+                                                });
+                                            });
+                                        }
+                                    });
+                                });
+                                list.Cell().ColumnSpan(2).Width(273f).Border(0.5f).ExtendVertical().Table(qty =>
+                                {
+                                    qty.ColumnsDefinition(column => { column.RelativeColumn(); });
+                                    qty.Cell().PaddingLeft(5).Table(qty =>
+                                    {
+                                        qty.ColumnsDefinition(column => { column.RelativeColumn(); });
+                                        qty.Cell().Element(ListTableItemsCenter).Table(each =>
+                                        {
+                                            each.ColumnsDefinition(column => { column.RelativeColumn(); });
+                                            foreach (var item in transactionItems)
+                                            {
+                                                each.Cell().Text(listTableHeader =>
+                                                {
+                                                    listTableHeader.Span(item.Particulars).FontSize(11); // Particulars
+                                                });
+                                            }
+                                        });
+                                    });
+                                });
+                                list.Cell().ColumnSpan(1).ExtendHorizontal().ExtendVertical().Table(qty =>
+                                {
+                                    qty.ColumnsDefinition(column => { column.RelativeColumn(); });
+                                    qty.Cell().AlignCenter().Table(qty =>
+                                    {
+                                        qty.ColumnsDefinition(column => { column.RelativeColumn(); });
+                                        qty.Cell().AlignCenter().Element(ListTableItemsCenter).Table(each =>
+                                        {
+                                            each.ColumnsDefinition(column => { column.RelativeColumn(); });
+                                            foreach (var item in transactionItems)
+                                            {
+                                                each.Cell().AlignCenter().Text(listTableHeader =>
+                                                {
+                                                    listTableHeader.Span(item.Quantity.ToString()).FontSize(11); // Quantity
+                                                });
+                                            }
+                                        });
+                                    });
+                                });
+                            });
                         });
                     });
 
@@ -97,48 +197,9 @@ public class InspectionAcceptanceTemplate
                         {
                             columns.RelativeColumn();
                             columns.RelativeColumn();
-                            columns.RelativeColumn();
                         });
-                        list.Cell().Element(ListTableHeader).Text(listTableHeader => { listTableHeader.Span("Unit"); });
-                        list.Cell().Element(ListTableHeader).Text(listTableHeader =>
-                        {
-                            listTableHeader.Span("Description");
-                        });
-                        list.Cell().Element(ListTableHeader).Text(listTableHeader =>
-                        {
-                            listTableHeader.Span("Quantity");
-                        });
-                    });
-
-                    // List of Transaction Items
-                    tableRow.Item().Table(list =>
-                    {
-                        list.ColumnsDefinition(columns =>
-                        {
-                            columns.RelativeColumn();
-                            columns.RelativeColumn();
-                            columns.RelativeColumn();
-                        });
-                        list.Cell().Element(ListTableItemsCenter).Text(listTableHeader =>
-                        {
-                            listTableHeader.Span("");
-                        });
-                        list.Cell().Element(ListTableItemsLeft).Text(listTableHeader => { listTableHeader.Span(""); });
-                        list.Cell().Element(ListTableItemsCenter).Text(listTableHeader =>
-                        {
-                            listTableHeader.Span("");
-                        });
-                    });
-
-                    tableRow.Item().Table(list =>
-                    {
-                        list.ColumnsDefinition(columns =>
-                        {
-                            columns.RelativeColumn();
-                            columns.RelativeColumn();
-                        });
-                        list.Cell().Element(Table).Text(listTableHeader => { listTableHeader.Span("INSPECTION"); });
-                        list.Cell().Element(Table).Text(listTableHeader => { listTableHeader.Span("ACCEPTANCE"); });
+                        list.Cell().Element(Table).Text(listTableHeader => { listTableHeader.Span("INSPECTION").FontSize(11); });
+                        list.Cell().Element(Table).Text(listTableHeader => { listTableHeader.Span("ACCEPTANCE").FontSize(11); });
                     });
 
                     tableRow.Item().Table(list =>
@@ -153,7 +214,7 @@ public class InspectionAcceptanceTemplate
                             column.ColumnsDefinition(div => { div.RelativeColumn(); });
                             column.Cell().PaddingTop(20).PaddingLeft(20).PaddingBottom(10).Text(text =>
                             {
-                                text.Span("Date Inspected: ");
+                                text.Span("Date Inspected: ").FontSize(11);
                                 text.Span("                                       ").Underline();
                             });
                             column.Cell().Padding(10).Table(box =>
@@ -170,13 +231,13 @@ public class InspectionAcceptanceTemplate
                                 });
                                 box.Cell().Text(text =>
                                 {
-                                    text.Span("Inspected, verified and found Ok as to quantity and specifications");
+                                    text.Span("Inspected, verified and found Ok as to quantity and specifications").FontSize(10);
                                 });
                             });
                             column.Cell().PaddingBottom(25).PaddingTop(30).AlignCenter().Text(text =>
                             {
                                 text.Span("                                       \n").Underline();
-                                text.Span("Authorized Inspection");
+                                text.Span("Authorized Inspection").FontSize(11);
                             });
                         });
                         list.Cell().Element(TableDivider).PaddingTop(10).Table(column =>
@@ -184,7 +245,7 @@ public class InspectionAcceptanceTemplate
                             column.ColumnsDefinition(div => { div.RelativeColumn(); });
                             column.Cell().PaddingTop(15).PaddingLeft(20).PaddingBottom(10).Text(text =>
                             {
-                                text.Span("Date Received: ");
+                                text.Span("Date Received: ").FontSize(11);
                                 text.Span("                                       ").Underline();
                             });
                             column.Cell().PaddingHorizontal(10).Table(box =>
@@ -201,7 +262,7 @@ public class InspectionAcceptanceTemplate
                                 });
                                 box.Cell().PaddingHorizontal(5).PaddingVertical(15).Text(text =>
                                 {
-                                    text.Span("Complete");
+                                    text.Span("Complete").FontSize(10);
                                 });
                                 box.Cell().PaddingHorizontal(10).Table(t =>
                                 {
@@ -210,13 +271,13 @@ public class InspectionAcceptanceTemplate
                                 });
                                 box.Cell().PaddingHorizontal(5).Text(text =>
                                 {
-                                    text.Span("Partial (Please specify quantity received)");
+                                    text.Span("Partial (Please specify quantity received)").FontSize(10);
                                 });
                             });
                             column.Cell().PaddingBottom(25).PaddingTop(20).AlignCenter().Text(text =>
                             {
                                 text.Span("                                       \n").Underline();
-                                text.Span("SK Treasurer");
+                                text.Span("SK Treasurer").FontSize(11);
                             });
                         });
                     });
@@ -246,28 +307,14 @@ public class InspectionAcceptanceTemplate
     static IContainer ListTableHeader(IContainer container)
     {
         return container
-            .Border(0.5f)
+            .BorderRight(0.5f)
             .AlignCenter()
-            .Padding(5);
-    }
-
-    static IContainer ListTableItemsLeft(IContainer container)
-    {
-        return container
-            .Height(330)
-            .MaxHeight(330)
-            .Border(0.5f)
-            .AlignLeft()
-            .PaddingLeft(5)
-            .Padding(1);
+            .PaddingVertical(5);
     }
 
     static IContainer ListTableItemsCenter(IContainer container)
     {
         return container
-            .Height(330)
-            .MaxHeight(330)
-            .Border(0.5f)
             .AlignCenter()
             .Padding(1);
     }
